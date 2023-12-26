@@ -1,0 +1,2 @@
+classdef Cmac < handle
+end
