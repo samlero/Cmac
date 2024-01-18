@@ -19,6 +19,7 @@ public: // constructor
 	, std::vector<std::vector<double>>& weightValues
 	, std::vector<double>& basis
 	, IResult* result);
+	Prediction(IResult* result);
 	~Prediction();
 
 public: // override getters

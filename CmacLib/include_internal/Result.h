@@ -9,8 +9,12 @@ private:
 	bool successful;
 	std::string message;
 
+public: // setters
+	void SetIsSuccessful(bool success);
+	void SetMessage(std::string msg);
+
 public:
-	Result(bool success, std::string msg);
+	Result();
 	~Result();
 
 public: // overrides

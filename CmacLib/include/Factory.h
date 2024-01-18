@@ -31,7 +31,7 @@ public:
 	/// </summary>
 	/// <param name="pathfile"></param>
 	/// <returns></returns>
-	std::unique_ptr<ICmac> CreateCmacFromFile(std::string pathfile);
+	//std::unique_ptr<ICmac> CreateCmacFromFile(std::string pathfile);
 };
 
 #endif

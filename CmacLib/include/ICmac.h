@@ -15,14 +15,14 @@ public:
 	/// <returns></returns>
 	virtual std::unique_ptr<IPrediction> Predict(std::vector<double>& input) = 0;
 	/// <summary>
-	/// Adjust the weights.
+	/// Adjust the weights using an array of corrections and only the weights from a prediction.
 	/// </summary>
-	/// <param name="correction">Errors to correct the weights by.</param>
-	/// <param name="indices">Indices of the weights to adjust.</param>
-	/// <param name="damping">Additional damping value to avoid overfitting.</param>
+	/// <param name="correction">Error values</param>
+	/// <param name="prediction">Prediction to correct.</param>
+	/// <param name="damping">Additional parameter to avoid overfitting</param>
 	/// <returns></returns>
 	virtual std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
-		, std::vector<std::vector<unsigned int>>& indices
+		, const IPrediction* prediction
 		, double damping) = 0;
 };
 

@@ -13,10 +13,20 @@ Prediction::Prediction(std::vector<double>& values
 	this->result.reset(result);
 }
 
+Prediction::Prediction(IResult* result)
+	: values(std::vector<double>())
+	, activeWeightIndices(std::vector<std::vector<unsigned int>>())
+	, activeWeights(std::vector<std::vector<double>>())
+	, basisValues(std::vector<double>())
+{
+	this->result.reset(result);
+}
+
 Prediction::~Prediction()
 {
 	this->result.reset();
 }
+
 
 const std::vector<double>& Prediction::GetValues()
 {
