@@ -10,7 +10,7 @@ public:
 	/// Gets the amount each weight changed in each output level. 
 	/// </summary>
 	/// <returns></returns>
-	virtual std::vector<std::vector<double>> GetWeightChanges() = 0;
+	virtual const std::vector<std::vector<double>>& GetWeightChanges() = 0;
 	/// <summary>
 	/// Indicates if the adjustment was successful or not and provides some reason as to why it failed.
 	/// </summary>

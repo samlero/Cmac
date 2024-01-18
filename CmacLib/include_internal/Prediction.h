@@ -10,19 +10,22 @@ private:
 	std::vector<double> values;
 	std::vector<std::vector<unsigned int>> activeWeightIndices;
 	std::vector<std::vector<double>> activeWeights;
+	std::vector<double> basisValues;
 	std::unique_ptr<IResult> result;
 
 public: // constructor
 	Prediction(std::vector<double>& values
 	, std::vector<std::vector<unsigned int>>& weightIndices
 	, std::vector<std::vector<double>>& weightValues
-	, const IResult* result);
+	, std::vector<double>& basis
+	, IResult* result);
 	~Prediction();
 
 public: // override getters
 	const std::vector<double>& GetValues() override;
 	const std::vector<std::vector<unsigned int>>& GetActiveWeightIndices() override;
 	const std::vector<std::vector<double>>& GetActiveWeights() override;
+	const std::vector<double>& GetBasisValues() override;
 	const IResult& GetResult() override;
 };
 

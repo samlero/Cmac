@@ -22,6 +22,11 @@ public:
 	/// <returns></returns>
 	virtual const std::vector<std::vector<double>>& GetActiveWeights() = 0;
 	/// <summary>
+	/// Get the basis function values. 
+	/// </summary>
+	/// <returns></returns>
+	virtual const std::vector<double>& GetBasisValues() = 0;
+	/// <summary>
 	/// Indicates if the prediction was successful or not, and provides a reason as to why the prediction failed.
 	/// </summary>
 	/// <returns></returns>

@@ -16,7 +16,7 @@ add_library (CmacLib STATIC)
 target_sources(${PROJECT_NAME}
     PRIVATE
         src/Cmac.cpp
- "include_internal/Prediction.h" "include/IPrediction.h" "include/IAdjustment.h" "include/IResult.h" "src/Prediction.cpp")
+ "include_internal/Prediction.h" "include/IPrediction.h" "include/IAdjustment.h" "include/IResult.h" "src/Prediction.cpp" "include_internal/Result.h" "include_internal/Adjustment.h" "src/Adjustment.cpp" "include/ICmac.h" "include/Factory.h")
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
