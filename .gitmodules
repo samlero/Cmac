@@ -1,0 +1,3 @@
+[submodule "CmacLib/googletest"]
+	path = CmacLib/googletest
+	url = https://github.com/google/googletest.git
