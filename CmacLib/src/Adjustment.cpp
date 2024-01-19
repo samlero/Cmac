@@ -1,6 +1,8 @@
 #include "Adjustment.h"
 #include "Result.h"
 
+using namespace CmacLib;
+
 void Adjustment::SetWeightChanges(std::vector<std::vector<double>>& dw)
 {
 	this->weightChanges = dw;

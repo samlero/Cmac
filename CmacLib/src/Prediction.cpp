@@ -1,6 +1,7 @@
 #include "Prediction.h"
 #include "Result.h"
 
+using namespace CmacLib;
 
 void Prediction::SetValues(std::vector<double>& values)
 {

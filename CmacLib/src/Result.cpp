@@ -1,5 +1,6 @@
 #include "Result.h"
 
+using namespace CmacLib;
 
 void Result::SetIsSuccessful(bool success)
 {

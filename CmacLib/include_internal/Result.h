@@ -4,22 +4,25 @@
 #include <string>
 #include "IResult.h"
 
-class Result : public IResult{
-private:
-	bool successful;
-	std::string message;
+namespace CmacLib
+{
+	class Result : public IResult {
+	private:
+		bool successful;
+		std::string message;
 
-public: // setters
-	void SetIsSuccessful(bool success);
-	void SetMessage(std::string msg);
+	public: // setters
+		void SetIsSuccessful(bool success);
+		void SetMessage(std::string msg);
 
-public:
-	Result();
-	~Result();
+	public:
+		Result();
+		~Result();
 
-public: // overrides
-	bool IsSuccessful() override;
-	std::string GetMessage() override;
-};
+	public: // overrides
+		bool IsSuccessful() override;
+		std::string GetMessage() override;
+	};
+}
 
 #endif

@@ -6,6 +6,7 @@
 #include "Prediction.h"
 #include "Adjustment.h"
 
+using namespace CmacLib;
 
 std::vector<double> Cmac::Normalize(std::vector<double>& raw)
 {
