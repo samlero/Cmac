@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : Top-level CMake project file, do global configuration
 # and include sub-projects here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.13)
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -13,10 +13,13 @@ project ("CmacLib")
 
 add_library (CmacLib STATIC)
 
+file(GLOB SOURCES "src/*.cpp")
+file(GLOB INTERNAL_INCLUDE "include_internal/*.h")
+
 target_sources(${PROJECT_NAME}
     PRIVATE
-        src/Cmac.cpp
- "include_internal/Prediction.h" "include/IPrediction.h" "include/IAdjustment.h" "include/IResult.h" "src/Prediction.cpp" "include_internal/Result.h" "include_internal/Adjustment.h" "src/Adjustment.cpp" "include/ICmac.h" "include/Factory.h" "src/Factory.cpp" "src/Result.cpp")
+        ${SOURCES} 
+        ${INTERNAL_INCLUDE})
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
