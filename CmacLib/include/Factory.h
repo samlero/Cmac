@@ -20,7 +20,8 @@ public:
 	/// <returns></returns>
 	std::unique_ptr<ICmac> CreateCmac(unsigned int numQ
 		, unsigned int numLayers
-		, unsigned int maxHash
+		, unsigned int maxmem
+		, unsigned int numOut
 		, std::vector<double> upper
 		, std::vector<double> lower
 		, double beta
