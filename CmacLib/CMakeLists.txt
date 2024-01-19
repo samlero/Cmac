@@ -9,12 +9,24 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
+if(POLICY CMP0091)
+  cmake_policy(SET CMP0091 NEW) 
+endif()
+
+set_property(TARGET MyVtkAppOrLibName PROPERTY
+  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
 project ("CmacLib")
 
 add_library (CmacLib STATIC)
 
 file(GLOB SOURCES "src/*.cpp")
 file(GLOB INTERNAL_INCLUDE "include_internal/*.h")
+
+include(CTest)
+
+add_subdirectory(googletest)
+add_subdirectory(tests)
 
 target_sources(${PROJECT_NAME}
     PRIVATE
