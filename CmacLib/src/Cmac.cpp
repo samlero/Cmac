@@ -4,6 +4,7 @@
 
 #include "Result.h"
 #include "Prediction.h"
+#include "Adjustment.h"
 
 
 std::vector<double> Cmac::Normalize(std::vector<double>& raw)
@@ -152,6 +153,94 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 	}
 
 	return prediction;
+}
+
+std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPrediction& prediction, double damping)
+{
+	std::unique_ptr<Adjustment> adjustment(new Adjustment());
+	try
+	{
+		// check output and correction are the same size
+		if (correction.size() != this->numOutput)
+		{
+			std::unique_ptr<Result> result = std::make_unique<Result>();
+			result->SetIsSuccessful(false);
+			result->SetMessage("Correction should be the same size as the number of outputs.");
+			adjustment->SetResult(result.release());
+			return adjustment;
+		}
+
+		// extract prediction variables
+		std::vector<double> gammas = prediction.GetBasisValues();
+		std::vector<std::vector<double>> weights = prediction.GetActiveWeights();
+		std::vector<size_t> indices = prediction.GetActiveWeightIndices();
+
+		// check weight indices same as the number of layers
+		if (indices.size() != this->numLayers)
+		{
+			std::unique_ptr<Result> result = std::make_unique<Result>();
+			result->SetIsSuccessful(false);
+			result->SetMessage("Size of active weight indices do not match the number of layers.");
+			adjustment->SetResult(result.release());
+			return adjustment;
+		}
+
+		// check basis values
+		if (gammas.size() != this->numLayers)
+		{
+			std::unique_ptr<Result> result = std::make_unique<Result>();
+			result->SetIsSuccessful(false);
+			result->SetMessage("Size of basis values do not match the number of layers.");
+			adjustment->SetResult(result.release());
+			return adjustment;
+		}
+
+		// check output size of the active weights matrix
+		if (weights.size() != this->numOutput)
+		{
+			std::unique_ptr<Result> result = std::make_unique<Result>();
+			result->SetIsSuccessful(false);
+			result->SetMessage("First size of the active weights matrix does not match the number of outputs.");
+			adjustment->SetResult(result.release());
+			return adjustment;
+		}
+
+		std::vector<std::vector<double>> dw(this->numOutput
+			, std::vector<double>(this->numLayers, 0.0));
+		// loop through and check the size of each sub-array of active weights matrix
+		for (size_t out = 0; out < this->numOutput; out++)
+		{
+			// check sub-array if correct size
+			if (weights[out].size() != this->numLayers)
+			{
+				std::unique_ptr<Result> result = std::make_unique<Result>();
+				result->SetIsSuccessful(false);
+				result->SetMessage("Sub-array of the active weights do not match the number of layers.");
+				adjustment->SetResult(result.release());
+				return adjustment;
+			}
+
+			for (size_t layer = 0; layer < this->numLayers; layer++)
+			{
+				dw[out][layer] = (this->beta) * (gammas[layer]*correction[out] - (this->nu)*damping* weights[out][layer]);
+				this->memory[out][indices[layer]] += dw[out][layer];
+			}
+		}
+
+		// collect all the results
+		adjustment->SetWeightChanges(dw);
+		std::unique_ptr<Result> result = std::make_unique<Result>();
+		result->SetIsSuccessful(true);
+		adjustment->SetResult(result.release());
+	}
+	catch (std::exception ex)
+	{
+		std::unique_ptr<Result> result = std::make_unique<Result>();
+		result->SetIsSuccessful(false);
+		result->SetMessage("An exception occured at Predict. " + std::string(ex.what()));
+		adjustment->SetResult(result.release());
+	}
+	return adjustment;
 }
 
 

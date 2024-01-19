@@ -55,7 +55,7 @@ public:
 
 	std::unique_ptr<IPrediction> Predict(std::vector<double>& input) override;
 	std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
-		, const IPrediction* prediction
+		, IPrediction& prediction
 		, double damping) override;
 };
 

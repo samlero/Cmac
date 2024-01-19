@@ -1,11 +1,19 @@
 #include "Adjustment.h"
+#include "Result.h"
 
-Adjustment::Adjustment(std::vector<std::vector<double>>& dw
-	, IResult* result)
-	: weightChanges(weightChanges)
+void Adjustment::SetWeightChanges(std::vector<std::vector<double>>& dw)
+{
+	this->weightChanges = dw;
+}
+
+void Adjustment::SetResult(IResult* result)
 {
 	this->result.reset(result);
 }
+
+Adjustment::Adjustment()
+	: weightChanges(std::vector<std::vector<double>>())
+	, result(std::make_unique<Result>()){}
 
 Adjustment::~Adjustment()
 {

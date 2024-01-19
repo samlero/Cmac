@@ -11,8 +11,12 @@ private:
 	std::vector<std::vector<double>> weightChanges;
 	std::unique_ptr<IResult> result;
 
+public: // setters
+	void SetWeightChanges(std::vector<std::vector<double>>& dw);
+	void SetResult(IResult* result);
+
 public:
-	Adjustment(std::vector<std::vector<double>>& dw, IResult* result);
+	Adjustment();
 	~Adjustment();
 
 public: // overrides

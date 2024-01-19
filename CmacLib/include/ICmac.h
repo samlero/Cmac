@@ -22,7 +22,7 @@ public:
 	/// <param name="damping">Additional parameter to avoid overfitting</param>
 	/// <returns></returns>
 	virtual std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
-		, const IPrediction* prediction
+		, IPrediction& prediction
 		, double damping) = 0;
 };
 
