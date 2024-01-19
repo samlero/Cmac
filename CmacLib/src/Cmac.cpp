@@ -101,8 +101,13 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 		// get basis and hash indices
 		std::vector<double> gammas(this->numLayers, 0.0);
 		std::vector<size_t> indices(this->numLayers, 0);
+		// get weights and add up for the output values
+		std::vector<std::vector<double>> weights(this->numOutput
+			, std::vector<double>(this->numLayers, 0.0));
+		std::vector<double> values(this->numOutput, 0.0);
 		for (size_t i = 0; i < gammas.size(); i++)
 		{
+			// acquire the location and find gamma
 			double location = 0.0;
 			for (size_t j = 0; j < normalized.size(); j++)
 			{
@@ -120,19 +125,12 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 				location += (double)(this->hashtable[loc]);
 			}
 			indices[i] = (size_t)(fmod(location, (double)(this->maxHashValue)));
-		}
 
-		// get weights and add up for the output values
-		std::vector<std::vector<double>> weights(this->numOutput
-			, std::vector<double>(this->numLayers, 0.0));
-		std::vector<double> values(this->numOutput, 0.0);
-		for (size_t output = 0; output < this->numOutput; output++)
-		{
-			for (size_t layer = 0; layer < this->numLayers; layer++)
+			// update the output
+			for (size_t out = 0; out < this->numOutput; out++)
 			{
-				weights[output][layer] = this->memory[output][indices[layer]];
-
-				values[output] += weights[output][layer] * gammas[layer];
+				weights[out][i] = this->memory[out][indices[i]];
+				values[out] += weights[out][i] * gammas[i];
 			}
 		}
 
