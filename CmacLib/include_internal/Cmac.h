@@ -9,7 +9,7 @@
 
 class Cmac: public ICmac {
 private:
-	unsigned int numQ, numLayers, maxMem, numOutput, numInput;
+	unsigned int numQ, numLayers, maxMem, maxHashValue, numOutput, numInput;
 	std::vector<double> upper, lower;
 	double beta, nu;
 
@@ -19,6 +19,8 @@ private:
 	std::vector<size_t> hashtable;
 	// contains normalizing denominator for the inputs
 	std::vector<double> denominator;
+	// offset in each layer
+	std::vector<std::vector<double>> offsets;
 
 private: // methods
 	/// <summary>
