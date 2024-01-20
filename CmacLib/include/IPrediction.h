@@ -32,7 +32,7 @@ namespace CmacLib
 		/// Indicates if the prediction was successful or not, and provides a reason as to why the prediction failed.
 		/// </summary>
 		/// <returns></returns>
-		virtual const IResult& GetResult() = 0;
+		virtual IResult*const GetResult() = 0;
 	};
 }
 

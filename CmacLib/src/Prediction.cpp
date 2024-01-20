@@ -60,7 +60,7 @@ const std::vector<double>& Prediction::GetBasisValues()
 	return this->basisValues;
 }
 
-const IResult& Prediction::GetResult()
+IResult* const Prediction::GetResult()
 {
-	return *(this->result);
+	return this->result.get();
 }

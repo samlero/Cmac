@@ -31,7 +31,7 @@ namespace CmacLib
 		const std::vector<size_t>& GetActiveWeightIndices() override;
 		const std::vector<std::vector<double>>& GetActiveWeights() override;
 		const std::vector<double>& GetBasisValues() override;
-		const IResult& GetResult() override;
+		IResult* const GetResult() override;
 	};
 }
 

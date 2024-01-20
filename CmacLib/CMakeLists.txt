@@ -13,8 +13,8 @@ if(POLICY CMP0091)
   cmake_policy(SET CMP0091 NEW) 
 endif()
 
-set_property(TARGET MyVtkAppOrLibName PROPERTY
-  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+#set_property(TARGET MyVtkAppOrLibName PROPERTY
+#  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 project ("CmacLib")
 
