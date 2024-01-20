@@ -1,6 +1,7 @@
 #include "Cmac.h"
 #include <stdexcept>
 #include <cstdlib>
+#include <cmath>
 
 #include "Result.h"
 #include "Prediction.h"
@@ -141,7 +142,7 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 				}
 				location += (double)(this->hashtable[loc]);
 			}
-			indices[i] = (size_t)(fmod(location, (double)(this->maxHashValue)));
+			indices[i] = (size_t)(std::fmod(location, (double)(this->maxHashValue)));
 
 			// update the output
 			for (size_t out = 0; out < this->numOutput; out++)
