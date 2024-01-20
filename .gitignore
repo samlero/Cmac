@@ -2,8 +2,5 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/CmacLib/.vs/CmacLib/FileContentIndex
-/CmacLib/.vs/CmacLib/v17
-/CmacLib/.vs
-/CmacLib/out/build/x64-debug
 /.vs
+/build/*
