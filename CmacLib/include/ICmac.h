@@ -24,7 +24,7 @@ namespace CmacLib
 		/// <param name="damping">Additional parameter to avoid overfitting</param>
 		/// <returns></returns>
 		virtual std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
-			, IPrediction& prediction
+			, IPrediction* const prediction
 			, double damping) = 0;
 	};
 }

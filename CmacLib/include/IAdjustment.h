@@ -17,7 +17,7 @@ namespace CmacLib
 		/// Indicates if the adjustment was successful or not and provides some reason as to why it failed.
 		/// </summary>
 		/// <returns></returns>
-		virtual const IResult& GetResult() = 0;
+		virtual IResult* const GetResult() = 0;
 	};
 }
 

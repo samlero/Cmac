@@ -57,7 +57,7 @@ namespace CmacLib
 
 		std::unique_ptr<IPrediction> Predict(std::vector<double>& input) override;
 		std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
-			, IPrediction& prediction
+			, IPrediction* const prediction
 			, double damping) override;
 	};
 }

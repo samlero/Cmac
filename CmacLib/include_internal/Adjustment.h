@@ -23,7 +23,7 @@ namespace CmacLib
 
 	public: // overrides
 		const std::vector<std::vector<double>>& GetWeightChanges() override;
-		const IResult& GetResult() override;
+		IResult* const GetResult() override;
 	};
 }
 

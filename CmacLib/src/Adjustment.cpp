@@ -27,9 +27,9 @@ const std::vector<std::vector<double>>& Adjustment::GetWeightChanges()
 	return this->weightChanges;
 }
 
-const IResult& Adjustment::GetResult()
+IResult* const Adjustment::GetResult()
 {
-	return *(this->result);
+	return this->result.get();
 }
 
 

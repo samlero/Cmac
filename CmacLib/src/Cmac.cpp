@@ -14,6 +14,14 @@ std::vector<double> Cmac::Normalize(std::vector<double>& raw)
 	for (size_t i = 0; i < raw.size(); i++) 
 	{
 		result[i] = (raw[i] - this->lower[i]) / this->denominator[i];
+		if(result[i] > 1.0) 
+		{
+			result[i] = 1.0;
+		}
+		if(result[i] < 0.0)
+		{
+			result[i] = 0.0;
+		}
 	}
 	return result;
 }
@@ -124,6 +132,13 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 
 				// calculate hash 
 				size_t loc = cell + this->numQ * i + this->numQ * this->numLayers * j;
+				if (loc > this->hashtable.size())
+				{
+					std::unique_ptr<Result> result = std::make_unique<Result>();
+					result->SetIsSuccessful(false);
+					result->SetMessage("Hash location/index is greater than the size of the hashtable.");
+					prediction->SetResult(result.release());
+				}
 				location += (double)(this->hashtable[loc]);
 			}
 			indices[i] = (size_t)(fmod(location, (double)(this->maxHashValue)));
@@ -156,7 +171,7 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 	return prediction;
 }
 
-std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPrediction& prediction, double damping)
+std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPrediction* const prediction, double damping)
 {
 	std::unique_ptr<Adjustment> adjustment(new Adjustment());
 	try
@@ -172,9 +187,9 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 		}
 
 		// extract prediction variables
-		std::vector<double> gammas = prediction.GetBasisValues();
-		std::vector<std::vector<double>> weights = prediction.GetActiveWeights();
-		std::vector<size_t> indices = prediction.GetActiveWeightIndices();
+		std::vector<double> gammas = prediction->GetBasisValues();
+		std::vector<std::vector<double>> weights = prediction->GetActiveWeights();
+		std::vector<size_t> indices = prediction->GetActiveWeightIndices();
 
 		// check weight indices same as the number of layers
 		if (indices.size() != this->numLayers)
