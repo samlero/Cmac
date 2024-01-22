@@ -2,6 +2,7 @@
 #include "mexAdapter.hpp"
 #include "ICmac.h"
 #include "Factory.h"
+#include <iostream>
 
 using namespace CmacLib;
 
@@ -17,7 +18,7 @@ public:
             if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
             {
                 matlabPtr->feval(u"error", 0,
-                                 std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type unsigned int (64bit).")}));
+                    std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.") }));
                 return;
             }
             // get Factory pointer
@@ -100,19 +101,34 @@ public:
         }
         else if(inputs.size() == 1) // constructor
         {
-            if(inputs[0].getType() != matlab::data::ArrayType::MATLAB_STRING)
+            std::cout<< "Constructor" << std::endl;
+            if(inputs[0].getType() != matlab::data::ArrayType::CHAR)
             {
                 matlabPtr->feval(u"error", 0,
-                                 std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type string.")}));
+                    std::vector<matlab::data::Array>({ factory.createScalar("First input must be of a char array.") }));
                 return;
             }
 
+            // extract the method name
+            std::cout<< "Constructor: Get method name" << std::endl;
+            matlab::data::CharArray inChar(inputs[0]);
+            std::cout<< "Constructor: Get method name 3" << std::endl;
+            std::string method = inChar.toAscii();
+            // make sure method name is CreateCmac
+            if(method != "New")
+            {
+                matlabPtr->feval(u"error", 0,
+                    std::vector<matlab::data::Array>({ factory.createScalar("Method name should be New.") }));
+                return;
+            }
+
+            std::cout<< "Constructor: Create factory" << std::endl;
             Factory* cmacFactory = new Factory();
             outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)cmacFactory);
-
         }
         else if(inputs.size() == 2) // destructor
         {
+            std::cout<< "Destructor" << std::endl;
             // first input should be a pointer
             if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
             {
@@ -120,6 +136,7 @@ public:
                                  std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
                 return;
             }
+            std::cout<< "Destructor: Get pointer" << std::endl;
             // get Factory pointer
             matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
             auto dataPtr = dataArray.release();
@@ -127,14 +144,15 @@ public:
             Factory* cmacFactory = (Factory*)(*dataRaw);
 
             // second input should be a method name
-            if(inputs[1].getType() != matlab::data::ArrayType::MATLAB_STRING)
+            if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
             {
                 matlabPtr->feval(u"error", 0,
-                                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
+                                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type char array.")}));
                 return;
             }
+            std::cout<< "Destructor: Get method name" << std::endl;
             // extract the method name
-            matlab::data::CharArray inChar = inputs[1];
+            matlab::data::CharArray inChar(inputs[1]);
             std::string method = inChar.toAscii();
             // make sure method name is CreateCmac
             if(method != "Delete")
@@ -144,6 +162,7 @@ public:
                 return;
             }
 
+            std::cout<< "Destructor: call delete" << std::endl;
             delete cmacFactory;
         }
         else
