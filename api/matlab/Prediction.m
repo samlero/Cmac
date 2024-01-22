@@ -1,17 +1,13 @@
-classdef Prediction < handle
+classdef Prediction < ACmacLibEntity
     %PREDICTION Prediction result.
     
-    properties(SetAccess=private, Hidden=true)
-        objectHandle uint64     % IPrediction object handle
-    end
-    
     methods
-        function obj = Prediction(objectHandle)
+        function obj = Prediction(handle)
             %PREDICTION Construct an instance of this class
             arguments
-                objectHandle uint64
+                handle uint64
             end
-            obj.objectHandle = objectHandle;
+            obj@ACmacLibEntity(handle, "PredictionMex");
         end
         
         function values = GetValues(obj)
@@ -19,7 +15,7 @@ classdef Prediction < handle
             arguments
                 obj Prediction
             end
-            values = PredictionMex(obj.objectHandle, "GetValues");
+            values = PredictionMex(obj.objectHandle, 'GetValues');
         end
 
         function weightIdx = GetActiveWeightIndices(obj)
@@ -28,7 +24,7 @@ classdef Prediction < handle
             arguments
                 obj Prediction
             end
-            weightIdx = PredictionMex(obj.objectHandle, "GetActiveWeightIndices");
+            weightIdx = PredictionMex(obj.objectHandle, 'GetActiveWeightIndices');
         end
 
         function weights = GetActiveWeights(obj)
@@ -37,7 +33,7 @@ classdef Prediction < handle
             arguments
                 obj Prediction
             end
-            [w, nrows, ncols] = PredictionMex(obj.objectHandle, "GetActiveWeights");
+            [w, nrows, ncols] = PredictionMex(obj.objectHandle, 'GetActiveWeights');
             weights = reshape(w, [nrows, ncols]);
         end
 
@@ -46,7 +42,7 @@ classdef Prediction < handle
             arguments
                 obj Prediction
             end
-            basis = PredictionMex(obj.objectHandle, "GetBasisValues");
+            basis = PredictionMex(obj.objectHandle, 'GetBasisValues');
         end
 
         function result = GetResult(obj)
@@ -55,16 +51,8 @@ classdef Prediction < handle
             arguments
                 obj Prediction
             end
-            res = PredictionMex(obj.objectHandle, "GetResult");
+            res = PredictionMex(obj.objectHandle, 'GetResult');
             result = Result(res);
-        end
-
-        function delete(obj)
-            %DELETE Destroy the object handle.
-            arguments
-                obj Prediction
-            end
-            PredictionMex(obj.objectHandle, "Delete");
         end
     end
 end

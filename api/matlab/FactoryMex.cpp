@@ -28,14 +28,14 @@ public:
             Factory* cmacFactory = (Factory*)(*dataRaw);
 
             // check second input
-            if(inputs[1].getType() != matlab::data::ArrayType::MATLAB_STRING)
+            if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
             {
                 matlabPtr->feval(u"error", 0,
                                  std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
                 return;
             }
             // extract the method name
-            matlab::data::CharArray inChar = inputs[1];
+            matlab::data::CharArray inChar(inputs[1]);
             std::string method = inChar.toAscii();
             // make sure method name is CreateCmac
             if(method != "CreateCmac")

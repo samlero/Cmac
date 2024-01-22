@@ -2,17 +2,17 @@ classdef Result < handle
     %RESULT CMAC operation result.
     %   If not successful, additional message is provided of the failure.
     
-    properties(SetAccess=private, Hidden=true)
+    properties(SetAccess=private, GetAccess=public)
         objectHandle uint64     % IResult object handle
     end
     
     methods
-        function obj = Result(objectHandle)
+        function obj = Result(handle)
             %RESULT Construct an instance of this class
             arguments
-                objectHandle uint64
+                handle uint64
             end
-            obj.objectHandle = objectHandle;
+            obj.objectHandle = handle;
         end
         
         function success = IsSuccessful(obj)
@@ -20,7 +20,7 @@ classdef Result < handle
             arguments
                 obj Result
             end
-            success = ResultMex(obj.objectHandle, "IsSuccessful");
+            success = ResultMex(obj.objectHandle, 'IsSuccessful');
         end
 
         function msg = GetMessage(obj)
@@ -29,7 +29,7 @@ classdef Result < handle
             arguments
                 obj Result
             end
-            msg = ResultMex(obj.objectHandle, "GetMessage");
+            msg = ResultMex(obj.objectHandle, 'GetMessage');
         end
     end
 end

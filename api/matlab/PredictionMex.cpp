@@ -24,7 +24,7 @@ public:
         if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
         {
             matlabPtr->feval(u"error", 0, 
-                std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint32.")}));
+                std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
             return;
         }
         // extract the handle
@@ -34,38 +34,34 @@ public:
         IPrediction* prediction = (IPrediction*)(*dataRaw);
 
         // second argument must be the name of the method in question
-        if(inputs[1].getType() != matlab::data::ArrayType::MATLAB_STRING)
+        if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
         {
             matlabPtr->feval(u"error", 0, 
                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
             return;
         }
         // extract the method name
-        matlab::data::CharArray inChar = inputs[1];
+        matlab::data::CharArray inChar(inputs[1]);
         std::string method = inChar.toAscii();
 
-        // output must only contain one output
-        if(outputs.size() != 1){
-            matlabPtr->feval(u"error", 0, 
-                std::vector<matlab::data::Array>({ factory.createScalar("One output required.")}));
-            return;
-        }
-
-        if(method == "GetValues"){
+        if(method == "GetValues")
+        {
             std::vector<double> values = prediction->GetValues();
             outputs[0] = factory
                 .createArray<double>({1, values.size()}
                                      , values.data()
                                      , values.data() + values.size());
         }
-        else if(method == "GetActiveWeightIndices"){
+        else if(method == "GetActiveWeightIndices")
+        {
             std::vector<unsigned int> values = prediction->GetActiveWeightIndices();
             outputs[0] = factory
                 .createArray<uint32_t>({1, values.size()}
                                      , values.data()
                                      , values.data() + values.size());
         }
-        else if(method == "GetActiveWeights"){
+        else if(method == "GetActiveWeights")
+        {
             std::vector<std::vector<double>> matrix = prediction->GetActiveWeights();
             std::vector<double> array;
             unsigned int ncols = 0;
@@ -87,18 +83,21 @@ public:
             outputs[2] = factory
                 .createScalar<uint32_t>(ncols);
         }
-        else if(method == "GetBasisValues"){
+        else if(method == "GetBasisValues")
+        {
             std::vector<double> values = prediction->GetBasisValues();
             outputs[0] = factory
                 .createArray<double>({1, values.size()}
                                      , values.data()
                                      , values.data() + values.size());
         }
-        else if(method == "GetResult"){
+        else if(method == "GetResult")
+        {
             IResult* result = prediction->GetResult();
             outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)result);
         }
-        else if(method == "Delete"){
+        else if(method == "Delete")
+        {
             delete prediction;
         }
         else{

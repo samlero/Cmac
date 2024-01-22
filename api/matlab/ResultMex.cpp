@@ -23,7 +23,7 @@ public:
         if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
         {
             matlabPtr->feval(u"error", 0, 
-                std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint32.")}));
+                std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
             return;
         }
         // extract the handle
@@ -33,22 +33,15 @@ public:
         IResult* result = (IResult*)(*dataRaw);
 
         // second argument must be the name of the method in question
-        if(inputs[1].getType() != matlab::data::ArrayType::MATLAB_STRING)
+        if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
         {
             matlabPtr->feval(u"error", 0, 
                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
             return;
         }
         // extract the method name
-        matlab::data::CharArray inChar = inputs[1];
+        matlab::data::CharArray inChar(inputs[1]);
         std::string method = inChar.toAscii();
-
-        // output must only contain one output
-        if(outputs.size() != 1){
-            matlabPtr->feval(u"error", 0, 
-                std::vector<matlab::data::Array>({ factory.createScalar("One output required.")}));
-            return;
-        }
 
         if(method == "IsSuccessful"){
             bool success = result->IsSuccessful();
