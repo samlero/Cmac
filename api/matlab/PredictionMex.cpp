@@ -100,7 +100,8 @@ public:
         {
             delete prediction;
         }
-        else{
+        else
+        {
            matlabPtr->feval(u"error", 0, 
                 std::vector<matlab::data::Array>({ factory.createScalar("Not a supported method.")}));
         }
