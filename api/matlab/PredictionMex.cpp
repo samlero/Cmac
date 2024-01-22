@@ -34,7 +34,7 @@ public:
         IPrediction* prediction = (IPrediction*)(*dataRaw);
 
         // second argument must be the name of the method in question
-        if(inputs[0].getType() != matlab::data::ArrayType::MATLAB_STRING)
+        if(inputs[1].getType() != matlab::data::ArrayType::MATLAB_STRING)
         {
             matlabPtr->feval(u"error", 0, 
                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
