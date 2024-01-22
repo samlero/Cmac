@@ -8,7 +8,7 @@ void Prediction::SetValues(std::vector<double>& values)
 	this->values = values;
 }
 
-void Prediction::SetActiveWeightIndices(std::vector<size_t>& activeWeightIndices)
+void Prediction::SetActiveWeightIndices(std::vector<unsigned int>& activeWeightIndices)
 {
 	this->activeWeightIndices = activeWeightIndices;
 }
@@ -30,7 +30,7 @@ void Prediction::SetResult(IResult* result)
 
 Prediction::Prediction()
 	: values(std::vector<double>())
-	, activeWeightIndices(std::vector<size_t>())
+	, activeWeightIndices(std::vector<unsigned int>())
 	, activeWeights(std::vector<std::vector<double>>())
 	, basisValues(std::vector<double>())
 	, result(std::make_unique<Result>()){}
@@ -45,7 +45,7 @@ const std::vector<double>& Prediction::GetValues()
 	return this->values;
 }
 
-const std::vector<size_t>& Prediction::GetActiveWeightIndices()
+const std::vector<unsigned int>& Prediction::GetActiveWeightIndices()
 {
 	return this->activeWeightIndices;
 }

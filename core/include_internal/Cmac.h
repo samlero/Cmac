@@ -18,7 +18,7 @@ namespace CmacLib
 		// contains all weights (output by weight)
 		std::vector<std::vector<double>> memory;
 		// contains indices to the weights
-		std::vector<size_t> hashtable;
+		std::vector<unsigned int> hashtable;
 		// contains normalizing denominator for the inputs
 		std::vector<double> denominator;
 		// offset in each layer

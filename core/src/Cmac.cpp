@@ -62,7 +62,7 @@ Cmac::Cmac(unsigned int numQ
 
 	// create hashtable
 	unsigned int hashsize = upper.size() * numLayers * numQ + numQ * numLayers + numQ;
-	this->hashtable = std::vector<size_t>(hashsize);
+	this->hashtable = std::vector<unsigned int>(hashsize);
 	this->maxHashValue = 0;
 	for (unsigned int i = 0; i < hashsize; i++) 
 	{
@@ -111,7 +111,7 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 
 		// get basis and hash indices
 		std::vector<double> gammas(this->numLayers, 0.0);
-		std::vector<size_t> indices(this->numLayers, 0);
+		std::vector<unsigned int> indices(this->numLayers, 0);
 		// get weights and add up for the output values
 		std::vector<std::vector<double>> weights(this->numOutput
 			, std::vector<double>(this->numLayers, 0.0));
@@ -142,7 +142,7 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 				}
 				location += (double)(this->hashtable[loc]);
 			}
-			indices[i] = (size_t)(std::fmod(location, (double)(this->maxHashValue)));
+			indices[i] = (unsigned int)(std::fmod(location, (double)(this->maxHashValue)));
 
 			// update the output
 			for (size_t out = 0; out < this->numOutput; out++)
@@ -190,7 +190,7 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 		// extract prediction variables
 		std::vector<double> gammas = prediction->GetBasisValues();
 		std::vector<std::vector<double>> weights = prediction->GetActiveWeights();
-		std::vector<size_t> indices = prediction->GetActiveWeightIndices();
+		std::vector<unsigned int> indices = prediction->GetActiveWeightIndices();
 
 		// check weight indices same as the number of layers
 		if (indices.size() != this->numLayers)

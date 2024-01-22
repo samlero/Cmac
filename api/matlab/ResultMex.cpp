@@ -1,6 +1,6 @@
 #include "mex.hpp"
 #include "mexAdapter.hpp"
-#include <IResult.h>
+#include "IResult.h"
 #include <string>
 
 using namespace CmacLib;
@@ -20,17 +20,17 @@ public:
         }
 
         // first argument must be an IResult* pointer
-        if(inputs[0].getType() != matlab::data::ArrayType::UINT32)
+        if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
         {
             matlabPtr->feval(u"error", 0, 
                 std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint32.")}));
             return;
         }
         // extract the handle
-        matlab::data::TypedArray<uint32_t> dataArray = std::move(inputs[0]);
+        matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
         auto dataPtr = dataArray.release();
-        uint32_t* dataRaw = dataPtr.get();
-        IResult* result = (IResult*)dataRaw;
+        uint64_t* dataRaw = dataPtr.get();
+        IResult* result = (IResult*)(*dataRaw);
 
         // second argument must be the name of the method in question
         if(inputs[0].getType() != matlab::data::ArrayType::MATLAB_STRING)

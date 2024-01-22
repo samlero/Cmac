@@ -3,14 +3,14 @@ classdef Result < handle
     %   If not successful, additional message is provided of the failure.
     
     properties(SetAccess=private, Hidden=true)
-        objectHandle uint32     % IResult object handle
+        objectHandle uint64     % IResult object handle
     end
     
     methods
         function obj = Result(objectHandle)
             %RESULT Construct an instance of this class
             arguments
-                objectHandle uint32
+                objectHandle uint64
             end
             obj.objectHandle = objectHandle;
         end

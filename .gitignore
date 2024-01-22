@@ -6,3 +6,4 @@
 /build/*
 *.mexw64
 *.asv
+out/*

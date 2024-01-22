@@ -17,7 +17,7 @@ namespace CmacLib
 		/// Get the indices of the active weights.
 		/// </summary>
 		/// <returns></returns>
-		virtual const std::vector<size_t>& GetActiveWeightIndices() = 0;
+		virtual const std::vector<unsigned int>& GetActiveWeightIndices() = 0;
 		/// <summary>
 		/// Get the values of the active weights in each layer and output.
 		/// </summary>
