@@ -31,6 +31,8 @@ namespace CmacLib
 		/// <param name="raw"></param>
 		/// <returns></returns>
 		std::vector<double> Normalize(std::vector<double>& raw);
+		/// @brief Initialize the instance.
+		void Init();
 
 	public:
 		Cmac(unsigned int numQ

@@ -28,20 +28,7 @@ std::vector<double> Cmac::Normalize(std::vector<double>& raw)
 	return result;
 }
 
-Cmac::Cmac(unsigned int numQ
-	, unsigned int numLayers
-	, unsigned int maxmem
-	, unsigned int numOut
-	, std::vector<double> upper
-	, std::vector<double> lower
-	, double beta, double nu)
-	: numQ(numQ), numLayers(numLayers)
-	, maxMem(maxmem)
-	, numOutput(numOut)
-	, numInput((unsigned int)upper.size())
-	, upper(upper), lower(lower)
-	, beta(beta), nu(nu)
-{
+void Cmac::Init() {
 	// check limit sizes are the same
 	if (upper.size() != lower.size()) 
 	{
@@ -67,7 +54,7 @@ Cmac::Cmac(unsigned int numQ
 	this->maxHashValue = 0;
 	for (unsigned int i = 0; i < hashsize; i++) 
 	{
-		unsigned int index = std::rand() % maxmem;
+		unsigned int index = std::rand() % maxMem;
 		this->hashtable[i] = index;
 		if (this->maxHashValue < index)
 		{
@@ -76,7 +63,7 @@ Cmac::Cmac(unsigned int numQ
 	}
 
 	// instantiate memory
-	this->memory = std::vector<std::vector<double>>(numOut
+	this->memory = std::vector<std::vector<double>>(numOutput
 		, std::vector<double>(maxHashValue, 0.0));
 
 	// create offsets
@@ -89,6 +76,23 @@ Cmac::Cmac(unsigned int numQ
 			this->offsets[layer][input] = ((double)rand()) / ((double)RAND_MAX);
 		}
 	}
+}
+
+Cmac::Cmac(unsigned int numQ
+	, unsigned int numLayers
+	, unsigned int maxmem
+	, unsigned int numOut
+	, std::vector<double> upper
+	, std::vector<double> lower
+	, double beta, double nu)
+	: numQ(numQ), numLayers(numLayers)
+	, maxMem(maxmem)
+	, numOutput(numOut)
+	, numInput((unsigned int)upper.size())
+	, upper(upper), lower(lower)
+	, beta(beta), nu(nu)
+{
+	Init();
 }
 
 Cmac::~Cmac(){}
