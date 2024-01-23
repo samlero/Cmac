@@ -1,5 +1,6 @@
 #include "Adjustment.h"
 #include "Result.h"
+#include <iostream>
 
 using namespace CmacLib;
 

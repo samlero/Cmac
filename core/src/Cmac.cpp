@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 
 #include "Result.h"
 #include "Prediction.h"

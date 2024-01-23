@@ -18,6 +18,8 @@ namespace CmacLib
 		/// </summary>
 		/// <returns></returns>
 		virtual IResult* const GetResult() = 0;
+		
+		virtual ~IAdjustment(){};
 	};
 }
 

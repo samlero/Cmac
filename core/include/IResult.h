@@ -17,6 +17,8 @@ namespace CmacLib
 		/// </summary>
 		/// <returns></returns>
 		virtual std::string GetMessage() = 0;
+
+		virtual ~IResult(){};
 	};
 }
 

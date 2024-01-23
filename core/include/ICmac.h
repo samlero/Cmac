@@ -26,6 +26,8 @@ namespace CmacLib
 		virtual std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
 			, IPrediction* const prediction
 			, double damping) = 0;
+
+		virtual ~ICmac(){};
 	};
 }
 
