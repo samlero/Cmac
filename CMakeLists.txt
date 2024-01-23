@@ -13,6 +13,16 @@ if(POLICY CMP0091)
   cmake_policy(SET CMP0091 NEW) 
 endif()
 
+## <region> Enforcing C++ standards.
+if(MSVC)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17")
+else()
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
+  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_EXTENSIONS OFF)
+endif()
+## Enforcing C and C++ standards. </region>
+
 #set_property(TARGET MyVtkAppOrLibName PROPERTY
 #  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
