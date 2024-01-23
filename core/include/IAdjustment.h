@@ -6,19 +6,19 @@
 
 namespace CmacLib
 {
+	/// @brief Contains weight adjustment data.
 	class IAdjustment {
 	public:
-		/// <summary>
-		/// Gets the amount each weight changed in each output level. 
-		/// </summary>
-		/// <returns></returns>
+
+		/// @brief Get the amount the each active weight changed.
+		/// @return Weight change dW.
 		virtual const std::vector<std::vector<double>>& GetWeightChanges() = 0;
-		/// <summary>
-		/// Indicates if the adjustment was successful or not and provides some reason as to why it failed.
-		/// </summary>
-		/// <returns></returns>
+
+		/// @brief Get the result (if not successful, a message of the failure is provided).
+		/// @return Operation result.
 		virtual IResult* const GetResult() = 0;
 		
+		/// @brief Destructor
 		virtual ~IAdjustment(){};
 	};
 }

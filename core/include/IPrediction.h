@@ -6,34 +6,30 @@
 
 namespace CmacLib
 {
+	/// @brief Prediction output.
 	class IPrediction {
 	public:
-		/// <summary>
-		/// Get the main output of the prediction.
-		/// </summary>
-		/// <returns></returns>
+		/// @brief Get the calculated multiplication and accumulation of basis and active weights.
+		/// @return Cmac output.
 		virtual const std::vector<double>& GetValues() = 0;
-		/// <summary>
-		/// Get the indices of the active weights.
-		/// </summary>
-		/// <returns></returns>
+
+		/// @brief Get the indices of the active weights.
+		/// @return Active weight indices.
 		virtual const std::vector<unsigned int>& GetActiveWeightIndices() = 0;
-		/// <summary>
-		/// Get the values of the active weights in each layer and output.
-		/// </summary>
-		/// <returns></returns>
+
+		/// @brief Get the values of the active weights.
+		/// @return Active weight values.
 		virtual const std::vector<std::vector<double>>& GetActiveWeights() = 0;
-		/// <summary>
-		/// Get the basis function values. 
-		/// </summary>
-		/// <returns></returns>
+
+		/// @brief Get the basis function values.
+		/// @return Basis function values.
 		virtual const std::vector<double>& GetBasisValues() = 0;
-		/// <summary>
-		/// Indicates if the prediction was successful or not, and provides a reason as to why the prediction failed.
-		/// </summary>
-		/// <returns></returns>
+
+		/// @brief Get the success status of the operation.
+		/// @return Operation result.
 		virtual IResult*const GetResult() = 0;
 
+		/// @brief Destructor.
 		virtual ~IPrediction(){};
 	};
 }

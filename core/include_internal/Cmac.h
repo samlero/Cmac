@@ -42,23 +42,13 @@ namespace CmacLib
 			, double beta
 			, double nu);
 
-		/** Include this once we have saving and loading ready.
-		Cmac(unsigned int numQ
-			, unsigned int numLayers
-			, unsigned int maxHash
-			, std::vector<double> upper
-			, std::vector<double> lower
-			, double beta
-			, double nu
-			, std::vector<std::vector<double>>& memory
-			, std::vector<unsigned int>& hashtable);
-			**/
 		~Cmac();
 
 		std::unique_ptr<IPrediction> Predict(std::vector<double>& input) override;
 		std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
 			, IPrediction* const prediction
 			, double damping) override;
+		std::unique_ptr<IResult> Save(std::string directory, std::string filename) override;
 	};
 }
 

@@ -5,19 +5,19 @@
 
 namespace CmacLib
 {
+	/// @brief Result.
 	class IResult {
 	public:
-		/// <summary>
-		/// Indicates if an action was successful or not.
-		/// </summary>
-		/// <returns></returns>
+
+		/// @brief Indicates if an operation was successful.
+		/// @return Success.
 		virtual bool IsSuccessful() = 0;
-		/// <summary>
-		///  If unsuccessful, a message is provided for the cause.
-		/// </summary>
-		/// <returns></returns>
+
+		/// @brief If not successful, a failure message is provided.
+		/// @return 
 		virtual std::string GetMessage() = 0;
 
+		/// @brief Destructor
 		virtual ~IResult(){};
 	};
 }

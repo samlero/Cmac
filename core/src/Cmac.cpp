@@ -38,7 +38,7 @@ Cmac::Cmac(unsigned int numQ
 	: numQ(numQ), numLayers(numLayers)
 	, maxMem(maxmem)
 	, numOutput(numOut)
-	, numInput(upper.size())
+	, numInput((unsigned int)upper.size())
 	, upper(upper), lower(lower)
 	, beta(beta), nu(nu)
 {
@@ -62,12 +62,12 @@ Cmac::Cmac(unsigned int numQ
 	}
 
 	// create hashtable
-	unsigned int hashsize = upper.size() * numLayers * numQ + numQ * numLayers + numQ;
+	unsigned int hashsize = ((unsigned int)upper.size()) * numLayers * numQ + numQ * numLayers + numQ;
 	this->hashtable = std::vector<unsigned int>(hashsize);
 	this->maxHashValue = 0;
 	for (unsigned int i = 0; i < hashsize; i++) 
 	{
-		size_t index = std::rand() % maxmem;
+		unsigned int index = std::rand() % maxmem;
 		this->hashtable[i] = index;
 		if (this->maxHashValue < index)
 		{
@@ -261,6 +261,9 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 	return adjustment;
 }
 
-
-
-
+std::unique_ptr<IResult> CmacLib::Cmac::Save(std::string directory, std::string filename)
+{
+	// Each member variable is its own Xml field.
+	// Keep in mind that some vector member variables are 2D.
+    throw std::exception("Save NOT IMPLEMENTED.");
+}
