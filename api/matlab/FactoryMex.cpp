@@ -4,6 +4,7 @@
 #include "Factory.h"
 #include <iostream>
 #include <utility>
+#include <iterator>
 
 using namespace CmacLib;
 
@@ -77,8 +78,14 @@ public:
             matlab::data::TypedArray<double> pUpper = std::move(inputs[6]);
             matlab::data::TypedArray<double> pLower = std::move(inputs[7]);
             // put them in a vector
-            std::vector<double> upper(pUpper.begin(), pUpper.end());
-            std::vector<double> lower(pLower.begin(), pLower.end());
+            std::vector<double> upper(
+                ::std::make_move_iterator(pUpper.begin()),
+                ::std::make_move_iterator(pUpper.end())
+            );
+            std::vector<double> lower(
+                ::std::make_move_iterator(pLower.begin()),
+                ::std::make_move_iterator(pLower.end())
+            );
 
             // check ninth and tenth inputs
             if(inputs[8].getType() != matlab::data::ArrayType::DOUBLE
