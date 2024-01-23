@@ -48,7 +48,9 @@ namespace CmacLib
 		std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
 			, IPrediction* const prediction
 			, double damping) override;
-		std::unique_ptr<IResult> Save(std::string directory, std::string filename) override;
+		std::unique_ptr<IResult> Save(
+			const std::string& directory, const std::string& filename
+		) override;
 	};
 }
 

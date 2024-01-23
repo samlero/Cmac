@@ -30,7 +30,9 @@ namespace CmacLib
 		/// @param directory Location to save the Cmac object.
 		/// @param filename Name of the saved file.
 		/// @return Save result.
-		virtual std::unique_ptr<IResult> Save(std::string directory, std::string filename) = 0;
+		virtual std::unique_ptr<IResult> Save(
+			const std::string& directory, const std::string& filename
+		) = 0;
 
 		/// @brief Destructor
 		virtual ~ICmac(){};

@@ -261,8 +261,9 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 	return adjustment;
 }
 
-std::unique_ptr<IResult> CmacLib::Cmac::Save(std::string directory, std::string filename)
-{
+std::unique_ptr<IResult> CmacLib::Cmac::Save(
+	const std::string& directory, const std::string& filename
+) {
 	// Each member variable is its own Xml field.
 	// Keep in mind that some vector member variables are 2D.
     throw std::runtime_error("Save NOT IMPLEMENTED.");
