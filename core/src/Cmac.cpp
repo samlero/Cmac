@@ -28,6 +28,7 @@ std::vector<double> Cmac::Normalize(std::vector<double>& raw)
 	return result;
 }
 
+/// @brief Initialize the cmac instance.
 void Cmac::Init() {
 	// check limit sizes are the same
 	if (upper.size() != lower.size()) 
