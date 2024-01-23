@@ -21,7 +21,12 @@ project ("CmacLibProject")
 include(CTest)
 
 add_subdirectory(core)
-add_subdirectory(googletest)
+
+find_package(GTest)
+# Prioritize using installed library.
+if (NOT GTest_FOUND)
+  # Only include this directory if gtest lib not installed in the system.
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
+endif()
+
 add_subdirectory(tests)
-
-
