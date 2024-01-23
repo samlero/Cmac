@@ -265,5 +265,5 @@ std::unique_ptr<IResult> CmacLib::Cmac::Save(std::string directory, std::string 
 {
 	// Each member variable is its own Xml field.
 	// Keep in mind that some vector member variables are 2D.
-    throw std::exception("Save NOT IMPLEMENTED.");
+    throw std::runtime_error("Save NOT IMPLEMENTED.");
 }
