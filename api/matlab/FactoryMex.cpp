@@ -3,6 +3,7 @@
 #include "ICmac.h"
 #include "Factory.h"
 #include <iostream>
+#include <utility>
 
 using namespace CmacLib;
 
@@ -97,8 +98,8 @@ public:
                                                          , pNumLayers[0]
                                                          , pMaxMem[0]
                                                          , pNumOut[0]
-                                                         , upper
-                                                         , lower
+                                                         , ::std::move(upper)
+                                                         , ::std::move(lower)
                                                          , pBeta[0]
                                                          , pNu[0]);
 

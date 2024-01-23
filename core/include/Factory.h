@@ -25,8 +25,8 @@ namespace CmacLib
 			, unsigned int numLayers
 			, unsigned int maxmem
 			, unsigned int numOut
-			, std::vector<double> upper
-			, std::vector<double> lower
+			, std::vector<double>&& upper
+			, std::vector<double>&& lower
 			, double beta
 			, double nu);
 

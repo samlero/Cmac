@@ -3,6 +3,7 @@
 //#include <CmacLib.h>
 #include <memory>
 #include <cmath>
+#include <utility>
 
 using namespace CmacLib;
 using namespace std;
@@ -20,8 +21,8 @@ TEST(FACTORY, CreateCmac)
 		, 100
 		, (unsigned int)1e5
 		, 2
-		, upper
-		, lower
+		, ::std::move(upper)
+		, ::std::move(lower)
 		, 0.001
 		, 0.00001));
 
@@ -37,8 +38,8 @@ TEST(CMAC, PREDICT_SUCCESS)
 		, 100
 		, (unsigned int)1e5
 		, 2
-		, upper
-		, lower
+		, ::std::move(upper)
+		, ::std::move(lower)
 		, 0.001
 		, 0.00001));
 	
@@ -77,8 +78,8 @@ TEST(CMAC, PREDICT_FAIL)
 		, 100
 		, (unsigned int)1e5
 		, 2
-		, upper
-		, lower
+		, ::std::move(upper)
+		, ::std::move(lower)
 		, 0.001
 		, 0.00001));
 	
@@ -105,8 +106,8 @@ TEST(CMAC, ADJUST_SUCCESS)
 		, 100
 		, (unsigned int)1e5
 		, 2
-		, upper
-		, lower
+		, ::std::move(upper)
+		, ::std::move(lower)
 		, 0.001
 		, 0.00001));
 
@@ -138,8 +139,8 @@ TEST(CMAC, ADJUST_FAIL)
 		, 100
 		, (unsigned int)1e5
 		, 2
-		, upper
-		, lower
+		, ::std::move(upper)
+		, ::std::move(lower)
 		, 0.001
 		, 0.00001));
 
