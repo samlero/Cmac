@@ -28,37 +28,37 @@ factory = Factory();
 cmac = factory.CreateCmac(10, 100, 1e5, 2, [10 10], -[10 10], dt*0.01, 1e-5);
 
 % cycles
-for cycle = 1 : num_cycles
-    % loop
-    for i = 1 : num_dts
-        e = x - xr;
-        edot = xdot - xrdot;
-        z = (kp/kd)*e + edot;
+%for cycle = 1 : num_cycles
+% loop
+for i = 1 : num_dts
+    e = x - xr;
+    edot = xdot - xrdot;
+    z = (kp/kd)*e + edot;
 
-        % predict
-        prediction = cmac.Predict(x);
-        if ~prediction.GetResult().IsSuccessful()
-            disp(prediction.GetResult().GetMessage());
-            error('Prediction failed.');
-        end
-
-        % train
-        adjustment = cmac.Adjust(z, prediction, norm(z));
-        if ~adjustment.GetResult().IsSuccessful()
-            disp(adjustment.GetResult().GetMessage());
-            error('Adjustment failed.');
-        end
-        nn = prediction.GetValues();
-        u = -kd*z - nn;
-
-        xddot = M\(u - B*xdot) - 9.81*ones(2,1);
-        xdot = xdot + xddot*dt;
-        x = x + xdot*dt;
-
-        record_e(:,i) = e;
-        record_nn(:,i) = nn;
+    % predict
+    prediction = cmac.Predict(x);
+    if ~prediction.GetResult().IsSuccessful()
+        disp(prediction.GetResult().GetMessage());
+        error('Prediction failed.');
     end
+
+    % train
+    adjustment = cmac.Adjust(z, prediction, norm(z));
+    if ~adjustment.GetResult().IsSuccessful()
+        disp(adjustment.GetResult().GetMessage());
+        error('Adjustment failed.');
+    end
+    nn = prediction.GetValues();
+    u = -kd*z - nn;
+
+    xddot = M\(u - B*xdot) - 9.81*ones(2,1);
+    xdot = xdot + xddot*dt;
+    x = x + xdot*dt;
+
+    record_e(:,i) = e;
+    record_nn(:,i) = nn;
 end
+%end
 
 % graph
 figure(1);
