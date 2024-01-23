@@ -3,6 +3,7 @@
 #include "IPrediction.h"
 #include "IResult.h"
 #include <string>
+#include <iostream>
 
 using namespace CmacLib;
 
@@ -27,6 +28,7 @@ public:
                 std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
             return;
         }
+        std::cout<<"Prediction:Extract IPrediction pointer"<<std::endl;
         // extract the handle
         matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
         auto dataPtr = dataArray.release();
@@ -40,12 +42,14 @@ public:
                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
             return;
         }
+        std::cout<<"Prediction:Extract method name"<<std::endl;
         // extract the method name
         matlab::data::CharArray inChar(inputs[1]);
         std::string method = inChar.toAscii();
 
         if(method == "GetValues")
         {
+            std::cout<<"Prediction:GetValues"<<std::endl;
             std::vector<double> values = prediction->GetValues();
             outputs[0] = factory
                 .createArray<double>({1, values.size()}
@@ -54,6 +58,7 @@ public:
         }
         else if(method == "GetActiveWeightIndices")
         {
+            std::cout<<"Prediction:GetActiveWeightIndices"<<std::endl;
             std::vector<unsigned int> values = prediction->GetActiveWeightIndices();
             outputs[0] = factory
                 .createArray<uint32_t>({1, values.size()}
@@ -62,6 +67,7 @@ public:
         }
         else if(method == "GetActiveWeights")
         {
+            std::cout<<"Prediction:GetActiveWeights"<<std::endl;
             std::vector<std::vector<double>> matrix = prediction->GetActiveWeights();
             std::vector<double> array;
             unsigned int ncols = 0;
@@ -85,6 +91,7 @@ public:
         }
         else if(method == "GetBasisValues")
         {
+            std::cout<<"Prediction:GetBasisValues"<<std::endl;
             std::vector<double> values = prediction->GetBasisValues();
             outputs[0] = factory
                 .createArray<double>({1, values.size()}
@@ -93,11 +100,13 @@ public:
         }
         else if(method == "GetResult")
         {
+            std::cout<<"Prediction:GetResult"<<std::endl;
             IResult* result = prediction->GetResult();
             outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)result);
         }
         else if(method == "Delete")
         {
+            std::cout<<"Prediction:Delete"<<std::endl;
             delete prediction;
         }
         else

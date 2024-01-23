@@ -21,6 +21,7 @@ public:
                                  std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
                 return;
             }
+            std::cout<<"Cmac:Extract Cmac pointer"<<std::endl;
             // get Cmac pointer
             matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
             auto dataPtr = dataArray.release();
@@ -34,12 +35,14 @@ public:
                                  std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type char array.")}));
                 return;
             }
+            std::cout<<"Cmac:Extract method name"<<std::endl;
             // extract the method name
             matlab::data::CharArray inChar(inputs[1]);
             std::string method = inChar.toAscii();
             // make sure method name is CreateCmac
             if(method == "Predict")
             {
+                std::cout<<"Cmac:Predict"<<std::endl;
                 // check if third input is double
                 if(inputs[2].getType() != matlab::data::ArrayType::DOUBLE)
                 {
@@ -47,9 +50,11 @@ public:
                                      std::vector<matlab::data::Array>({ factory.createScalar("Third input should be of type double.") }));
                     return;
                 }
+                std::cout<<"Cmac:Predict: Extract inputs"<<std::endl;
                 matlab::data::TypedArray<double> pInputs = std::move(inputs[2]);
                 std::vector<double> predictInputs(pInputs.begin(), pInputs.end());
 
+                std::cout<<"Cmac:Predict: Call library predict method."<<std::endl;
                 std::unique_ptr<IPrediction> prediction 
                     = cmac->Predict(predictInputs);
 
@@ -57,6 +62,7 @@ public:
             }
             else if(method == "Adjust")
             {
+                std::cout<<"Cmac:Adjust"<<std::endl;
                 // check if third input is double
                 if(inputs[2].getType() != matlab::data::ArrayType::DOUBLE)
                 {
@@ -64,6 +70,7 @@ public:
                                      std::vector<matlab::data::Array>({ factory.createScalar("Third input should be of type double.") }));
                     return;
                 }
+                std::cout<<"Cmac:Adjust: Extract corrections"<<std::endl;
                 matlab::data::TypedArray<double> pCorrections = std::move(inputs[2]);
                 std::vector<double> corrections(pCorrections.begin(), pCorrections.end());
 
@@ -74,6 +81,7 @@ public:
                                      std::vector<matlab::data::Array>({ factory.createScalar("Fourth input should be of type uint64.") }));
                     return;
                 }
+                std::cout<<"Cmac:Adjust: Extract prediction"<<std::endl;
                 // get prediction pointer
                 matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[3]);
                 auto dataPtr = dataArray.release();
@@ -87,9 +95,10 @@ public:
                                      std::vector<matlab::data::Array>({ factory.createScalar("Fifth input should be of type double.") }));
                     return;
                 }
-
+                std::cout<<"Cmac:Adjust: Extract damping"<<std::endl;
                 matlab::data::TypedArray<double> pDamping = std::move(inputs[4]);
 
+                std::cout<<"Cmac:Adjust: Call adjust method"<<std::endl;
                 // call the Adjust method
                 std::unique_ptr<IAdjustment> adjustment = cmac->Adjust(corrections
                                                                        , prediction
@@ -99,6 +108,7 @@ public:
             }
             else if(method == "Delete")
             {
+                std::cout<<"Cmac:Delete"<<std::endl;
                 delete cmac;
             }
             else

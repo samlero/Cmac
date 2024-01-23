@@ -15,7 +15,8 @@ classdef Prediction < ACmacLibEntity
             arguments
                 obj Prediction
             end
-            values = PredictionMex(obj.objectHandle, 'GetValues');
+            vals = PredictionMex(obj.objectHandle, 'GetValues');
+            values = reshape(vals, [numel(vals) 1]);
         end
 
         function weightIdx = GetActiveWeightIndices(obj)
@@ -24,7 +25,8 @@ classdef Prediction < ACmacLibEntity
             arguments
                 obj Prediction
             end
-            weightIdx = PredictionMex(obj.objectHandle, 'GetActiveWeightIndices');
+            idx = PredictionMex(obj.objectHandle, 'GetActiveWeightIndices');
+            weightIdx = reshape(idx, [numel(idx), 1]);
         end
 
         function weights = GetActiveWeights(obj)
@@ -42,7 +44,8 @@ classdef Prediction < ACmacLibEntity
             arguments
                 obj Prediction
             end
-            basis = PredictionMex(obj.objectHandle, 'GetBasisValues');
+            bf = PredictionMex(obj.objectHandle, 'GetBasisValues');
+            basis = reshape(bf, [numel(bf) 1]);
         end
 
         function result = GetResult(obj)
