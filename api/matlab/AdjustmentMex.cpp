@@ -25,6 +25,7 @@ public:
             return;
         }
 
+        std::cout<<"Adjustment:Extract Adjustment pointer"<<std::endl;
         // extract the handle
         matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
         auto dataPtr = dataArray.release();
@@ -38,13 +39,14 @@ public:
                              std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
             return;
         }
-
+        std::cout<<"Adjustment:Extract method name"<<std::endl;
         // extract the method name
         matlab::data::CharArray inChar(inputs[1]);
         std::string method = inChar.toAscii();
 
         if(method == "GetWeightChanges")
         {
+            std::cout<<"Adjustment:GetWeightChanges"<<std::endl;
             std::vector<std::vector<double>> matrix = adjustment->GetWeightChanges();
             std::vector<double> array;
             unsigned int ncols = 0;
@@ -68,11 +70,13 @@ public:
         }
         else if(method == "GetResult")
         {
+            std::cout<<"Adjustment:GetResult"<<std::endl;
             IResult* result = adjustment->GetResult();
             outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)result);
         }
         else if(method == "Delete")
         {
+            std::cout<<"Adjustment:Delete"<<std::endl;
             delete adjustment;
         }
         else

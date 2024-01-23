@@ -6,8 +6,12 @@ classdef (Abstract) ACmacLibEntity < handle
         objectHandle uint64
         mexName string
     end
+
+    properties(Hidden)
+        cleanup
+    end
     
-    methods
+    methods(Access=public)
         function obj = ACmacLibEntity(handle,name)
             %ACMACLIBENTITY Construct an instance of this class
             %   Detailed explanation goes here
@@ -17,8 +21,11 @@ classdef (Abstract) ACmacLibEntity < handle
             end
             obj.objectHandle = handle;
             obj.mexName = name;
+            obj.cleanup = onCleanup(@()delete(obj));
         end
-        
+    end
+
+    methods(Access=private)
         function delete(obj)
             %METHOD1 Summary of this method goes here
             %   Detailed explanation goes here
