@@ -11,20 +11,22 @@
 
 using namespace CmacLib;
 
-void Cmac::Normalize(std::vector<double>& raw)
+std::vector<double> Cmac::Normalize(std::vector<double>& raw)
 {
+	std::vector<double> result(raw.size(), 0.0);
 	for (size_t i = 0; i < raw.size(); i++) 
 	{
-		raw[i] = (raw[i] - this->lower[i]) / this->denominator[i];
-		if(raw[i] > 1.0) 
+		result[i] = (raw[i] - this->lower[i]) / this->denominator[i];
+		if(result[i] > 1.0) 
 		{
-			raw[i] = 1.0;
+			result[i] = 1.0;
 		}
-		if(raw[i] < 0.0)
+		if(result[i] < 0.0)
 		{
-			raw[i] = 0.0;
+			result[i] = 0.0;
 		}
 	}
+	return result;
 }
 
 /// @brief Initialize the cmac instance.
@@ -112,8 +114,7 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 			return prediction;
 		}
 
-		Normalize(input);
-		const std::vector<double>& normalized = input;
+		std::vector<double> normalized = Normalize(input);
 
 		// get basis and hash indices
 		std::vector<double> gammas(this->numLayers, 0.0);
