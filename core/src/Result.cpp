@@ -1,5 +1,5 @@
 #include "Result.h"
-#include <iostream>
+#include <utility>
 
 using namespace CmacLib;
 
@@ -8,9 +8,9 @@ void Result::SetIsSuccessful(bool success)
 	this->successful = success;
 }
 
-void Result::SetMessage(std::string msg)
+void Result::SetMessage(std::string&& msg)
 {
-	this->message = msg;
+	this->message = ::std::move(msg);
 }
 
 Result::Result(): successful(false), message(""){}

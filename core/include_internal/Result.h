@@ -13,7 +13,7 @@ namespace CmacLib
 
 	public: // setters
 		void SetIsSuccessful(bool success);
-		void SetMessage(std::string msg);
+		void SetMessage(std::string&& msg);
 
 	public:
 		Result();
