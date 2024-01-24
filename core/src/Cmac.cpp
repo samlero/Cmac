@@ -167,7 +167,7 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 		result->SetIsSuccessful(true);
 		prediction->SetResult(result.release());
 	}
-	catch (std::exception ex) 
+	catch (const std::exception& ex) 
 	{
 		std::unique_ptr<Result> result = std::make_unique<Result>();
 		result->SetIsSuccessful(false);
@@ -256,7 +256,7 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 		result->SetIsSuccessful(true);
 		adjustment->SetResult(result.release());
 	}
-	catch (std::exception ex)
+	catch (const std::exception& ex)
 	{
 		std::unique_ptr<Result> result = std::make_unique<Result>();
 		result->SetIsSuccessful(false);
