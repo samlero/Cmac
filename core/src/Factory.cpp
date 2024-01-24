@@ -14,7 +14,7 @@ std::unique_ptr<ICmac> Factory::CreateCmac(unsigned int numQ, unsigned int numLa
         , maxmem, numOut, ::std::move(upper), ::std::move(lower), beta, nu);
 }
 
-std::unique_ptr<ICmac> LoadCmac(std::string pathfile)
+std::unique_ptr<ICmac> LoadCmac(const std::string& pathfile)
 {
 
     // Need to update Cmac.h constructor to include all the member variables.

@@ -33,7 +33,7 @@ namespace CmacLib
 		/// @brief Loads a trained Cmac or its configuration.
 		/// @param pathfile File path of the saved Cmac object or configuration.
 		/// @return Cmac
-		std::unique_ptr<ICmac> LoadCmac(std::string pathfile);
+		std::unique_ptr<ICmac> LoadCmac(const std::string& pathfile);
 	};
 }
 
