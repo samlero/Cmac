@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
+#include <utility>
 
 #include "Result.h"
 #include "Prediction.h"
@@ -83,14 +84,14 @@ Cmac::Cmac(unsigned int numQ
 	, unsigned int numLayers
 	, unsigned int maxmem
 	, unsigned int numOut
-	, std::vector<double> upper
-	, std::vector<double> lower
+	, std::vector<double>&& upper
+	, std::vector<double>&& lower
 	, double beta, double nu)
 	: numQ(numQ), numLayers(numLayers)
 	, maxMem(maxmem)
 	, numOutput(numOut)
 	, numInput((unsigned int)upper.size())
-	, upper(upper), lower(lower)
+	, upper(::std::move(upper)), lower(::std::move(lower))
 	, beta(beta), nu(nu)
 {
 	Init();
