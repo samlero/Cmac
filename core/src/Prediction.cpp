@@ -1,27 +1,27 @@
 #include "Prediction.h"
 #include "Result.h"
-#include <iostream>
+#include <utility>
 
 using namespace CmacLib;
 
-void Prediction::SetValues(std::vector<double>& values)
+void Prediction::SetValues(std::vector<double>&& values)
 {
-	this->values = values;
+	this->values = ::std::move(values);
 }
 
-void Prediction::SetActiveWeightIndices(std::vector<unsigned int>& activeWeightIndices)
+void Prediction::SetActiveWeightIndices(std::vector<unsigned int>&& activeWeightIndices)
 {
-	this->activeWeightIndices = activeWeightIndices;
+	this->activeWeightIndices = ::std::move(activeWeightIndices);
 }
 
-void Prediction::SetActiveWeights(std::vector<std::vector<double>>& weights)
+void Prediction::SetActiveWeights(std::vector<std::vector<double>>&& weights)
 {
-	this->activeWeights = weights;
+	this->activeWeights = ::std::move(weights);
 }
 
-void Prediction::SetBasisValues(std::vector<double>& basis)
+void Prediction::SetBasisValues(std::vector<double>&& basis)
 {
-	this->basisValues = basis;
+	this->basisValues = ::std::move(basis);
 }
 
 void Prediction::SetResult(IResult* result)

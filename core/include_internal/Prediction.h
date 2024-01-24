@@ -16,10 +16,10 @@ namespace CmacLib
 		std::unique_ptr<IResult> result;
 
 	public: // setters
-		void SetValues(std::vector<double>& values);
-		void SetActiveWeightIndices(std::vector<unsigned int>& activeWeightIndices);
-		void SetActiveWeights(std::vector<std::vector<double>>& weights);
-		void SetBasisValues(std::vector<double>& basis);
+		void SetValues(std::vector<double>&& values);
+		void SetActiveWeightIndices(std::vector<unsigned int>&& activeWeightIndices);
+		void SetActiveWeights(std::vector<std::vector<double>>&& weights);
+		void SetBasisValues(std::vector<double>&& basis);
 		void SetResult(IResult* result);
 
 	public: // constructor

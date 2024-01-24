@@ -159,10 +159,10 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 		}
 
 		// fill in prediction/results
-		prediction->SetActiveWeightIndices(indices);
-		prediction->SetActiveWeights(weights);
-		prediction->SetBasisValues(gammas);
-		prediction->SetValues(values);
+		prediction->SetActiveWeightIndices(::std::move(indices));
+		prediction->SetActiveWeights(::std::move(weights));
+		prediction->SetBasisValues(::std::move(gammas));
+		prediction->SetValues(::std::move(values));
 		std::unique_ptr<Result> result = std::make_unique<Result>();
 		result->SetIsSuccessful(true);
 		prediction->SetResult(result.release());
