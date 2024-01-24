@@ -251,7 +251,7 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 		}
 
 		// collect all the results
-		adjustment->SetWeightChanges(dw);
+		adjustment->SetWeightChanges(::std::move(dw));
 		std::unique_ptr<Result> result = std::make_unique<Result>();
 		result->SetIsSuccessful(true);
 		adjustment->SetResult(result.release());

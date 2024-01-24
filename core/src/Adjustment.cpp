@@ -1,12 +1,12 @@
 #include "Adjustment.h"
 #include "Result.h"
-#include <iostream>
+#include <utility>
 
 using namespace CmacLib;
 
-void Adjustment::SetWeightChanges(std::vector<std::vector<double>>& dw)
+void Adjustment::SetWeightChanges(std::vector<std::vector<double>>&& dw)
 {
-	this->weightChanges = dw;
+	this->weightChanges = ::std::move(dw);
 }
 
 void Adjustment::SetResult(IResult* result)
@@ -32,5 +32,3 @@ IResult* const Adjustment::GetResult()
 {
 	return this->result.get();
 }
-
-

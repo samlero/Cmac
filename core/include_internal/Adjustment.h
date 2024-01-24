@@ -14,7 +14,7 @@ namespace CmacLib
 		std::unique_ptr<IResult> result;
 
 	public: // setters
-		void SetWeightChanges(std::vector<std::vector<double>>& dw);
+		void SetWeightChanges(std::vector<std::vector<double>>&& dw);
 		void SetResult(IResult* result);
 
 	public:
