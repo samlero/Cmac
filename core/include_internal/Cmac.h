@@ -24,13 +24,10 @@ namespace CmacLib
 		// offset in each layer
 		std::vector<std::vector<double>> offsets;
 
-	private: // methods
-		/// <summary>
-		/// Normalizes the input.
-		/// </summary>
-		/// <param name="raw"></param>
-		/// <returns></returns>
-		std::vector<double> Normalize(std::vector<double>& raw);
+	private:
+		/// @brief Normalize the raw data.
+		/// @param raw The vec of data to be normalized.
+		void Normalize(std::vector<double>& raw);
 		/// @brief Initialize the instance.
 		void Init();
 
