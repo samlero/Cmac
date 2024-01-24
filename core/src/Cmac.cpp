@@ -101,7 +101,7 @@ Cmac::~Cmac(){}
 
 std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 {
-	std::unique_ptr<Prediction> prediction(new Prediction());
+	std::unique_ptr<Prediction> prediction = ::std::make_unique<Prediction>();
 
 	try
 	{	
@@ -181,7 +181,7 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 
 std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPrediction* const prediction, double damping)
 {
-	std::unique_ptr<Adjustment> adjustment(new Adjustment());
+	std::unique_ptr<Adjustment> adjustment = ::std::make_unique<Adjustment>();
 	try
 	{
 		// check output and correction are the same size

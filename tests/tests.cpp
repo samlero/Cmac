@@ -11,7 +11,7 @@ using namespace std;
 TEST(FACTORY, CreateCmac)
 {
 	// create factory
-	std::unique_ptr<Factory> factory(new Factory());
+	std::unique_ptr<Factory> factory= ::std::make_unique<Factory>();
 
 	ASSERT_TRUE(factory.get() != nullptr);
 
@@ -31,7 +31,7 @@ TEST(FACTORY, CreateCmac)
 
 TEST(CMAC, PREDICT_SUCCESS)
 {
-	std::unique_ptr<Factory> factory(new Factory());
+	std::unique_ptr<Factory> factory= ::std::make_unique<Factory>();
 	std::vector<double> upper(2, 10.0);
 	std::vector<double> lower(2, -10.0);
 	std::unique_ptr<ICmac> cmac(factory->CreateCmac(10
@@ -71,7 +71,7 @@ TEST(CMAC, PREDICT_SUCCESS)
 
 TEST(CMAC, PREDICT_FAIL)
 {
-	std::unique_ptr<Factory> factory(new Factory());
+	std::unique_ptr<Factory> factory= ::std::make_unique<Factory>();
 	std::vector<double> upper(2, 10.0);
 	std::vector<double> lower(2, -10.0);
 	std::unique_ptr<ICmac> cmac(factory->CreateCmac(10
@@ -99,7 +99,7 @@ TEST(CMAC, PREDICT_FAIL)
 
 TEST(CMAC, ADJUST_SUCCESS)
 {
-	std::unique_ptr<Factory> factory(new Factory());
+	std::unique_ptr<Factory> factory= ::std::make_unique<Factory>();
 	std::vector<double> upper(2, 10.0);
 	std::vector<double> lower(2, -10.0);
 	std::unique_ptr<ICmac> cmac(factory->CreateCmac(10
@@ -132,7 +132,7 @@ TEST(CMAC, ADJUST_SUCCESS)
 
 TEST(CMAC, ADJUST_FAIL)
 {
-	std::unique_ptr<Factory> factory(new Factory());
+	std::unique_ptr<Factory> factory= ::std::make_unique<Factory>();
 	std::vector<double> upper(2, 10.0);
 	std::vector<double> lower(2, -10.0);
 	std::unique_ptr<ICmac> cmac(factory->CreateCmac(10
@@ -174,7 +174,7 @@ TEST(CMAC, ADAPTING)
 	double kp = 1.0; double kd = 0.01;
 	double nn = 0.0;
 
-	std::unique_ptr<Factory> factory(new Factory());
+	std::unique_ptr<Factory> factory= ::std::make_unique<Factory>();
 	std::vector<double> upper(1, 10.0);
 	std::vector<double> lower(1, -10.0);
 	std::unique_ptr<ICmac> cmac(factory->CreateCmac(10
