@@ -11,7 +11,7 @@ bool CmacLib::Marshaller::Save(ISerializable *serializable, std::string director
     return false;
 }
 
-bool CmacLib::Marshaller::Load(ISerializable *serializable, std::string filepath)
+bool CmacLib::Marshaller::Load(ISerializable *serializable, const std::string& filepath)
 {
     // load the contents of the file
 

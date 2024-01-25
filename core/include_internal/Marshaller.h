@@ -13,7 +13,7 @@ namespace CmacLib
     
     public: // overrides
         bool Save(ISerializable* serializable, std::string directory, std::string filename) override;
-        bool Load(ISerializable* serializable, std::string filepath) override;
+        bool Load(ISerializable* serializable, const std::string& filepath) override;
     };
 }
 

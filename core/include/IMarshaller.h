@@ -22,7 +22,7 @@ namespace CmacLib
         /// @param serializable Object to fill.
         /// @param filepath Location of the file that contains the serializable object's contents.
         /// @return 
-        virtual bool Load(ISerializable* serializable, std::string filepath) = 0;
+        virtual bool Load(ISerializable* serializable, const std::string& filepath) = 0;
     };
 }
 
