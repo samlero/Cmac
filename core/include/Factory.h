@@ -4,13 +4,13 @@
 #include <memory>
 #include <string>
 #include "ICmac.h"
+#include "IMarshaller.h"
 
 namespace CmacLib
 {
 	/// @brief Creates Cmac objects.
 	class Factory {
 	public:
-
 		/// @brief Create a raw and untrained Cmac.
 		/// @param numQ Number of quantizations.
 		/// @param numLayers Number of layers (which would indicate number of active weights)
@@ -20,7 +20,7 @@ namespace CmacLib
 		/// @param lower Lower limits of the Predict method inputs.
 		/// @param beta Learning rate.
 		/// @param nu Damping coefficient.
-		/// @return Cmac.
+		/// @return ICmac.
 		std::unique_ptr<ICmac> CreateCmac(unsigned int numQ
 			, unsigned int numLayers
 			, unsigned int maxmem
@@ -30,10 +30,13 @@ namespace CmacLib
 			, double beta
 			, double nu);
 
-		/// @brief Loads a trained Cmac or its configuration.
-		/// @param pathfile File path of the saved Cmac object or configuration.
-		/// @return Cmac
-		std::unique_ptr<ICmac> LoadCmac(const std::string& pathfile);
+		/// @brief Create a Cmac with default values.
+		/// @return ICmac
+		std::unique_ptr<ICmac> CreateDefaultCmac();
+
+		/// @brief Creates an instance of IMarshaller.
+		/// @return IMarshaller object
+		std::unique_ptr<IMarshaller> CreateMarshaller();
 	};
 }
 

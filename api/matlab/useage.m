@@ -28,7 +28,7 @@ factory = Factory();
 cmac = factory.CreateCmac(10, 100, 1e5, 2, [10 10], -[10 10], dt*0.01, 1e-5);
 
 % cycles
-%for cycle = 1 : num_cycles
+for cycle = 1 : num_cycles
 % loop
 for i = 1 : num_dts
     e = x - xr;
@@ -58,7 +58,7 @@ for i = 1 : num_dts
     record_e(:,i) = e;
     record_nn(:,i) = nn;
 end
-%end
+end
 
 % graph
 figure(1);

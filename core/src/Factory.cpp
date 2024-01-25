@@ -1,5 +1,6 @@
 #include "Factory.h"
 #include "Cmac.h"
+#include "Marshaller.h"
 
 #include <stdexcept>
 #include <utility>
@@ -14,10 +15,14 @@ std::unique_ptr<ICmac> Factory::CreateCmac(unsigned int numQ, unsigned int numLa
         , maxmem, numOut, ::std::move(upper), ::std::move(lower), beta, nu);
 }
 
-std::unique_ptr<ICmac> Factory::LoadCmac(const std::string& pathfile)
+std::unique_ptr<ICmac> CmacLib::Factory::CreateDefaultCmac()
 {
-    // Need to update Cmac.h constructor to include all the member variables.
-    // Either make a separate constructor or add missing ones to the currently existing constructor
-    // and let them be empty by default.
-    throw std::runtime_error("LoadCmac NOT IMPLEMENTED.");
+    return CreateCmac(1, 1, 10, 1
+        , std::vector<double>(1, 1.0), std::vector<double>(1, -1.0)
+        , 0.0, 0.0);
+}
+
+std::unique_ptr<IMarshaller> CmacLib::Factory::CreateMarshaller()
+{
+    return std::make_unique<Marshaller>();
 }

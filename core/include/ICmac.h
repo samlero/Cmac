@@ -5,11 +5,12 @@
 #include "IPrediction.h"
 #include "IAdjustment.h"
 #include "IResult.h"
+#include "ISerializable.h"
 
 namespace CmacLib
 {
 	/// @brief Cerebellar Model Articulation Controller (CMAC)
-	class ICmac {
+	class ICmac : public virtual ISerializable{
 	public:
 
 		/// @brief Acquires active weights and associated basis values, then multiply and sum to produce an output.
@@ -25,14 +26,6 @@ namespace CmacLib
 		virtual std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
 			, IPrediction* const prediction
 			, double damping) = 0;
-
-		/// @brief Save the contents and weights of the Cmac instance.
-		/// @param directory Location to save the Cmac object.
-		/// @param filename Name of the saved file.
-		/// @return Save result.
-		virtual std::unique_ptr<IResult> Save(
-			const std::string& directory, const std::string& filename
-		) = 0;
 
 		/// @brief Destructor
 		virtual ~ICmac(){};
