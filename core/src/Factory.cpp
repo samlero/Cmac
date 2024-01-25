@@ -17,7 +17,7 @@ std::unique_ptr<ICmac> Factory::CreateCmac(unsigned int numQ, unsigned int numLa
 
 std::unique_ptr<ICmac> CmacLib::Factory::CreateDefaultCmac()
 {
-    return CreateCmac(1, 1, 10, 1
+    return std::make_unique<Cmac>(1, 1, 10, 1
         , std::vector<double>(1, 1.0), std::vector<double>(1, -1.0)
         , 0.0, 0.0);
 }
