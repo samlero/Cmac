@@ -12,8 +12,8 @@ namespace CmacLib
         ~Marshaller(){}
     
     public: // overrides
-        bool Save(ISerializable* serializable, std::string directory, std::string filename) override;
-        bool Load(ISerializable* serializable, const std::string& filepath) override;
+        std::unique_ptr<IResult> Save(ISerializable* serializable, std::string directory, std::string filename) override;
+        std::unique_ptr<IResult> Load(ISerializable* serializable, const std::string& filepath) override;
     };
 }
 

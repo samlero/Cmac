@@ -1,21 +1,70 @@
 #include "Marshaller.h"
+#include "Result.h"
+#include <iostream>
+#include <fstream>
 
 using namespace CmacLib;
 
-bool CmacLib::Marshaller::Save(ISerializable *serializable, std::string directory, std::string filename)
+std::unique_ptr<IResult> Marshaller::Save(ISerializable *serializable, std::string directory, std::string filename)
 {
-    // call the serialize method of the serializable object to get a string representation
+    std::unique_ptr<Result> result(std::make_unique<Result>());
+    try
+    {
+        result->SetIsSuccessful(false);
 
-    // save the string to a file
+        // call the serialize method of the serializable object to get a string representation
+        std::string content = serializable->Serialize();
+    
+        // concatenate filepath
+        std::string filepath = directory + "/" + filename + "." + serializable->GetExtension();
 
-    return false;
+        // save
+        std::ofstream file;
+        file.open (filepath);
+        file << content;
+        file.close();
+
+        // set result to successful
+        result->SetIsSuccessful(true);
+    }
+    catch(const std::exception& ex)
+    {
+        result->SetMessage(ex.what());
+    }
+    return result;
 }
 
-bool CmacLib::Marshaller::Load(ISerializable *serializable, const std::string& filepath)
+std::unique_ptr<IResult> Marshaller::Load(ISerializable *serializable, const std::string& filepath)
 {
-    // load the contents of the file
+    std::unique_ptr<Result> result(std::make_unique<Result>());
+    try
+    {
+        result->SetIsSuccessful(false);
 
-    // call the deserialize method
+        // check if the filepath has the serializable's extension
+        std::string extension = filepath.substr(filepath.length() - serializable->GetExtension().size(), filepath.length());
+        if(extension != serializable->GetExtension())
+        {
+            result->SetMessage("Filepath does not contain the correct extension.");
+            return result;
+        }
 
-    return false;
+        // load the content
+        std::ifstream file(filepath);
+        std::string content = "";
+        std::string line;
+        while(std::getline(file, line))
+        {
+            content += line;
+            content.push_back('\n');
+        }
+
+        // deserialize
+        serializable->Deserialize(std::move(content));
+    } 
+    catch(const std::exception& ex)
+    {
+        result->SetMessage(ex.what());
+    }
+    return result;
 }
