@@ -272,7 +272,7 @@ std::string CmacLib::Cmac::Serialize()
     throw std::runtime_error("Serialize NOT IMPLEMENTED.");
 }
 
-void CmacLib::Cmac::Deserialize(std::string content)
+void CmacLib::Cmac::Deserialize(std::string&& content)
 {
 	throw std::runtime_error("Deserialize NOT IMPLEMENTED.");
 }
