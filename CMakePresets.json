@@ -1,4 +1,4 @@
-﻿{
+{
     "version": 3,
     "configurePresets": [
         {
@@ -96,6 +96,14 @@
                     "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
                 }
             }
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "Debug_x64",
+            "description": "",
+            "displayName": "",
+            "configurePreset": "x64-debug"
         }
     ]
 }

@@ -58,9 +58,13 @@ std::unique_ptr<IResult> Marshaller::Load(ISerializable *serializable, const std
             content += line;
             content.push_back('\n');
         }
+        content.pop_back();
 
         // deserialize
         serializable->Deserialize(std::move(content));
+
+        // successful operation
+        result->SetIsSuccessful(true);
     } 
     catch(const std::exception& ex)
     {
