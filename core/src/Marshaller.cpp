@@ -5,7 +5,8 @@
 
 using namespace CmacLib;
 
-std::unique_ptr<IResult> Marshaller::Save(ISerializable *serializable, std::string directory, std::string filename)
+std::unique_ptr<IResult> Marshaller::Save(ISerializable *serializable,
+    const std::string& directory, const std::string& filename)
 {
     std::unique_ptr<Result> result(std::make_unique<Result>());
     try

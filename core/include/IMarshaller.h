@@ -18,7 +18,8 @@ namespace CmacLib
         /// @param directory Folder to save the serializable object in.
         /// @param filename Name of the object to save.
         /// @return Indicates if the save operation was successful or not.
-        virtual std::unique_ptr<IResult> Save(ISerializable* serializable, std::string directory, std::string filename) = 0;
+        virtual std::unique_ptr<IResult> Save(ISerializable* serializable,
+            const std::string& directory, const std::string& filename) = 0;
         
         /// @brief Fills the contents of the serialzable object.
         /// @param serializable Object to fill.
