@@ -68,7 +68,13 @@ std::unique_ptr<IResult> Marshaller::Load(ISerializable *serializable, const std
         content.pop_back();
 
         // deserialize
-        serializable->Deserialize(std::move(content));
+        std::unique_ptr<IResult> deserialization = serializable->Deserialize(std::move(content));
+
+        if(!deserialization->IsSuccessful())
+        {
+            result->SetMessage("Deserialization failed.");
+            return result;
+        }
 
         // successful operation
         result->SetIsSuccessful(true);

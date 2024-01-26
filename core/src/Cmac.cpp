@@ -267,9 +267,11 @@ std::unique_ptr<ISerialization> Cmac::Serialize()
 		result += tagger->Entry(tagger->ToString(this->nu), CmacTagger::NU);
 		// hashtable
 		result += tagger->Entry(tagger->ToString(this->hashtable), CmacTagger::HASHTABLE);
-		// denominator
+		// vector doubles
+		result += tagger->Entry(tagger->ToString(this->upper), CmacTagger::UPPER_LIMITS);
+		result += tagger->Entry(tagger->ToString(this->lower), CmacTagger::LOWER_LIMITS);
 		result += tagger->Entry(tagger->ToString(this->denominator), CmacTagger::DENOMINATOR);
-			// memory
+		// memory
 		result += tagger->Entry(tagger->ToString(this->memory), CmacTagger::MEMORY);
 		// offsets
 		result += tagger->Entry(tagger->ToString(this->offsets), CmacTagger::OFFSETS);
@@ -291,6 +293,41 @@ std::unique_ptr<ISerialization> Cmac::Serialize()
 std::unique_ptr<IResult> Cmac::Deserialize(std::string&& content)
 {
 	throw std::runtime_error("Deserialize NOT IMPLEMENTED.");
+	std::unique_ptr<Result> result(std::make_unique<Result>());
+	try
+	{
+		result->SetIsSuccessful(false);
+
+		// create helper
+		std::unique_ptr<CmacTagger> tagger(std::make_unique<CmacTagger>());
+		
+		// unsigned ints
+		this->numQ = tagger->GetUnsignedInt(content, CmacTagger::NUM_Q);
+		this->numLayers = tagger->GetUnsignedInt(content, CmacTagger::NUM_LAYERS);
+		this->maxMem = tagger->GetUnsignedInt(content, CmacTagger::MAX_MEMORY);
+		this->maxHashValue = tagger->GetUnsignedInt(content, CmacTagger::MAX_HASH_VALUE);
+		this->numOutput = tagger->GetUnsignedInt(content, CmacTagger::NUM_OUTPUTS);
+		this->numInput = tagger->GetUnsignedInt(content, CmacTagger::NUM_INPUTS);
+		// doubles
+		this->beta = tagger->GetDouble(content, CmacTagger::BETA);
+		this->nu = tagger->GetDouble(content, CmacTagger::NU);
+		// array unsigned ints
+		this->hashtable = tagger->GetUnsignedInts(content, CmacTagger::HASHTABLE);
+		// array doubles
+		this->denominator = tagger->GetDoubles(content, CmacTagger::DENOMINATOR);
+		this->upper = tagger->GetDoubles(content, CmacTagger::UPPER_LIMITS);
+		this->lower = tagger->GetDoubles(content, CmacTagger::LOWER_LIMITS);
+		// matrix doubles
+		this->offsets = tagger->GetMatrixDoubles(content, CmacTagger::OFFSETS);
+		this->memory = tagger->GetMatrixDoubles(content, CmacTagger::MEMORY);
+		
+		result->SetIsSuccessful(true);
+	}
+	catch(const std::exception& ex)
+	{
+		result->SetMessage(ex.what());
+	}
+	return result;
 }
 
 std::string Cmac::GetExtension()

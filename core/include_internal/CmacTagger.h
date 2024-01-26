@@ -85,6 +85,100 @@ namespace CmacLib
             }
             return result;
         }
+
+        std::string GetContent(std::string entry, std::string tag)
+        {
+            size_t start = entry.find(StartTag(tag)) + StartTag(tag).size();
+            size_t end = entry.find(EndTag(tag));
+            return entry.substr(start, end - start);
+        }
+
+        unsigned int GetUnsignedInt(std::string entry, std::string tag)
+        {
+            return std::stoul(GetContent(entry, tag));
+        }
+
+        double GetDouble(std::string entry, std::string tag)
+        {
+            std::string content = GetContent(entry, tag);
+            std::stringstream ss;
+            ss << content;
+            double result;
+            ss >> std::hexfloat >> result;
+            return result;
+        }
+
+        std::vector<std::string> StringSplit(std::string str, char delimiter)
+        {
+            std::vector<std::string> strings;
+            int startIndex = 0, endIndex = 0;
+            for (int i = 0; i <= str.size(); i++) {
+                
+                // If we reached the end of the word or the end of the input.
+                if (str[i] == delimiter || i == str.size()) {
+                    endIndex = i;
+                    std::string temp;
+                    temp.append(str, startIndex, endIndex - startIndex);
+                    strings.push_back(temp);
+                    startIndex = endIndex + 1;
+                }
+            }
+            return strings;
+        }
+
+        std::vector<unsigned int> GetUnsignedInts(std::string entry, std::string tag)
+        {
+            std::vector<unsigned int> result;
+            std::string content = GetContent(entry, tag);
+            std::vector<std::string> strNums = StringSplit(content, CmacTagger::DELIMITER[0]);
+            for(size_t i = 0; i < strNums.size(); i++)
+            {
+                result.push_back(std::stoul(strNums[i]));
+            }
+            return result;
+        }
+
+        std::vector<double> GetDoubles(std::string entry, std::string tag)
+        {
+            std::vector<double> result;
+            std::string content = GetContent(entry, tag);
+            std::vector<std::string> strNums = StringSplit(content, CmacTagger::DELIMITER[0]);
+            for(size_t i = 0; i < strNums.size(); i++)
+            {
+                std::stringstream ss;
+                ss << strNums[i];
+                double val;
+                ss >> std::hexfloat >> val;
+                result.push_back(val);
+            }
+            return result;
+        }
+
+        std::vector<std::vector<double>> GetMatrixDoubles(std::string entry, std::string tag)
+        {
+            std::string content = GetContent(entry, tag);
+            std::vector<std::vector<double>> result;
+            std::vector<std::string> lines = StringSplit(content, '\n');
+            for(size_t i = 0; i < lines.size(); i++)
+            {
+                std::vector<double> vals;
+                std::vector<std::string> strNums = StringSplit(lines[i], CmacTagger::DELIMITER[0]);
+                for(size_t j = 0; j < strNums.size(); j++)
+                {
+                    std::stringstream ss;
+                    ss << strNums[j];
+                    double val;
+                    ss >> std::hexfloat >> val;
+                    vals.push_back(val);
+                }
+
+                if(vals.size() > 0) // avoid accidentally putting in empty vectors
+                {
+                    result.push_back(vals);
+                }
+            }
+            return result;
+        }
     };
 }
 
