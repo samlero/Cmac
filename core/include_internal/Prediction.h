@@ -1,6 +1,8 @@
 #ifndef PREDICTION_H
 #define PREDICTION_H
 
+#pragma warning( disable : 4250) // disable dominance warning
+
 #include <memory>
 #include <vector>
 #include "IPrediction.h"

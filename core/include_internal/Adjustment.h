@@ -1,6 +1,8 @@
 #ifndef ADJUSTMENT_H
 #define ADJUSTMENT_H
 
+#pragma warning( disable : 4250) // disable dominance warning
+
 #include <vector>
 #include <memory>
 #include "IResult.h"
