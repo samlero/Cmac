@@ -18,31 +18,32 @@ public:
             return;
         }
 
-        if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
+        // first argument must be the name of the method in question
+        if(inputs[0].getType() != matlab::data::ArrayType::CHAR)
         {
             matlabPtr->feval(u"error", 0,
-                             std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
+                             std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type string.")}));
+            return;
+        }
+        std::cout<<"Adjustment:Extract method name"<<std::endl;
+        // extract the method name
+        matlab::data::CharArray inChar(inputs[0]);
+        std::string method = inChar.toAscii();
+
+
+        if(inputs[1].getType() != matlab::data::ArrayType::UINT64)
+        {
+            matlabPtr->feval(u"error", 0,
+                             std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type uint64.")}));
             return;
         }
 
         std::cout<<"Adjustment:Extract Adjustment pointer"<<std::endl;
         // extract the handle
-        matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
+        matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[1]);
         auto dataPtr = dataArray.release();
         uint64_t* dataRaw = dataPtr.get();
         IAdjustment* adjustment = (IAdjustment*)(*dataRaw);
-
-        // second argument must be the name of the method in question
-        if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
-        {
-            matlabPtr->feval(u"error", 0,
-                             std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
-            return;
-        }
-        std::cout<<"Adjustment:Extract method name"<<std::endl;
-        // extract the method name
-        matlab::data::CharArray inChar(inputs[1]);
-        std::string method = inChar.toAscii();
 
         if(method == "GetWeightChanges")
         {
@@ -67,12 +68,6 @@ public:
             // number of columns
             outputs[2] = factory
                 .createScalar<uint32_t>(ncols);
-        }
-        else if(method == "GetResult")
-        {
-            std::cout<<"Adjustment:GetResult"<<std::endl;
-            IResult* result = adjustment->GetResult();
-            outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)result);
         }
         else if(method == "Delete")
         {

@@ -1,4 +1,4 @@
-classdef Adjustment < ACmacLibEntity
+classdef Adjustment < AEntity
     %ADJUSTMENT Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -9,7 +9,7 @@ classdef Adjustment < ACmacLibEntity
             arguments
                 handle uint64
             end
-            obj@ACmacLibEntity(handle, "AdjustmentMex");
+            obj@AEntity(handle, "AdjustmentMex");
         end
         
         function dw = GetWeightChanges(obj)
@@ -17,21 +17,10 @@ classdef Adjustment < ACmacLibEntity
             arguments
                 obj Adjustment
             end
-            [change, nrows, ncols] = AdjustmentMex(obj.objectHandle ...
-                , 'GetWeightChanges');
+            [change, nrows, ncols] = AdjustmentMex('GetWeightChanges' ...
+                , obj.objectHandle);
             dw = reshape(change,[nrows, ncols]);
         end
-
-        function result = GetResult(obj)
-            %GETRESULT Get the result (successful or not, and reason for
-            %failures).
-            arguments
-                obj Adjustment
-            end
-            res = AdjustmentMex(obj.objectHandle, 'GetResult');
-            result = Result(res);
-        end
-
     end
 end
 
