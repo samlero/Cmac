@@ -4,23 +4,22 @@
 #include <memory>
 #include <vector>
 #include "IPrediction.h"
+#include "Result.h"
 
 namespace CmacLib
 {
-	class Prediction : public IPrediction {
+	class Prediction : public Result, public virtual IPrediction {
 	private:
 		std::vector<double> values;
 		std::vector<unsigned int> activeWeightIndices;
 		std::vector<std::vector<double>> activeWeights;
 		std::vector<double> basisValues;
-		std::unique_ptr<IResult> result;
 
 	public: // setters
 		void SetValues(std::vector<double>&& values);
 		void SetActiveWeightIndices(std::vector<unsigned int>&& activeWeightIndices);
 		void SetActiveWeights(std::vector<std::vector<double>>&& weights);
 		void SetBasisValues(std::vector<double>&& basis);
-		void SetResult(IResult* result);
 
 	public: // constructor
 		Prediction();
@@ -31,7 +30,6 @@ namespace CmacLib
 		const std::vector<unsigned int>& GetActiveWeightIndices() override;
 		const std::vector<std::vector<double>>& GetActiveWeights() override;
 		const std::vector<double>& GetBasisValues() override;
-		IResult* const GetResult() override;
 	};
 }
 

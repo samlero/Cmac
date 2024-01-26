@@ -7,7 +7,7 @@
 namespace CmacLib
 {
 	/// @brief Prediction output.
-	class IPrediction {
+	class IPrediction : public virtual IResult {
 	public:
 		/// @brief Get the calculated multiplication and accumulation of basis and active weights.
 		/// @return Cmac output.
@@ -24,10 +24,6 @@ namespace CmacLib
 		/// @brief Get the basis function values.
 		/// @return Basis function values.
 		virtual const std::vector<double>& GetBasisValues() = 0;
-
-		/// @brief Get the success status of the operation.
-		/// @return Operation result.
-		virtual IResult*const GetResult() = 0;
 
 		/// @brief Destructor.
 		virtual ~IPrediction(){};

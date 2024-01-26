@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include "../include/CmacLib.h"
-//#include <CmacLib.h>
 #include <memory>
 #include <cmath>
 #include <utility>
@@ -30,8 +29,7 @@ TEST(CMAC, PREDICT_SUCCESS)
 
 	// verify prediction properties
 	ASSERT_EQ(prediction->GetValues().size(), 2);
-	ASSERT_TRUE(prediction->GetResult() != nullptr);
-	ASSERT_TRUE(prediction->GetResult()->IsSuccessful());
+	ASSERT_TRUE(prediction->IsSuccessful());
 	ASSERT_EQ(prediction->GetBasisValues().size(), 100); // numlayers
 	// check each basis value is between 0 and 1
 	for(size_t i = 0; i < prediction->GetBasisValues().size(); i++)
@@ -69,8 +67,7 @@ TEST(CMAC, PREDICT_FAIL)
 
 	// verify prediction properties
 	ASSERT_EQ(prediction->GetValues().size(), 0);
-	ASSERT_TRUE(prediction->GetResult() != nullptr);
-	ASSERT_FALSE(prediction->GetResult()->IsSuccessful());
+	ASSERT_FALSE(prediction->IsSuccessful());
 	ASSERT_EQ(prediction->GetBasisValues().size(), 0); // numlayers
 	ASSERT_EQ(prediction->GetActiveWeights().size(), 0); // numoutput
 	ASSERT_EQ(prediction->GetActiveWeightIndices().size(), 0); // numlayers

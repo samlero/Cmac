@@ -24,22 +24,13 @@ void Prediction::SetBasisValues(std::vector<double>&& basis)
 	this->basisValues = ::std::move(basis);
 }
 
-void Prediction::SetResult(IResult* result)
-{
-	this->result.reset(result);
-}
-
 Prediction::Prediction()
 	: values(std::vector<double>())
 	, activeWeightIndices(std::vector<unsigned int>())
 	, activeWeights(std::vector<std::vector<double>>())
-	, basisValues(std::vector<double>())
-	, result(std::make_unique<Result>()){}
+	, basisValues(std::vector<double>()){}
 
-Prediction::~Prediction()
-{
-	this->result.reset();
-}
+Prediction::~Prediction(){}
 
 const std::vector<double>& Prediction::GetValues()
 {
@@ -59,9 +50,4 @@ const std::vector<std::vector<double>>& Prediction::GetActiveWeights()
 const std::vector<double>& Prediction::GetBasisValues()
 {
 	return this->basisValues;
-}
-
-IResult* const Prediction::GetResult()
-{
-	return this->result.get();
 }

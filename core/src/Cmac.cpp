@@ -108,10 +108,8 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 	{	
 		if (input.size() != this->upper.size())
 		{
-			std::unique_ptr<Result> result = std::make_unique<Result>();
-			result->SetIsSuccessful(false);
-			result->SetMessage("Incorrect input size.");
-			prediction->SetResult(result.release());
+			prediction->SetIsSuccessful(false);
+			prediction->SetMessage("Incorrect input size.");
 			return prediction;
 		}
 
@@ -143,10 +141,8 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 				size_t loc = cell + this->numQ * i + this->numQ * this->numLayers * j;
 				if (loc > this->hashtable.size())
 				{
-					std::unique_ptr<Result> result = std::make_unique<Result>();
-					result->SetIsSuccessful(false);
-					result->SetMessage("Hash location/index is greater than the size of the hashtable.");
-					prediction->SetResult(result.release());
+					prediction->SetIsSuccessful(false);
+					prediction->SetMessage("Hash location/index is greater than the size of the hashtable.");
 				}
 				location += (double)(this->hashtable[loc]);
 			}
@@ -165,16 +161,12 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 		prediction->SetActiveWeights(::std::move(weights));
 		prediction->SetBasisValues(::std::move(gammas));
 		prediction->SetValues(::std::move(values));
-		std::unique_ptr<Result> result = std::make_unique<Result>();
-		result->SetIsSuccessful(true);
-		prediction->SetResult(result.release());
+		prediction->SetIsSuccessful(true);
 	}
 	catch (const std::exception& ex) 
 	{
-		std::unique_ptr<Result> result = std::make_unique<Result>();
-		result->SetIsSuccessful(false);
-		result->SetMessage("An exception occured at Predict. " + std::string(ex.what()));
-		prediction->SetResult(result.release());
+		prediction->SetIsSuccessful(false);
+		prediction->SetMessage("An exception occured at Predict. " + std::string(ex.what()));
 	}
 
 	return prediction;
