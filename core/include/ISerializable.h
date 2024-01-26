@@ -16,7 +16,7 @@ namespace CmacLib
 
         /// @brief Deserializes the content into its member variables.
         /// @param content Valid deserializable content.
-        virtual void Deserialize(std::string&& content) = 0;
+        virtual std::unique_ptr<IResult> Deserialize(std::string&& content) = 0;
 
         /// @brief Extension of the serializable object
         /// @return 

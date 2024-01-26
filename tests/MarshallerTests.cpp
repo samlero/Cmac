@@ -5,6 +5,7 @@
 #include <utility>
 #include <filesystem>
 #include "../include_internal/Serialization.h"
+#include "../include_internal/Result.h"
 
 using namespace CmacLib;
 using namespace std;
@@ -27,7 +28,13 @@ public: // overrides
         result->SetString(this->data);
         return result;
     };
-    void Deserialize(string&& content){data = content;};
+    std::unique_ptr<IResult> Deserialize(string&& content)
+    {
+        data = content;
+        unique_ptr<Result> result(make_unique<Result>());
+        result->SetIsSuccessful(true);
+        return result;
+    };
     string GetExtension(){return "ext";};
 };
 
@@ -40,7 +47,7 @@ public:
 
 public: // overrides
     unique_ptr<ISerialization> Serialize(){throw runtime_error("Serialize error.");};
-    void Deserialize(string&& content){throw runtime_error("Deserialize error");};
+    std::unique_ptr<IResult> Deserialize(string&& content){throw runtime_error("Deserialize error");};
     string GetExtension(){return "ext";};
 };
 
