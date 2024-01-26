@@ -1,4 +1,4 @@
-classdef Prediction < ACmacLibEntity
+classdef Prediction < AEntity
     %PREDICTION Prediction result.
     
     methods
@@ -7,7 +7,7 @@ classdef Prediction < ACmacLibEntity
             arguments
                 handle uint64
             end
-            obj@ACmacLibEntity(handle, "PredictionMex");
+            obj@AEntity(handle, "PredictionMex");
         end
         
         function values = GetValues(obj)
@@ -15,7 +15,7 @@ classdef Prediction < ACmacLibEntity
             arguments
                 obj Prediction
             end
-            vals = PredictionMex(obj.objectHandle, 'GetValues');
+            vals = PredictionMex('GetValues', obj.objectHandle);
             values = reshape(vals, [numel(vals) 1]);
         end
 
@@ -25,7 +25,7 @@ classdef Prediction < ACmacLibEntity
             arguments
                 obj Prediction
             end
-            idx = PredictionMex(obj.objectHandle, 'GetActiveWeightIndices');
+            idx = PredictionMex('GetActiveWeightIndices', obj.objectHandle);
             weightIdx = reshape(idx, [numel(idx), 1]);
         end
 
@@ -35,7 +35,7 @@ classdef Prediction < ACmacLibEntity
             arguments
                 obj Prediction
             end
-            [w, nrows, ncols] = PredictionMex(obj.objectHandle, 'GetActiveWeights');
+            [w, nrows, ncols] = PredictionMex('GetActiveWeights', obj.objectHandle);
             weights = reshape(w, [nrows, ncols]);
         end
 
@@ -44,18 +44,8 @@ classdef Prediction < ACmacLibEntity
             arguments
                 obj Prediction
             end
-            bf = PredictionMex(obj.objectHandle, 'GetBasisValues');
+            bf = PredictionMex('GetBasisValues', obj.objectHandle);
             basis = reshape(bf, [numel(bf) 1]);
-        end
-
-        function result = GetResult(obj)
-            %GETRESULT Get the result (successful or not, and reason for
-            %failures).
-            arguments
-                obj Prediction
-            end
-            res = PredictionMex(obj.objectHandle, 'GetResult');
-            result = Result(res);
         end
     end
 end

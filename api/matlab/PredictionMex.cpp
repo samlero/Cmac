@@ -21,31 +21,32 @@ public:
             return;
         }
 
-        // first argument must be an IResult* pointer
-        if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
+        // first argument must be the name of the method in question
+        if(inputs[0].getType() != matlab::data::ArrayType::CHAR)
         {
             matlabPtr->feval(u"error", 0, 
-                std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
-            return;
-        }
-        std::cout<<"Prediction:Extract IPrediction pointer"<<std::endl;
-        // extract the handle
-        matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
-        auto dataPtr = dataArray.release();
-        uint64_t* dataRaw = dataPtr.get();
-        IPrediction* prediction = (IPrediction*)(*dataRaw);
-
-        // second argument must be the name of the method in question
-        if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
-        {
-            matlabPtr->feval(u"error", 0, 
-                std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
+                std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type string.")}));
             return;
         }
         std::cout<<"Prediction:Extract method name"<<std::endl;
         // extract the method name
-        matlab::data::CharArray inChar(inputs[1]);
+        matlab::data::CharArray inChar(inputs[0]);
         std::string method = inChar.toAscii();
+
+        // second argument must be an IPrediction* pointer
+        if(inputs[1].getType() != matlab::data::ArrayType::UINT64)
+        {
+            matlabPtr->feval(u"error", 0, 
+                std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type uint64.")}));
+            return;
+        }
+        std::cout<<"Prediction:Extract IPrediction pointer"<<std::endl;
+        // extract the handle
+        matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[1]);
+        auto dataPtr = dataArray.release();
+        uint64_t* dataRaw = dataPtr.get();
+        IPrediction* prediction = (IPrediction*)(*dataRaw);
+
 
         if(method == "GetValues")
         {
@@ -97,12 +98,6 @@ public:
                 .createArray<double>({1, values.size()}
                                      , values.data()
                                      , values.data() + values.size());
-        }
-        else if(method == "GetResult")
-        {
-            std::cout<<"Prediction:GetResult"<<std::endl;
-            IResult* result = prediction->GetResult();
-            outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)result);
         }
         else if(method == "Delete")
         {
