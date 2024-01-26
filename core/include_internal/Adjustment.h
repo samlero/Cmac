@@ -5,17 +5,16 @@
 #include <memory>
 #include "IResult.h"
 #include "IAdjustment.h"
+#include "Result.h"
 
 namespace CmacLib
 {
-	class Adjustment : public IAdjustment {
+	class Adjustment : public Result, public virtual IAdjustment {
 	private:
 		std::vector<std::vector<double>> weightChanges;
-		std::unique_ptr<IResult> result;
 
 	public: // setters
 		void SetWeightChanges(std::vector<std::vector<double>>&& dw);
-		void SetResult(IResult* result);
 
 	public:
 		Adjustment();
@@ -23,7 +22,6 @@ namespace CmacLib
 
 	public: // overrides
 		const std::vector<std::vector<double>>& GetWeightChanges() override;
-		IResult* const GetResult() override;
 	};
 }
 

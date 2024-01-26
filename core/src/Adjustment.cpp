@@ -9,26 +9,12 @@ void Adjustment::SetWeightChanges(std::vector<std::vector<double>>&& dw)
 	this->weightChanges = ::std::move(dw);
 }
 
-void Adjustment::SetResult(IResult* result)
-{
-	this->result.reset(result);
-}
-
 Adjustment::Adjustment()
-	: weightChanges(std::vector<std::vector<double>>())
-	, result(std::make_unique<Result>()){}
+	: weightChanges(std::vector<std::vector<double>>()){}
 
-Adjustment::~Adjustment()
-{
-	this->result.reset();
-}
+Adjustment::~Adjustment(){}
 
 const std::vector<std::vector<double>>& Adjustment::GetWeightChanges()
 {
 	return this->weightChanges;
-}
-
-IResult* const Adjustment::GetResult()
-{
-	return this->result.get();
 }

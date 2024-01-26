@@ -6,7 +6,7 @@
 
 namespace CmacLib
 {
-	class Result : public IResult {
+	class Result : public virtual IResult {
 	private:
 		bool successful;
 		std::string message;

@@ -188,10 +188,8 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 		// check output and correction are the same size
 		if (correction.size() != this->numOutput)
 		{
-			std::unique_ptr<Result> result = std::make_unique<Result>();
-			result->SetIsSuccessful(false);
-			result->SetMessage("Correction should be the same size as the number of outputs.");
-			adjustment->SetResult(result.release());
+			adjustment->SetIsSuccessful(false);
+			adjustment->SetMessage("Correction should be the same size as the number of outputs.");
 			return adjustment;
 		}
 
@@ -203,30 +201,24 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 		// check weight indices same as the number of layers
 		if (indices.size() != this->numLayers)
 		{
-			std::unique_ptr<Result> result = std::make_unique<Result>();
-			result->SetIsSuccessful(false);
-			result->SetMessage("Size of active weight indices do not match the number of layers.");
-			adjustment->SetResult(result.release());
+			adjustment->SetIsSuccessful(false);
+			adjustment->SetMessage("Size of active weight indices do not match the number of layers.");
 			return adjustment;
 		}
 
 		// check basis values
 		if (gammas.size() != this->numLayers)
 		{
-			std::unique_ptr<Result> result = std::make_unique<Result>();
-			result->SetIsSuccessful(false);
-			result->SetMessage("Size of basis values do not match the number of layers.");
-			adjustment->SetResult(result.release());
+			adjustment->SetIsSuccessful(false);
+			adjustment->SetMessage("Size of basis values do not match the number of layers.");
 			return adjustment;
 		}
 
 		// check output size of the active weights matrix
 		if (weights.size() != this->numOutput)
 		{
-			std::unique_ptr<Result> result = std::make_unique<Result>();
-			result->SetIsSuccessful(false);
-			result->SetMessage("First size of the active weights matrix does not match the number of outputs.");
-			adjustment->SetResult(result.release());
+			adjustment->SetIsSuccessful(false);
+			adjustment->SetMessage("First size of the active weights matrix does not match the number of outputs.");
 			return adjustment;
 		}
 
@@ -238,10 +230,8 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 			// check sub-array if correct size
 			if (weights[out].size() != this->numLayers)
 			{
-				std::unique_ptr<Result> result = std::make_unique<Result>();
-				result->SetIsSuccessful(false);
-				result->SetMessage("Sub-array of the active weights do not match the number of layers.");
-				adjustment->SetResult(result.release());
+				adjustment->SetIsSuccessful(false);
+				adjustment->SetMessage("Sub-array of the active weights do not match the number of layers.");
 				return adjustment;
 			}
 
@@ -254,16 +244,12 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 
 		// collect all the results
 		adjustment->SetWeightChanges(::std::move(dw));
-		std::unique_ptr<Result> result = std::make_unique<Result>();
-		result->SetIsSuccessful(true);
-		adjustment->SetResult(result.release());
+		adjustment->SetIsSuccessful(true);
 	}
 	catch (const std::exception& ex)
 	{
-		std::unique_ptr<Result> result = std::make_unique<Result>();
-		result->SetIsSuccessful(false);
-		result->SetMessage("An exception occured at Predict. " + std::string(ex.what()));
-		adjustment->SetResult(result.release());
+		adjustment->SetIsSuccessful(false);
+		adjustment->SetMessage("An exception occured at Predict. " + std::string(ex.what()));
 	}
 	return adjustment;
 }

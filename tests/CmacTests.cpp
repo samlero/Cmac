@@ -99,8 +99,7 @@ TEST(CMAC, ADJUST_SUCCESS)
 	std::unique_ptr<IAdjustment> adjust = cmac->Adjust(correct, prediction.get(), 0.00001);
 
 	ASSERT_TRUE(adjust.get() != nullptr);
-	ASSERT_TRUE(adjust->GetResult() != nullptr);
-	ASSERT_TRUE(adjust->GetResult()->IsSuccessful());
+	ASSERT_TRUE(adjust->IsSuccessful());
 	ASSERT_EQ(adjust->GetWeightChanges().size(), 2);
 
 	for(size_t i = 0; i < adjust->GetWeightChanges().size(); i++)
@@ -132,8 +131,7 @@ TEST(CMAC, ADJUST_FAIL)
 	std::unique_ptr<IAdjustment> adjust = cmac->Adjust(correct, prediction.get(), 0.00001);
 
 	ASSERT_TRUE(adjust.get() != nullptr);
-	ASSERT_TRUE(adjust->GetResult() != nullptr);
-	ASSERT_FALSE(adjust->GetResult()->IsSuccessful());
+	ASSERT_FALSE(adjust->IsSuccessful());
 	ASSERT_EQ(adjust->GetWeightChanges().size(), 0);
 }
 
