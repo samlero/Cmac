@@ -157,6 +157,9 @@ namespace CmacLib
         std::vector<std::vector<double>> GetMatrixDoubles(std::string entry, std::string tag)
         {
             std::string content = GetContent(entry, tag);
+            // remove new lines
+            content = content.erase(0,1); 
+            content.pop_back();
             std::vector<std::vector<double>> result;
             std::vector<std::string> lines = StringSplit(content, '\n');
             for(size_t i = 0; i < lines.size(); i++)

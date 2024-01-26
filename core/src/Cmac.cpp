@@ -292,7 +292,6 @@ std::unique_ptr<ISerialization> Cmac::Serialize()
 
 std::unique_ptr<IResult> Cmac::Deserialize(std::string&& content)
 {
-	throw std::runtime_error("Deserialize NOT IMPLEMENTED.");
 	std::unique_ptr<Result> result(std::make_unique<Result>());
 	try
 	{

@@ -37,3 +37,20 @@ TEST(SERIALIZABLE, SERIALIZE_CMAC)
     ASSERT_EQ(serialization->GetString().length(), expected.size());
     ASSERT_EQ(serialization->GetString(), expected);
 }
+
+TEST(SERIALIZABLE, DESERIALIZE_CMAC)
+{
+	std::unique_ptr<Factory> factory= ::std::make_unique<Factory>();
+	std::unique_ptr<ICmac> cmac = factory->CreateDefaultCmac();
+
+	std::ifstream t("expected_serialized.xml");
+    std::string content((std::istreambuf_iterator<char>(t)),
+                 std::istreambuf_iterator<char>());
+
+	std::unique_ptr<IResult> result = cmac->Deserialize(std::move(content));
+	ASSERT_TRUE(result->IsSuccessful());
+
+	std::unique_ptr<ISerialization> serialization = cmac->Serialize();
+	ASSERT_TRUE(serialization->IsSuccessful());
+	ASSERT_EQ(content, serialization->GetString());
+}
