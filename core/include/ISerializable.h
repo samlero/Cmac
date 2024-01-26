@@ -1,7 +1,9 @@
 #ifndef ISERIALIZABLE_H
 #define ISERIALIZABLE_H
 
+#include <memory>
 #include <string>
+#include "ISerialization.h"
 
 namespace CmacLib
 {
@@ -10,7 +12,7 @@ namespace CmacLib
     public:
         /// @brief Serializes the object in its own unique format.
         /// @return Serialized string.
-        virtual std::string Serialize() = 0;
+        virtual std::unique_ptr<ISerialization> Serialize() = 0;
 
         /// @brief Deserializes the content into its member variables.
         /// @param content Valid deserializable content.

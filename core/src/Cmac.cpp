@@ -9,6 +9,7 @@
 #include "Prediction.h"
 #include "Adjustment.h"
 #include "CmacTagger.h"
+#include "Serialization.h"
 
 using namespace CmacLib;
 
@@ -246,32 +247,45 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 	return adjustment;
 }
 
-std::string Cmac::Serialize()
+std::unique_ptr<ISerialization> Cmac::Serialize()
 {
-	// create tagger
-	std::unique_ptr<CmacTagger> tagger(std::make_unique<CmacTagger>());
-	std::string result;
-	// integer types
-	result += tagger->Entry(std::to_string(this->numQ), CmacTagger::NUM_Q);
-	result += tagger->Entry(std::to_string(this->numLayers), CmacTagger::NUM_LAYERS);
-	result += tagger->Entry(std::to_string(this->maxMem), CmacTagger::MAX_MEMORY);
-	result += tagger->Entry(std::to_string(this->maxHashValue), CmacTagger::MAX_HASH_VALUE);
-	result += tagger->Entry(std::to_string(this->numOutput), CmacTagger::NUM_OUTPUTS);
-	result += tagger->Entry(std::to_string(this->numInput), CmacTagger::NUM_INPUTS);
-	// double types
-	result += tagger->Entry(tagger->ToString(this->beta), CmacTagger::BETA);
-	result += tagger->Entry(tagger->ToString(this->nu), CmacTagger::NU);
-	// hashtable
-	result += tagger->Entry(tagger->ToString(this->hashtable), CmacTagger::HASHTABLE);
-	// denominator
-	result += tagger->Entry(tagger->ToString(this->denominator), CmacTagger::DENOMINATOR);
-		// memory
-	result += tagger->Entry(tagger->ToString(this->memory), CmacTagger::MEMORY);
-	// offsets
-	result += tagger->Entry(tagger->ToString(this->offsets), CmacTagger::OFFSETS);
-	// wrap the entire content inside the root
-	return tagger->StartTag(CmacTagger::ROOT) 
-		+ "\n" + result + tagger->EndTag(CmacTagger::ROOT);
+	std::unique_ptr<Serialization> serialization(std::make_unique<Serialization>());
+	try
+	{		
+		// create tagger
+		std::unique_ptr<CmacTagger> tagger(std::make_unique<CmacTagger>());
+		std::string result;
+		// integer types
+		result += tagger->Entry(std::to_string(this->numQ), CmacTagger::NUM_Q);
+		result += tagger->Entry(std::to_string(this->numLayers), CmacTagger::NUM_LAYERS);
+		result += tagger->Entry(std::to_string(this->maxMem), CmacTagger::MAX_MEMORY);
+		result += tagger->Entry(std::to_string(this->maxHashValue), CmacTagger::MAX_HASH_VALUE);
+		result += tagger->Entry(std::to_string(this->numOutput), CmacTagger::NUM_OUTPUTS);
+		result += tagger->Entry(std::to_string(this->numInput), CmacTagger::NUM_INPUTS);
+		// double types
+		result += tagger->Entry(tagger->ToString(this->beta), CmacTagger::BETA);
+		result += tagger->Entry(tagger->ToString(this->nu), CmacTagger::NU);
+		// hashtable
+		result += tagger->Entry(tagger->ToString(this->hashtable), CmacTagger::HASHTABLE);
+		// denominator
+		result += tagger->Entry(tagger->ToString(this->denominator), CmacTagger::DENOMINATOR);
+			// memory
+		result += tagger->Entry(tagger->ToString(this->memory), CmacTagger::MEMORY);
+		// offsets
+		result += tagger->Entry(tagger->ToString(this->offsets), CmacTagger::OFFSETS);
+		// wrap the entire content inside the root
+		result = tagger->StartTag(CmacTagger::ROOT) 
+			+ "\n" + result + tagger->EndTag(CmacTagger::ROOT);
+
+		serialization->SetString(result);
+		serialization->SetIsSuccessful(true);
+	}
+	catch(const std::exception& ex)
+	{
+		serialization->SetIsSuccessful(false);
+		serialization->SetMessage(ex.what());
+	}
+	return serialization;
 }
 
 void Cmac::Deserialize(std::string&& content)

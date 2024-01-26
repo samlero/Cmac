@@ -14,7 +14,13 @@ std::unique_ptr<IResult> Marshaller::Save(ISerializable *serializable,
         result->SetIsSuccessful(false);
 
         // call the serialize method of the serializable object to get a string representation
-        std::string content = serializable->Serialize();
+        std::unique_ptr<ISerialization> serialization = serializable->Serialize();
+
+        if(!serialization->IsSuccessful())
+        {
+            result->SetMessage("Serialization failed.");
+            return result;
+        }
     
         // concatenate filepath
         std::string filepath = directory + "/" + filename + "." + serializable->GetExtension();
@@ -22,7 +28,7 @@ std::unique_ptr<IResult> Marshaller::Save(ISerializable *serializable,
         // save
         std::ofstream file;
         file.open (filepath);
-        file << content;
+        file << serialization->GetString();
         file.close();
 
         // set result to successful

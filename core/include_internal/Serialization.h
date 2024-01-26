@@ -15,8 +15,10 @@ namespace CmacLib
         std::string serialized;
 
     public:
-        Serialization(std::string data);
+        Serialization();
         ~Serialization();
+
+        void SetString(std::string str);
 
     public: // ISerialization override
         std::string GetString() override;

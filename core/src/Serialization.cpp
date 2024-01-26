@@ -2,9 +2,14 @@
 
 using namespace CmacLib;
 
-Serialization::Serialization(std::string data) : serialized(data){}
+Serialization::Serialization() {}
 
 Serialization::~Serialization(){}
+
+void CmacLib::Serialization::SetString(std::string str)
+{
+    this->serialized = str;
+}
 
 std::string CmacLib::Serialization::GetString()
 {

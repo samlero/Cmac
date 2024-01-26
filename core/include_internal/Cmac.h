@@ -55,7 +55,7 @@ namespace CmacLib
 
 	
 	public: // ISerializable overrides
-		std::string Serialize() override;
+		std::unique_ptr<ISerialization> Serialize() override;
 		void Deserialize(std::string&& content) override;
 		std::string GetExtension() override;
 	};

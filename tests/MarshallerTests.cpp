@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
 #include "../include/CmacLib.h"
-//#include <CmacLib.h>
 #include <memory>
 #include <cmath>
 #include <utility>
 #include <filesystem>
+#include "../include_internal/Serialization.h"
 
 using namespace CmacLib;
 using namespace std;
@@ -20,7 +20,13 @@ public:
     string GetData(){return data;};
 
 public: // overrides
-    string Serialize(){return data;};
+    unique_ptr<ISerialization> Serialize()
+    {
+        unique_ptr<Serialization> result(std::make_unique<Serialization>());
+        result->SetIsSuccessful(true);
+        result->SetString(this->data);
+        return result;
+    };
     void Deserialize(string&& content){data = content;};
     string GetExtension(){return "ext";};
 };
@@ -33,7 +39,7 @@ public:
     ~MockFailSerializable(){};
 
 public: // overrides
-    string Serialize(){throw runtime_error("Serialize error.");};
+    unique_ptr<ISerialization> Serialize(){throw runtime_error("Serialize error.");};
     void Deserialize(string&& content){throw runtime_error("Deserialize error");};
     string GetExtension(){return "ext";};
 };

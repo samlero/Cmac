@@ -24,7 +24,7 @@ TEST(SERIALIZABLE, SERIALIZE_CMAC)
 		, 0.001
 		, 0.00001));
 
-    std::string str = cmac->Serialize();
+    std::unique_ptr<ISerialization> serialization = cmac->Serialize();
 
     //unique_ptr<IMarshaller> marshaller = factory->CreateMarshaller();
     //marshaller->Save(cmac.get(), filesystem::current_path().string(), "expected_serialized_2.xml");
@@ -34,6 +34,6 @@ TEST(SERIALIZABLE, SERIALIZE_CMAC)
     std::string expected((std::istreambuf_iterator<char>(t)),
                  std::istreambuf_iterator<char>());
 
-    ASSERT_EQ(str.length(), expected.size());
-    ASSERT_EQ(str, expected);
+    ASSERT_EQ(serialization->GetString().length(), expected.size());
+    ASSERT_EQ(serialization->GetString(), expected);
 }
