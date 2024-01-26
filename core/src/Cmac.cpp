@@ -4,10 +4,11 @@
 #include <cmath>
 #include <iostream>
 #include <utility>
-
+#include <ios>
 #include "Result.h"
 #include "Prediction.h"
 #include "Adjustment.h"
+#include "CmacTags.h"
 
 using namespace CmacLib;
 
@@ -269,7 +270,29 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 
 std::string Cmac::Serialize()
 {
-    throw std::runtime_error("Serialize NOT IMPLEMENTED.");
+	// root header
+    std::string result = CmacTags::StartTag(CmacTags::ROOT);
+	// integer types
+	result += CmacTags::Entry(std::to_string(this->numQ), CmacTags::NUM_Q);
+	result += CmacTags::Entry(std::to_string(this->numLayers), CmacTags::NUM_LAYERS);
+	result += CmacTags::Entry(std::to_string(this->maxMem), CmacTags::MAX_MEMORY);
+	result += CmacTags::Entry(std::to_string(this->maxHashValue), CmacTags::MAX_HASH_VALUE);
+	result += CmacTags::Entry(std::to_string(this->numOutput), CmacTags::NUM_OUTPUTS);
+	result += CmacTags::Entry(std::to_string(this->numInput), CmacTags::NUM_INPUTS);
+	// double types
+	result += CmacTags::Entry(CmacTags::ToString(this->beta), CmacTags::BETA);
+	result += CmacTags::Entry(CmacTags::ToString(this->nu), CmacTags::NU);
+	// hashtable
+	result += CmacTags::Entry(CmacTags::ToString(this->hashtable), CmacTags::HASHTABLE);
+	// denominator
+	result += CmacTags::Entry(CmacTags::ToString(this->denominator), CmacTags::DENOMINATOR);
+	// offsets
+	result += CmacTags::Entry(CmacTags::ToString(this->offsets), CmacTags::OFFSETS);
+	// memory
+	result += CmacTags::Entry(CmacTags::ToString(this->memory), CmacTags::MEMORY);
+	// root footer
+	result += CmacTags::EndTag(CmacTags::ROOT);
+	return result;
 }
 
 void Cmac::Deserialize(std::string&& content)

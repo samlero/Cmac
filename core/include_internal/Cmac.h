@@ -11,7 +11,8 @@ namespace CmacLib
 {
 	class Cmac : public ICmac {
 	private:
-		unsigned int numQ, numLayers, maxMem, maxHashValue, numOutput, numInput;
+		unsigned int numQ, numLayers, maxMem
+		, maxHashValue, numOutput, numInput;
 		std::vector<double> upper, lower;
 		double beta, nu;
 

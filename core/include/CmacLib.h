@@ -6,5 +6,7 @@
 #include "IAdjustment.h"
 #include "IPrediction.h"
 #include "IResult.h"
+#include "IMarshaller.h"
+#include "ISerializable.h"
 
 #endif
