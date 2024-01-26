@@ -8,7 +8,7 @@
 #include "Result.h"
 #include "Prediction.h"
 #include "Adjustment.h"
-#include "CmacTags.h"
+#include "CmacTagger.h"
 
 using namespace CmacLib;
 
@@ -270,29 +270,30 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 
 std::string Cmac::Serialize()
 {
-	// root header
-    std::string result = CmacTags::StartTag(CmacTags::ROOT);
+	// create tagger
+	std::unique_ptr<CmacTagger> tagger(std::make_unique<CmacTagger>());
+	std::string result;
 	// integer types
-	result += CmacTags::Entry(std::to_string(this->numQ), CmacTags::NUM_Q);
-	result += CmacTags::Entry(std::to_string(this->numLayers), CmacTags::NUM_LAYERS);
-	result += CmacTags::Entry(std::to_string(this->maxMem), CmacTags::MAX_MEMORY);
-	result += CmacTags::Entry(std::to_string(this->maxHashValue), CmacTags::MAX_HASH_VALUE);
-	result += CmacTags::Entry(std::to_string(this->numOutput), CmacTags::NUM_OUTPUTS);
-	result += CmacTags::Entry(std::to_string(this->numInput), CmacTags::NUM_INPUTS);
+	result += tagger->Entry(std::to_string(this->numQ), CmacTagger::NUM_Q);
+	result += tagger->Entry(std::to_string(this->numLayers), CmacTagger::NUM_LAYERS);
+	result += tagger->Entry(std::to_string(this->maxMem), CmacTagger::MAX_MEMORY);
+	result += tagger->Entry(std::to_string(this->maxHashValue), CmacTagger::MAX_HASH_VALUE);
+	result += tagger->Entry(std::to_string(this->numOutput), CmacTagger::NUM_OUTPUTS);
+	result += tagger->Entry(std::to_string(this->numInput), CmacTagger::NUM_INPUTS);
 	// double types
-	result += CmacTags::Entry(CmacTags::ToString(this->beta), CmacTags::BETA);
-	result += CmacTags::Entry(CmacTags::ToString(this->nu), CmacTags::NU);
+	result += tagger->Entry(tagger->ToString(this->beta), CmacTagger::BETA);
+	result += tagger->Entry(tagger->ToString(this->nu), CmacTagger::NU);
 	// hashtable
-	result += CmacTags::Entry(CmacTags::ToString(this->hashtable), CmacTags::HASHTABLE);
+	result += tagger->Entry(tagger->ToString(this->hashtable), CmacTagger::HASHTABLE);
 	// denominator
-	result += CmacTags::Entry(CmacTags::ToString(this->denominator), CmacTags::DENOMINATOR);
+	result += tagger->Entry(tagger->ToString(this->denominator), CmacTagger::DENOMINATOR);
+		// memory
+	result += tagger->Entry(tagger->ToString(this->memory), CmacTagger::MEMORY);
 	// offsets
-	result += CmacTags::Entry(CmacTags::ToString(this->offsets), CmacTags::OFFSETS);
-	// memory
-	result += CmacTags::Entry(CmacTags::ToString(this->memory), CmacTags::MEMORY);
-	// root footer
-	result += CmacTags::EndTag(CmacTags::ROOT);
-	return result;
+	result += tagger->Entry(tagger->ToString(this->offsets), CmacTagger::OFFSETS);
+	// wrap the entire content inside the root
+	return tagger->StartTag(CmacTagger::ROOT) 
+		+ "\n" + result + tagger->EndTag(CmacTagger::ROOT);
 }
 
 void Cmac::Deserialize(std::string&& content)

@@ -1,5 +1,5 @@
-#ifndef CMACTAGS_H
-#define CMACTAGS_H
+#ifndef CMACTAGGER_H
+#define CMACTAGGER_H
 
 #include <string>
 #include <sstream>
@@ -7,11 +7,11 @@
 
 namespace CmacLib
 {
-    class CmacTags
+    class CmacTagger
     {
     public:
-        /// @brief Disable constructor, static class
-        CmacTags() = delete;
+        CmacTagger(){};
+        ~CmacTagger(){};
 
     public: // tags
         inline static const std::string ROOT = "Cmac";
@@ -32,58 +32,57 @@ namespace CmacLib
         inline static const std::string OFFSETS = "Offsets";
 
     public: // helper methods
-        inline static std::string StartTag(std::string content)
+        std::string StartTag(std::string content)
         {
             return "<" + content + ">";
         };
 
-        inline static std::string EndTag(std::string content)
+        std::string EndTag(std::string content)
         {
             return "</" + content + ">";
         }
 
-        inline static std::string Entry(std::string content, std::string tag)
+        std::string Entry(std::string content, std::string tag)
         {
-            return CmacTags::StartTag(tag) + content + CmacTags::EndTag(tag) + "\n";
+            return StartTag(tag) + content + EndTag(tag) + "\n";
         }
 
-        inline static std::string ToString(double value)
+        std::string ToString(double value)
         {
             std::stringstream ss;
             ss << std::hexfloat << value;
             return ss.str();
         }
 
-        inline static std::string ToString(std::vector<unsigned int> vec)
+        std::string ToString(std::vector<unsigned int> vec)
         {
             std::string result;
             for(size_t i = 0; i < vec.size(); i++)
             {
-                result += std::to_string(vec[i]) + CmacTags::DELIMITER;
+                result += std::to_string(vec[i]) + CmacTagger::DELIMITER;
             }
             result.pop_back(); // remove last delimiter
             return result;
         }
 
-        inline static std::string ToString(std::vector<double> vec)
+        std::string ToString(std::vector<double> vec)
         {
             std::string result;
             for(size_t i = 0; i < vec.size(); i++)
             {
-                result += CmacTags::ToString(vec[i]) + CmacTags::DELIMITER;
+                result += ToString(vec[i]) + CmacTagger::DELIMITER;
             }
             result.pop_back();
             return result;
         }
 
-        inline static std::string ToString(std::vector<std::vector<double>> mat)
+        std::string ToString(std::vector<std::vector<double>> mat)
         {
-            std::string result;
+            std::string result = "\n";
             for(size_t i = 0; i < mat.size(); i++)
             {
-                result += CmacTags::ToString(mat[i]) + "\n";
+                result += ToString(mat[i]) + "\n";
             }
-            result.pop_back();
             return result;
         }
     };
