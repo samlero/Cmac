@@ -19,29 +19,30 @@ public:
             return;
         }
 
-        // first argument must be an IResult* pointer
-        if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
+        // first argument must be the name of the method in question
+        if(inputs[0].getType() != matlab::data::ArrayType::CHAR)
         {
             matlabPtr->feval(u"error", 0, 
-                std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
+                std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type string.")}));
+            return;
+        }
+        // extract the method name
+        matlab::data::CharArray inChar(inputs[0]);
+        std::string method = inChar.toAscii();
+
+        // second argument must be an IResult* pointer
+        if(inputs[1].getType() != matlab::data::ArrayType::UINT64)
+        {
+            matlabPtr->feval(u"error", 0, 
+                std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type uint64.")}));
             return;
         }
         // extract the handle
-        matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
+        matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[1]);
         auto dataPtr = dataArray.release();
         uint64_t* dataRaw = dataPtr.get();
         IResult* result = (IResult*)(*dataRaw);
 
-        // second argument must be the name of the method in question
-        if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
-        {
-            matlabPtr->feval(u"error", 0, 
-                std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
-            return;
-        }
-        // extract the method name
-        matlab::data::CharArray inChar(inputs[1]);
-        std::string method = inChar.toAscii();
 
         if(method == "IsSuccessful"){
             bool success = result->IsSuccessful();
@@ -50,6 +51,10 @@ public:
         else if(method == "GetMessage"){
             std::string msg = result->GetMessage();
             outputs[0] = factory.createCharArray(msg);
+        }
+        else if(method == "Delete")
+        {
+            delete result;
         }
         else{
            matlabPtr->feval(u"error", 0, 
