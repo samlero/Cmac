@@ -10,7 +10,7 @@
 using namespace CmacLib;
 using namespace std;
 
-TEST(SERIALIZABLE, SERIALIZE_CMAC)
+TEST(SERIALIZABLE, SERIALIZE_DESERIALIZE_CMAC)
 {
 	std::unique_ptr<Factory> factory= ::std::make_unique<Factory>();
 	std::vector<double> upper(2, 10.0);
@@ -24,33 +24,23 @@ TEST(SERIALIZABLE, SERIALIZE_CMAC)
 		, 0.001
 		, 0.00001));
 
-    std::unique_ptr<ISerialization> serialization = cmac->Serialize();
-
-    //unique_ptr<IMarshaller> marshaller = factory->CreateMarshaller();
-    //marshaller->Save(cmac.get(), filesystem::current_path().string(), "expected_serialized_2.xml");
-
-    // get expected string
-    std::ifstream t("expected_serialized.xml");
-    std::string expected((std::istreambuf_iterator<char>(t)),
-                 std::istreambuf_iterator<char>());
-
-    ASSERT_EQ(serialization->GetString().length(), expected.size());
-    ASSERT_EQ(serialization->GetString(), expected);
-}
-
-TEST(SERIALIZABLE, DESERIALIZE_CMAC)
-{
-	std::unique_ptr<Factory> factory= ::std::make_unique<Factory>();
-	std::unique_ptr<ICmac> cmac = factory->CreateDefaultCmac();
-
-	std::ifstream t("expected_serialized.xml");
-    std::string content((std::istreambuf_iterator<char>(t)),
-                 std::istreambuf_iterator<char>());
-
-	std::unique_ptr<IResult> result = cmac->Deserialize(std::move(content));
-	ASSERT_TRUE(result->IsSuccessful());
-
 	std::unique_ptr<ISerialization> serialization = cmac->Serialize();
+
 	ASSERT_TRUE(serialization->IsSuccessful());
-	ASSERT_EQ(content, serialization->GetString());
+	ASSERT_GT(serialization->GetString().size(), 0);
+	ASSERT_EQ(serialization->GetMessage().size(), 0);
+
+	std::unique_ptr<ICmac> defCmac = factory->CreateDefaultCmac();
+	std::unique_ptr<IResult> deserialization = defCmac->Deserialize(serialization->GetString());
+
+	ASSERT_TRUE(deserialization->IsSuccessful());
+	ASSERT_EQ(deserialization->GetMessage().size(), 0);
+
+	std::unique_ptr<ISerialization> anotherSerialization = defCmac->Serialize();
+
+	ASSERT_TRUE(anotherSerialization->IsSuccessful());
+	ASSERT_GT(anotherSerialization->GetString().size(), 0);
+	ASSERT_EQ(anotherSerialization->GetMessage().size(), 0);
+	ASSERT_EQ(serialization->GetString(), anotherSerialization->GetString());
+
 }
