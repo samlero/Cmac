@@ -23,6 +23,14 @@ else()
 endif()
 ## Enforcing C and C++ standards. </region>
 
+## <region> Set -fPIC compiler flag globally
+if(MSVC)
+  # TODO: Implement.
+else()
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+endif()
+## Set -fPIC compiler flag globally </region>
+
 #set_property(TARGET MyVtkAppOrLibName PROPERTY
 #  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
