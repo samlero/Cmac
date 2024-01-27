@@ -33,6 +33,12 @@ TEST(SERIALIZABLE, SERIALIZE_DESERIALIZE_CMAC)
 	std::unique_ptr<ICmac> defCmac = factory->CreateDefaultCmac();
 	std::unique_ptr<IResult> deserialization = defCmac->Deserialize(serialization->GetString());
 
+
+	std::unique_ptr<IMarshaller> marshaller = factory->CreateMarshaller();
+	marshaller->Save(cmac.get(), filesystem::current_path().string(), "expected");
+
+
+
 	ASSERT_TRUE(deserialization->IsSuccessful());
 	ASSERT_EQ(deserialization->GetMessage().size(), 0);
 

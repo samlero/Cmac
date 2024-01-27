@@ -6,7 +6,7 @@ if(BUILD_TESTING)
 		MarshallerTests.cpp 
 		SerializableTests.cpp
 		HelperTests.cpp)
-	configure_file(expected_serialized.xml expected_serialized.xml COPYONLY)
+	configure_file(expected.cmac expected_serialized.cmac COPYONLY)
 	target_link_libraries(tests PRIVATE GTest::gtest_main)
 	target_link_libraries(tests PRIVATE CmacLib)
 	include(GoogleTest)

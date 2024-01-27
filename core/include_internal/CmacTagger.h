@@ -101,11 +101,8 @@ namespace CmacLib
         double GetDouble(std::string entry, std::string tag)
         {
             std::string content = GetContent(entry, tag);
-            std::stringstream ss;
-            ss << content;
-            double result;
-            ss >> std::hexfloat >> result;
-            return result;
+            std::stringstream ss(content);
+            return std::strtod(ss.str().c_str(), NULL);
         }
 
         std::vector<std::string> StringSplit(std::string str, char delimiter)
@@ -145,10 +142,8 @@ namespace CmacLib
             std::vector<std::string> strNums = StringSplit(content, CmacTagger::DELIMITER[0]);
             for(size_t i = 0; i < strNums.size(); i++)
             {
-                std::stringstream ss;
-                ss << strNums[i];
-                double val;
-                ss >> std::hexfloat >> val;
+                std::stringstream ss(strNums[i]);
+                double val = std::strtod(ss.str().c_str(), NULL);
                 result.push_back(val);
             }
             return result;
@@ -168,10 +163,8 @@ namespace CmacLib
                 std::vector<std::string> strNums = StringSplit(lines[i], CmacTagger::DELIMITER[0]);
                 for(size_t j = 0; j < strNums.size(); j++)
                 {
-                    std::stringstream ss;
-                    ss << strNums[j];
-                    double val;
-                    ss >> std::hexfloat >> val;
+                    std::stringstream ss(strNums[j]);
+                    double val = std::strtod(ss.str().c_str(), NULL);
                     vals.push_back(val);
                 }
 

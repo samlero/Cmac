@@ -27,7 +27,7 @@ std::unique_ptr<IResult> Marshaller::Save(ISerializable *serializable,
 
         // save
         std::ofstream file;
-        file.open (filepath);
+        file.open (filepath, std::ios_base::binary);
         file << serialization->GetString();
         file.close();
 
