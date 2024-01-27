@@ -8,3 +8,13 @@
 *.asv
 out/*
 **.vscode/settings.json
+
+# Python related ignores.
+**/__pycache__
+**.pytest_cache/
+**pip-log.txt
+**.pyd
+**.pyc
+**.pyo
+**.eggs/
+**.egg-info
