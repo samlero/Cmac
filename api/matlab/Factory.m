@@ -1,11 +1,10 @@
-classdef Factory < AEntity
+classdef Factory < Entity
     %FACTORY Creates instances of CMACs
-    
     methods
         function obj = Factory()
             %FACTORY Construct an instance of this class
-            handle = FactoryMex('New');
-            obj@AEntity(handle, "FactoryMex");
+            handle = FactoryMex(uint32(FactoryMethods.NEW));
+            obj@Entity("FactoryMex", handle, uint32(FactoryMethods.DELETE));
         end
         
         function cmac = CreateCmac(obj, numQ, numLayers, maxMem, numOut ...
@@ -21,11 +20,12 @@ classdef Factory < AEntity
                 beta double
                 nu double
             end
-            cmacHandle = FactoryMex('CreateCmac', obj.objectHandle ...
+            cmacHandle = FactoryMex(uint32(FactoryMethods.CREATE_CMAC) ...
+                , obj.handle ...
                 , numQ, numLayers, maxMem, numOut ...
                 , upper, lower, beta, nu);
 
-            cmac = Cmac(cmacHandle);
+            %cmac = Cmac(cmacHandle);
         end
     end
 end

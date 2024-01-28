@@ -12,7 +12,7 @@ fprintf("\n");
 
 %% Build FactoryMex.cpp
 fprintf("Build FactoryMex ...\n");
-mex FactoryMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+mex -DDebug=true FactoryMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
 fprintf("\n");
 
 %% Build AdjustmentMex.cpp

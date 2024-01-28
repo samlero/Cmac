@@ -8,11 +8,114 @@
 
 using namespace CmacLib;
 
+class InputIndex
+{
+public:
+    const static unsigned int METHOD = 0;
+    const static unsigned int POINTER = 1;
+};
+
+class InputSize
+{
+public:
+    const static unsigned int NEW = 1;
+    const static unsigned int DELETE = 2;
+    const static unsigned int CREATE_CMAC = 10;
+    const static unsigned int CREATE_MARSHALLER = 2;
+};
+
+class Method
+{
+public:
+    const static unsigned int NEW = 0;
+    const static unsigned int DELETE = 1;
+    const static unsigned int CREATE_CMAC = 100;
+    const static unsigned int CREATE_MARSHALLER = 101;
+};
+
 class MexFunction : public matlab::mex::Function {
     matlab::data::ArrayFactory factory;
+    
+private:
+    Factory* GetPointer(matlab::mex::ArgumentList inputs
+                        , std::shared_ptr<matlab::engine::MATLABEngine> matlabPtr)
+    {
+        if(inputs[InputIndex::POINTER].getType() != matlab::data::ArrayType::UINT64)
+        {
+            matlabPtr->feval(u"error", 0,
+                             std::vector<matlab::data::Array>({ factory.createScalar("Expected uint64 for pointer value.")}));
+        }
+
+        matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[InputIndex::POINTER]);
+        auto dataPtr = dataArray.release();
+        uint64_t* dataRaw = dataPtr.get();
+        Factory* cmacFactory = (Factory*)(*dataRaw);
+        return cmacFactory;
+    }
+
 public:
     void operator()(matlab::mex::ArgumentList outputs, matlab::mex::ArgumentList inputs){
         std::shared_ptr<matlab::engine::MATLABEngine> matlabPtr = getEngine();
+
+        if(inputs.size() > 0)
+        {
+            // extract method type
+            if(inputs[InputIndex::METHOD].getType() != matlab::data::ArrayType::UINT32)
+            {
+                matlabPtr->feval(u"error", 0,
+                                 std::vector<matlab::data::Array>({ factory.createScalar("FactoryMex: Expected uint32 for the method type.")}));
+            }
+            matlab::data::TypedArray<uint32_t> methodData = std::move(inputs[InputIndex::METHOD]);
+            auto methodPtr = methodData.release();
+            uint32_t* methodRaw = methodPtr.get();
+            uint32_t method = *methodRaw;
+
+            if(method == Method::NEW 
+               && inputs.size() == InputSize::NEW)
+            {
+                std::unique_ptr<Factory> cmacFactory = std::make_unique<Factory>();
+                outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)cmacFactory.release());
+
+                #if Debug
+                std::cout << "FactoryMex: Successful construction." << std::endl;
+                #endif
+            }
+            else if(method == Method::DELETE 
+                    && inputs.size() == InputSize::DELETE)
+            {
+                Factory* ptr = this->GetPointer(inputs, matlabPtr);
+                delete ptr;
+
+                #if Debug
+                std::cout << "FactoryMex: Successful deletion." << std::endl;
+                #endif
+            }
+            else if(method == Method::CREATE_CMAC 
+                    && inputs.size() == InputSize::CREATE_CMAC)
+            {
+                Factory* ptr = this->GetPointer(inputs, matlabPtr);
+                
+            }
+            else if(method == Method::CREATE_MARSHALLER
+                   && inputs.size() == InputSize::CREATE_MARSHALLER)
+            {
+                Factory* ptr = this->GetPointer(inputs, matlabPtr);
+            }
+            else
+            {
+                matlabPtr->feval(u"error", 0,
+                                 std::vector<matlab::data::Array>({ factory.createScalar("FactoryMex: Not a supported method or invalid input size.")}));
+            }
+        }
+        else
+        {
+            matlabPtr->feval(u"error", 0,
+                             std::vector<matlab::data::Array>({ factory.createScalar("FactoryMex: Must have at least one input.") }));
+        }
+
+
+
+        /**
 
         if(inputs.size() == 10)
         {
@@ -188,5 +291,6 @@ public:
                              std::vector<matlab::data::Array>({ factory.createScalar("Number of inputs should be either 1, 2 or 10.")}));
             return;
         }
+        **/
     }
 };
