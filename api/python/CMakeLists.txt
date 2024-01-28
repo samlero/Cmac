@@ -40,10 +40,10 @@ if (NOT DEFINED CmacLibPythonWrapperSrc)
                     COPYONLY
                 )
             endforeach()
-            find_program(PYTEST_EXE pytest)
+            find_program(PYTHON_EXE python)
             add_test(
                 NAME PythonWrapperTests
-                COMMAND ${PYTEST_EXE} -s
+                COMMAND ${PYTHON_EXE} -m pytest
                 WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             )
         endif()
