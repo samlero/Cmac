@@ -74,6 +74,15 @@ public:
             std::cout<<"Adjustment:Delete"<<std::endl;
             delete adjustment;
         }
+        else if(method == "IsSuccessful"){
+            bool success = adjustment->IsSuccessful();
+            std::cout << "IsSuccessful: " << success << std::endl;
+            outputs[0] = factory.createScalar<bool>(success);
+        }
+        else if(method == "GetMessage"){
+            std::string msg = adjustment->GetMessage();
+            outputs[0] = factory.createCharArray(msg);
+        }
         else
         {
             matlabPtr->feval(u"error", 0,

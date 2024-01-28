@@ -3,7 +3,7 @@ clear all; close all; clc;
 dt = 0.01;
 T = 100.0;
 num_dts = int32(T/dt);
-num_cycles = int32(100);
+num_cycles = int32(1);
 
 % mass-damp system
 M = 0.1*eye(2);
@@ -37,15 +37,15 @@ for i = 1 : num_dts
 
     % predict
     prediction = cmac.Predict(x);
-    if ~prediction.GetResult().IsSuccessful()
-        disp(prediction.GetResult().GetMessage());
+    if ~prediction.IsSuccessful()
+        disp(prediction.GetMessage());
         error('Prediction failed.');
     end
 
     % train
     adjustment = cmac.Adjust(z, prediction, norm(z));
-    if ~adjustment.GetResult().IsSuccessful()
-        disp(adjustment.GetResult().GetMessage());
+    if ~adjustment.IsSuccessful()
+        disp(adjustment.GetMessage());
         error('Adjustment failed.');
     end
     nn = prediction.GetValues();

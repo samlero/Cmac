@@ -1,4 +1,4 @@
-classdef Prediction < AEntity
+classdef Prediction < Result
     %PREDICTION Prediction result.
     
     methods
@@ -7,7 +7,7 @@ classdef Prediction < AEntity
             arguments
                 handle uint64
             end
-            obj@AEntity(handle, "PredictionMex");
+            obj@Result(handle, "PredictionMex");
         end
         
         function values = GetValues(obj)

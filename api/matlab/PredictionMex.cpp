@@ -99,6 +99,15 @@ public:
                                      , values.data()
                                      , values.data() + values.size());
         }
+        else if(method == "IsSuccessful"){
+            bool success = prediction->IsSuccessful();
+            std::cout << "IsSuccessful: " << success << std::endl;
+            outputs[0] = factory.createScalar<bool>(success);
+        }
+        else if(method == "GetMessage"){
+            std::string msg = prediction->GetMessage();
+            outputs[0] = factory.createCharArray(msg);
+        }
         else if(method == "Delete")
         {
             std::cout<<"Prediction:Delete"<<std::endl;
