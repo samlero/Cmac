@@ -1,4 +1,4 @@
-classdef Cmac < ACmacLibEntity
+classdef Cmac < AEntity
     %CMAC Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -9,7 +9,7 @@ classdef Cmac < ACmacLibEntity
             arguments
                 handle uint64
             end
-            obj@ACmacLibEntity(handle, "CmacMex");
+            obj@AEntity(handle, "CmacMex");
         end
         
         function prediction = Predict(obj, inputs)
@@ -19,7 +19,7 @@ classdef Cmac < ACmacLibEntity
                 obj Cmac
                 inputs (:,1) double
             end
-            predictionHandle = CmacMex(obj.objectHandle, 'Predict', inputs);
+            predictionHandle = CmacMex('Predict', obj.objectHandle, inputs);
             prediction = Prediction(predictionHandle);
         end
 
@@ -30,7 +30,7 @@ classdef Cmac < ACmacLibEntity
                 prediction Prediction
                 damping double
             end
-            adjustmentHandle = CmacMex(obj.objectHandle, 'Adjust' ...
+            adjustmentHandle = CmacMex('Adjust', obj.objectHandle ...
                 , correction, prediction.objectHandle, damping);
             adjustment = Adjustment(adjustmentHandle);
         end

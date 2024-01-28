@@ -1,11 +1,11 @@
-classdef Factory < ACmacLibEntity
+classdef Factory < AEntity
     %FACTORY Creates instances of CMACs
     
     methods
         function obj = Factory()
             %FACTORY Construct an instance of this class
             handle = FactoryMex('New');
-            obj@ACmacLibEntity(handle, "FactoryMex");
+            obj@AEntity(handle, "FactoryMex");
         end
         
         function cmac = CreateCmac(obj, numQ, numLayers, maxMem, numOut ...
@@ -21,7 +21,7 @@ classdef Factory < ACmacLibEntity
                 beta double
                 nu double
             end
-            cmacHandle = FactoryMex(obj.objectHandle, 'CreateCmac' ...
+            cmacHandle = FactoryMex('CreateCmac', obj.objectHandle ...
                 , numQ, numLayers, maxMem, numOut ...
                 , upper, lower, beta, nu);
 

@@ -17,31 +17,33 @@ public:
         if(inputs.size() == 10)
         {
             std::cout<<"Factory:CreateCmac"<<std::endl;
-            // check first input
-            if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
-            {
-                matlabPtr->feval(u"error", 0,
-                    std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.") }));
-                return;
-            }
-            std::cout<<"Factory:CreateCmac: Extract factory pointer"<<std::endl;
-            // get Factory pointer
-            matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
-            auto dataPtr = dataArray.release();
-            uint64_t* dataRaw = dataPtr.get();
-            Factory* cmacFactory = (Factory*)(*dataRaw);
 
             // check second input
-            if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
+            if(inputs[0].getType() != matlab::data::ArrayType::CHAR)
             {
                 matlabPtr->feval(u"error", 0,
-                                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type string.")}));
+                                 std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type string.")}));
                 return;
             }
             std::cout<<"Factory:CreateCmac: Extract method name"<<std::endl;
             // extract the method name
-            matlab::data::CharArray inChar(inputs[1]);
+            matlab::data::CharArray inChar(inputs[0]);
             std::string method = inChar.toAscii();
+
+            // check Second input
+            if(inputs[1].getType() != matlab::data::ArrayType::UINT64)
+            {
+                matlabPtr->feval(u"error", 0,
+                    std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type uint64.") }));
+                return;
+            }
+            std::cout<<"Factory:CreateCmac: Extract factory pointer"<<std::endl;
+            // get Factory pointer
+            matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[1]);
+            auto dataPtr = dataArray.release();
+            uint64_t* dataRaw = dataPtr.get();
+            Factory* cmacFactory = (Factory*)(*dataRaw);
+
             // make sure method name is CreateCmac
             if(method != "CreateCmac")
             {
@@ -142,31 +144,33 @@ public:
         else if(inputs.size() == 2) // destructor
         {
             std::cout<< "Factory:Delete" << std::endl;
-            // first input should be a pointer
-            if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
-            {
-                matlabPtr->feval(u"error", 0,
-                                 std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
-                return;
-            }
-            std::cout<< "Factory:Delete: Get pointer" << std::endl;
-            // get Factory pointer
-            matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
-            auto dataPtr = dataArray.release();
-            uint64_t* dataRaw = dataPtr.get();
-            Factory* cmacFactory = (Factory*)(*dataRaw);
 
             // second input should be a method name
-            if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
+            if(inputs[0].getType() != matlab::data::ArrayType::CHAR)
             {
                 matlabPtr->feval(u"error", 0,
-                                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type char array.")}));
+                                 std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type char array.")}));
                 return;
             }
             std::cout<< "Factory:Delete: Get method name" << std::endl;
             // extract the method name
-            matlab::data::CharArray inChar(inputs[1]);
+            matlab::data::CharArray inChar(inputs[0]);
             std::string method = inChar.toAscii();
+
+            // first input should be a pointer
+            if(inputs[1].getType() != matlab::data::ArrayType::UINT64)
+            {
+                matlabPtr->feval(u"error", 0,
+                                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type uint64.")}));
+                return;
+            }
+            std::cout<< "Factory:Delete: Get pointer" << std::endl;
+            // get Factory pointer
+            matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[1]);
+            auto dataPtr = dataArray.release();
+            uint64_t* dataRaw = dataPtr.get();
+            Factory* cmacFactory = (Factory*)(*dataRaw);
+
             // make sure method name is CreateCmac
             if(method != "Delete")
             {

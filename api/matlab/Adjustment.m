@@ -1,4 +1,4 @@
-classdef Adjustment < AEntity
+classdef Adjustment < Result
     %ADJUSTMENT Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -9,7 +9,7 @@ classdef Adjustment < AEntity
             arguments
                 handle uint64
             end
-            obj@AEntity(handle, "AdjustmentMex");
+            obj@Result(handle, "AdjustmentMex");
         end
         
         function dw = GetWeightChanges(obj)

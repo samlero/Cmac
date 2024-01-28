@@ -3,12 +3,13 @@ classdef Result < AEntity
     %   If not successful, additional message is provided of the failure.
 
     methods
-        function obj = Result(handle)
+        function obj = Result(handle, mexname)
             %RESULT Construct an instance of this class
             arguments
                 handle uint64
+                mexname string = "ResultMex";
             end
-            obj@AEntity(handle, "ResultMex");
+            obj@AEntity(handle, mexname);
         end
         
         function success = IsSuccessful(obj)
@@ -16,7 +17,7 @@ classdef Result < AEntity
             arguments
                 obj Result
             end
-            success = ResultMex('IsSuccessful', obj.objectHandle);
+            success = feval(obj.mexName, 'IsSuccessful', obj.objectHandle);
         end
 
         function msg = GetMessage(obj)
@@ -25,7 +26,7 @@ classdef Result < AEntity
             arguments
                 obj Result
             end
-            msg = ResultMex('GetMessage', obj.objectHandle);
+            msg = feval(obj.mexName, 'GetMessage', obj.objectHandle);
         end
     end
 end

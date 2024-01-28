@@ -41,11 +41,11 @@ public:
         matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[1]);
         auto dataPtr = dataArray.release();
         uint64_t* dataRaw = dataPtr.get();
-        IResult* result = (IResult*)(*dataRaw);
-
+        IResult* result = (IResult*)((void*)(*dataRaw));
 
         if(method == "IsSuccessful"){
             bool success = result->IsSuccessful();
+            std::cout << "IsSuccessful: " << success << std::endl;
             outputs[0] = factory.createScalar<bool>(success);
         }
         else if(method == "GetMessage"){

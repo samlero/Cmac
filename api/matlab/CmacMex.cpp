@@ -14,31 +14,32 @@ public:
                 || inputs.size() == 3 // predict
                 || inputs.size() == 5) // adjust
         {
-            // first input should be a pointer
-            if(inputs[0].getType() != matlab::data::ArrayType::UINT64)
+            // First input should be a method name
+            if(inputs[0].getType() != matlab::data::ArrayType::CHAR)
             {
                 matlabPtr->feval(u"error", 0,
-                                 std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint64.")}));
-                return;
-            }
-            std::cout<<"Cmac:Extract Cmac pointer"<<std::endl;
-            // get Cmac pointer
-            matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[0]);
-            auto dataPtr = dataArray.release();
-            uint64_t* dataRaw = dataPtr.get();
-            ICmac* cmac = (ICmac*)(*dataRaw);
-
-            // second input should be a method name
-            if(inputs[1].getType() != matlab::data::ArrayType::CHAR)
-            {
-                matlabPtr->feval(u"error", 0,
-                                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type char array.")}));
+                                 std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type char array.")}));
                 return;
             }
             std::cout<<"Cmac:Extract method name"<<std::endl;
             // extract the method name
-            matlab::data::CharArray inChar(inputs[1]);
+            matlab::data::CharArray inChar(inputs[0]);
             std::string method = inChar.toAscii();
+
+            // second input should be a pointer
+            if(inputs[1].getType() != matlab::data::ArrayType::UINT64)
+            {
+                matlabPtr->feval(u"error", 0,
+                                 std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type uint64.")}));
+                return;
+            }
+            std::cout<<"Cmac:Extract Cmac pointer"<<std::endl;
+            // get Cmac pointer
+            matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[1]);
+            auto dataPtr = dataArray.release();
+            uint64_t* dataRaw = dataPtr.get();
+            ICmac* cmac = (ICmac*)(*dataRaw);
+
             // make sure method name is CreateCmac
             if(method == "Predict")
             {
