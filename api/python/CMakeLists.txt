@@ -44,7 +44,7 @@ if (NOT DEFINED cmaclib_src)
             find_program(PYTHON_EXE python)
             add_test(
                 NAME PythonWrapperTests
-                COMMAND ${PYTHON_EXE} -m pytest
+                COMMAND ${PYTHON_EXE} -m pytest -s
                 WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             )
         endif()
