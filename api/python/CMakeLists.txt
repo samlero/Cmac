@@ -7,12 +7,13 @@ if (NOT TARGET CmacLibPythonWrapper)
     if (pybind11_FOUND)
         file(GLOB CmacLibPythonWrapperSrc
             ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../core/src/*.cpp
         )
         add_library(
             CmacLibPythonWrapper SHARED ${CmacLibPythonWrapperSrc}
         )
         target_link_libraries(
-            CmacLibPythonWrapper PRIVATE CmacLib PUBLIC pybind11::module
+            CmacLibPythonWrapper PRIVATE pybind11::module
         )
         set_target_properties(CmacLibPythonWrapper PROPERTIES
             PREFIX "${PYTHON_MODULE_PREFIX}"
