@@ -1,34 +1,28 @@
 project(CmacLibPythonWrapper)
 
-if (NOT TARGET CmacLibPythonWrapper)
+if (NOT DEFINED cmaclib_src)
     find_package(pybind11)
     find_package(Python)
 
     if (pybind11_FOUND)
-        file(GLOB CmacLibPythonWrapperSrc
+        file(GLOB cmaclib_src
             ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/src/*.cpp
         )
-        add_library(
-            CmacLibPythonWrapper SHARED ${CmacLibPythonWrapperSrc}
-        )
+        # Add the Python module
+        pybind11_add_module(cmaclib ${cmaclib_src})
         target_link_libraries(
-            CmacLibPythonWrapper PRIVATE pybind11::module
+            cmaclib PUBLIC pybind11::module
         )
-        set_target_properties(CmacLibPythonWrapper PROPERTIES
+        set_target_properties(cmaclib PROPERTIES
             PREFIX "${PYTHON_MODULE_PREFIX}"
             SUFFIX "${PYTHON_MODULE_EXTENSION}"
         )
         # Access implementation classes.
         target_include_directories(
-            CmacLibPythonWrapper PUBLIC
+            cmaclib PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include_internal
-        )
-        # Add the Python module
-        pybind11_add_module(cmaclib ${CmacLibPythonWrapperSrc})
-        target_link_libraries(
-            cmaclib PUBLIC CmacLibPythonWrapper
         )
 
         # Testing.
