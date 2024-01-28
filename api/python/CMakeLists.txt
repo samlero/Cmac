@@ -24,6 +24,11 @@ if (NOT TARGET CmacLibPythonWrapper)
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include_internal
         )
+        # Add the Python module
+        pybind11_add_module(cmaclib ${CmacLibPythonWrapperSrc})
+        target_link_libraries(
+            cmaclib PUBLIC CmacLibPythonWrapper
+        )
 
         # Testing.
         if (BUILD_TESTING AND NOT Python_FOUND)
@@ -48,11 +53,6 @@ if (NOT TARGET CmacLibPythonWrapper)
                 WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             )
         endif()
-        # Add the Python module
-        pybind11_add_module(cmaclib ${CmacLibPythonWrapperSrc})
-        target_link_libraries(
-            cmaclib PUBLIC CmacLibPythonWrapper
-        )
     else()
         message("pybind11 is not installed in your system."
         " CmacLibPythonWrapper was not built")
