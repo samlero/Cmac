@@ -9,7 +9,7 @@ if (NOT TARGET CmacLibPythonWrapper)
             ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
         )
         add_library(
-            CmacLibPythonWrapper ${CmacLibPythonWrapperSrc}
+            CmacLibPythonWrapper SHARED ${CmacLibPythonWrapperSrc}
         )
         target_link_libraries(
             CmacLibPythonWrapper PRIVATE CmacLib PUBLIC pybind11::module
