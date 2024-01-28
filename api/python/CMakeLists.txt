@@ -25,10 +25,6 @@ if (NOT TARGET CmacLibPythonWrapper)
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include_internal
         )
-        set_property(
-            TARGET CmacLibPythonWrapper
-            PROPERTY CMAKE_POSITION_INDEPENDENT_CODE ON
-        )
         # Add the Python module
         pybind11_add_module(cmaclib ${CmacLibPythonWrapperSrc})
         target_link_libraries(
