@@ -19,43 +19,36 @@
 using namespace CmacLib;
 
 PYBIND11_MODULE(cmaclib, m) {
-    pybind11::class_<IResult,
-        ::std::unique_ptr<IResult, pybind11::nodelete>>(m, "IResult")
+    pybind11::class_<IResult>(m, "IResult")
         .def("IsSuccessful", &IResult::IsSuccessful, pybind11::return_value_policy::take_ownership)
         .def("GetMessage", &IResult::GetMessage, pybind11::return_value_policy::take_ownership);
     pybind11::class_<Result, IResult>(m, "Result");
 
-    pybind11::class_<ISerialization, IResult,
-        ::std::unique_ptr<ISerialization, pybind11::nodelete>>(m, "ISerialization")
+    pybind11::class_<ISerialization, IResult>(m, "ISerialization")
         .def("GetString", &ISerialization::GetString, pybind11::return_value_policy::take_ownership);
     pybind11::class_<Serialization, ISerialization, Result>(m, "Serialization");
 
-    pybind11::class_<IPrediction, IResult,
-        ::std::unique_ptr<IPrediction, pybind11::nodelete>>(m, "IPrediction")
+    pybind11::class_<IPrediction, IResult>(m, "IPrediction")
         .def("GetValues", &IPrediction::GetValues, pybind11::return_value_policy::reference_internal)
         .def("GetActiveWeightIndices", &IPrediction::GetActiveWeightIndices, pybind11::return_value_policy::reference_internal)
         .def("GetActiveWeights", &IPrediction::GetActiveWeights, pybind11::return_value_policy::reference_internal)
         .def("GetBasisValues", &IPrediction::GetBasisValues, pybind11::return_value_policy::reference_internal);
     pybind11::class_<Prediction, IPrediction, Result>(m, "Prediction");
 
-    pybind11::class_<IAdjustment, IResult,
-        ::std::unique_ptr<IAdjustment, pybind11::nodelete>>(m, "IAdjustment")
+    pybind11::class_<IAdjustment, IResult>(m, "IAdjustment")
         .def("GetWeightChanges", &IAdjustment::GetWeightChanges, pybind11::return_value_policy::reference_internal);
     pybind11::class_<Adjustment, IAdjustment, Result>(m, "Adjustment");
 
-    pybind11::class_<IMarshaller,
-        ::std::unique_ptr<IMarshaller, pybind11::nodelete>>(m, "IMarshaller")
+    pybind11::class_<IMarshaller>(m, "IMarshaller")
         .def("Save", &IMarshaller::Save, pybind11::return_value_policy::take_ownership)
         .def("Load", &IMarshaller::Load, pybind11::return_value_policy::take_ownership);
     pybind11::class_<Marshaller, IMarshaller>(m, "Marshaller");
 
-    pybind11::class_<ISerializable,
-        ::std::unique_ptr<ISerializable, pybind11::nodelete>>(m, "ISerializable")
+    pybind11::class_<ISerializable>(m, "ISerializable")
         .def("Serialize", &ISerializable::Serialize, pybind11::return_value_policy::take_ownership)
         .def("Deserialize", &ISerializable::Deserialize, pybind11::return_value_policy::take_ownership);
 
-    pybind11::class_<ICmac, ISerializable,
-        ::std::unique_ptr<ICmac, pybind11::nodelete>>(m, "ICmac")
+    pybind11::class_<ICmac, ISerializable>(m, "ICmac")
         .def("Predict", &ICmac::Predict, pybind11::return_value_policy::take_ownership)
         .def("Adjust", &ICmac::Adjust, pybind11::return_value_policy::take_ownership);
 
