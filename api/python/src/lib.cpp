@@ -19,33 +19,47 @@
 using namespace CmacLib;
 
 PYBIND11_MODULE(cmaclib, m) {
-    pybind11::class_<IResult, Result>(m, "IResult")
+    pybind11::class_<IResult,
+        ::std::unique_ptr<IResult, pybind11::nodelete>>(m, "IResult")
         .def("IsSuccessful", &IResult::IsSuccessful)
         .def("GetMessage", &IResult::GetMessage);
+    pybind11::class_<Result, IResult>(m, "Result");
 
-    pybind11::class_<ISerialization, Serialization, IResult>(m, "ISerialization")
+    pybind11::class_<ISerialization, IResult,
+        ::std::unique_ptr<ISerialization, pybind11::nodelete>>(m, "ISerialization")
         .def("GetString", &ISerialization::GetString);
+    pybind11::class_<Serialization, ISerialization, Result>(m, "Serialization");
 
-    pybind11::class_<IPrediction, Prediction, IResult>(m, "IPrediction")
+    pybind11::class_<IPrediction, IResult,
+        ::std::unique_ptr<IPrediction, pybind11::nodelete>>(m, "IPrediction")
         .def("GetValues", &IPrediction::GetValues)
         .def("GetActiveWeightIndices", &IPrediction::GetActiveWeightIndices)
         .def("GetActiveWeights", &IPrediction::GetActiveWeights)
         .def("GetBasisValues", &IPrediction::GetBasisValues);
+    pybind11::class_<Prediction, IPrediction, Result>(m, "Prediction");
 
-    pybind11::class_<IAdjustment, Adjustment, IResult>(m, "IAdjustment")
+    pybind11::class_<IAdjustment, IResult,
+        ::std::unique_ptr<IAdjustment, pybind11::nodelete>>(m, "IAdjustment")
         .def("GetWeightChanges", &IAdjustment::GetWeightChanges);
+    pybind11::class_<Adjustment, IAdjustment, Result>(m, "Adjustment");
 
-    pybind11::class_<IMarshaller, Marshaller>(m, "IMarshaller")
+    pybind11::class_<IMarshaller,
+        ::std::unique_ptr<IMarshaller, pybind11::nodelete>>(m, "IMarshaller")
         .def("Save", &IMarshaller::Save)
         .def("Load", &IMarshaller::Load);
+    pybind11::class_<Marshaller, IMarshaller>(m, "Marshaller");
 
-    pybind11::class_<ISerializable, Cmac>(m, "ISerializable")
+    pybind11::class_<ISerializable,
+        ::std::unique_ptr<ISerializable, pybind11::nodelete>>(m, "ISerializable")
         .def("Serialize", &ISerializable::Serialize)
         .def("Deserialize", &ISerializable::Deserialize);
 
-    pybind11::class_<ICmac, Cmac>(m, "ICmac")
+    pybind11::class_<ICmac, ISerializable,
+        ::std::unique_ptr<ICmac, pybind11::nodelete>>(m, "ICmac")
         .def("Predict", &ICmac::Predict)
         .def("Adjust", &ICmac::Adjust);
+
+    pybind11::class_<Cmac, ICmac>(m, "Cmac");
 
     pybind11::class_<Factory>(m, "Factory")
         .def(pybind11::init<>())
