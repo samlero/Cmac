@@ -12,7 +12,7 @@ if (NOT DEFINED cmaclib_src)
         # Add the Python module
         pybind11_add_module(cmaclib ${cmaclib_src})
         target_link_libraries(
-            cmaclib PUBLIC pybind11::module
+            cmaclib PRIVATE pybind11::module
         )
         set_target_properties(cmaclib PROPERTIES
             PREFIX "${PYTHON_MODULE_PREFIX}"
@@ -20,7 +20,7 @@ if (NOT DEFINED cmaclib_src)
         )
         # Access implementation classes.
         target_include_directories(
-            cmaclib PUBLIC
+            cmaclib PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include_internal
         )
