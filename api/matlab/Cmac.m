@@ -9,7 +9,6 @@ classdef Cmac < Entity
         METHOD_SERIALIZE uint32 = 102;
         METHOD_DESERIALIZE uint32 = 103;
     end
-    
 
     methods
         function obj = Cmac(handle)
@@ -42,6 +41,22 @@ classdef Cmac < Entity
             adjustmentHandle = CmacMex(Cmac.METHOD_ADJUST, obj.handle ...
                 , correction, prediction.handle, damping);
             adjustment = Adjustment(adjustmentHandle);
+        end
+
+        function serialization = Serialize(obj)
+            arguments
+                obj Cmac
+            end
+            handle = CmacMex(Cmac.METHOD_SERIALIZE, obj.handle);
+            serialization = Serialization(handle);
+        end
+
+        function result = Deserialize(obj)
+            arguments
+                obj Cmac
+            end
+            handle = CmacMex(Cmac.METHOD_DESERIALIZE, obj.handle);
+            result = Result(handle);
         end
     end
 end

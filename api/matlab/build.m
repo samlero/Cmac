@@ -24,3 +24,9 @@ fprintf("\n");
 fprintf("Build CmacMex ...\n");
 mex -DDebug=true CmacMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
 fprintf("\n");
+
+%% Build SerializationMex.cpp
+fprintf("Build SerializationMex ...\n");
+mex -DDebug=true SerializationMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+fprintf("\n");
+

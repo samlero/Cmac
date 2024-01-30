@@ -27,6 +27,10 @@ record_nn = zeros(2, num_dts);
 factory = Factory();
 cmac = factory.CreateCmac(10, 100, 1e5, 2, [10 10], -[10 10], dt*0.01, 1e-5);
 
+% serialize 
+ser = cmac.Serialize();
+serializedString = ser.GetString();
+
 % cycles
 for cycle = 1 : num_cycles
 % loop

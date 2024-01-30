@@ -1,6 +1,7 @@
 #include "mex.hpp"
 #include "mexAdapter.hpp"
 #include "CmacLib.h"
+#include <string>
 
 using namespace CmacLib;
 
@@ -133,6 +134,15 @@ class MexFunction : public matlab::mex::Function {
 
                 #if Debug
                 std::cout<<"Cmac: Adjust method"<<std::endl;
+                #endif
+            }
+            else if(method == Method::SERIALIZE
+                   && inputs.size() == InputSize::SERIALIZE)
+            {
+                std::unique_ptr<ISerialization> serialization = cmac->Serialize();
+                outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)serialization.release());
+                #if Debug
+                std::cout<<"Cmac: Serialize method"<<std::endl;
                 #endif
             }
             else if(method == Method::DELETE 
