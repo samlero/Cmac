@@ -10,9 +10,9 @@ using namespace CmacLib;
 class InputIndex 
 {
 public:
-    const static unsigned int METHOD = 1;
-    const static unsigned int POINTER = 2;
-}
+    const static unsigned int METHOD = 0;
+    const static unsigned int POINTER = 1;
+};
 
 class Method
 {
@@ -22,9 +22,9 @@ public:
     const static unsigned int GET_ACTIVE_WEIGHT_INDICES = 101;
     const static unsigned int GET_ACTIVE_WEIGHTS = 102;
     const static unsigned int GET_BASIS_VALUES = 103;
-    const static unsigned int GET_IS_SUCCESSFUL = 104;
+    const static unsigned int IS_SUCCESSFUL = 104;
     const static unsigned int GET_MESSAGE = 105;
-}
+};
 
 class MexFunction : public matlab::mex::Function {
     matlab::data::ArrayFactory factory;
