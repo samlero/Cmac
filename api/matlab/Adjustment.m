@@ -2,7 +2,7 @@ classdef Adjustment < Result
     %ADJUSTMENT Summary of this class goes here
     %   Detailed explanation goes here
 
-    properties(Hidden, Constant)
+    properties(Hidden, Constant, Access=private)
         METHOD_DELETE uint32 = 0;
         METHOD_GET_WEIGHT_CHANGES uint32 = 100;
         METHOD_IS_SUCCESSFUL uint32 = 101;

@@ -8,8 +8,8 @@ using namespace CmacLib;
 class InputIndex
 {
 public:
-    const static unsigned int METHOD = 1;
-    const static unsigned int POINTER = 2;
+    const static unsigned int METHOD = 0;
+    const static unsigned int POINTER = 1;
 };
 
 class Method

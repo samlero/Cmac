@@ -1,7 +1,7 @@
 classdef Prediction < Result
     %PREDICTION Prediction result.
 
-    properties(Hidden, Constant)
+    properties(Hidden, Constant, Access=private)
         METHOD_DELETE uint32 = 0;
         METHOD_GET_VALUES uint32 = 100;
         METHOD_GET_ACTIVE_WEIGHT_INDICES = 101;
@@ -28,8 +28,8 @@ classdef Prediction < Result
             arguments
                 obj Prediction
             end
-            vals = PredictionMex(obj.handle ...
-                , Prediction.METHOD_GET_VALUES);
+            vals = PredictionMex(Prediction.METHOD_GET_VALUES ...
+                , obj.handle);
             values = reshape(vals, [numel(vals) 1]);
         end
 
@@ -39,8 +39,8 @@ classdef Prediction < Result
             arguments
                 obj Prediction
             end
-            idx = PredictionMex(obj.handle ...
-                , Prediction.METHOD_GET_ACTIVE_WEIGHT_INDICES);
+            idx = PredictionMex(Prediction.METHOD_GET_ACTIVE_WEIGHT_INDICES ...
+                , obj.handle);
             weightIdx = reshape(idx, [numel(idx), 1]);
         end
 
@@ -50,8 +50,8 @@ classdef Prediction < Result
             arguments
                 obj Prediction
             end
-            [w, nrows, ncols] = PredictionMex(obj.handle ...
-                , Prediction.METHOD_GET_ACTIVE_WEIGHTS);
+            [w, nrows, ncols] = PredictionMex(Prediction.METHOD_GET_ACTIVE_WEIGHTS ...
+                , obj.handle);
             weights = reshape(w, [nrows, ncols]);
         end
 
@@ -60,8 +60,8 @@ classdef Prediction < Result
             arguments
                 obj Prediction
             end
-            bf = PredictionMex(obj.handle ...
-                , Prediction.METHOD_GET_BASIS_VALUES);
+            bf = PredictionMex(Prediction.METHOD_GET_BASIS_VALUES ...
+                , obj.handle);
             basis = reshape(bf, [numel(bf) 1]);
         end
     end

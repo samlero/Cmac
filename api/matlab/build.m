@@ -7,7 +7,7 @@ fprintf("\n");
 
 %% Build PredictionMex.cpp
 fprintf("Build PredictionMex ...\n");
-mex PredictionMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+mex -DDebug=true PredictionMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
 fprintf("\n");
 
 %% Build FactoryMex.cpp
@@ -22,5 +22,5 @@ fprintf("\n");
 
 %% Build CmacMex.cpp
 fprintf("Build CmacMex ...\n");
-mex CmacMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+mex -DDebug=true CmacMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
 fprintf("\n");

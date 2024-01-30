@@ -3,7 +3,7 @@ classdef Result < Entity
     %   If not successful, additional message is provided of the failure.
 
     % Method types as uint32
-    properties(Hidden, Constant)
+    properties(Hidden, Constant, Access=private)
         METHOD_DELETE uint32 = 0;
         METHOD_IS_SUCCESSFUL uint32 = 100;
         METHOD_GET_MESSAGE uint32 = 101;

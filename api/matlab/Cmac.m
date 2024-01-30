@@ -2,7 +2,7 @@ classdef Cmac < Entity
     %CMAC Summary of this class goes here
     %   Detailed explanation goes here
     
-    properties(Hidden, Constant)
+    properties(Hidden, Constant, Access=private)
         METHOD_DELETE uint32 = 0;
         METHOD_PREDICT uint32 = 100;
         METHOD_ADJUST uint32 = 101;
@@ -40,7 +40,7 @@ classdef Cmac < Entity
                 damping double
             end
             adjustmentHandle = CmacMex(Cmac.METHOD_ADJUST, obj.handle ...
-                , correction, prediction.objectHandle, damping);
+                , correction, prediction.handle, damping);
             adjustment = Adjustment(adjustmentHandle);
         end
     end

@@ -6,18 +6,19 @@ using namespace CmacLib;
 
 class InputIndex
 {
-    public:
-    const static unsigned int METHOD = 1;
-    const static unsigned int POINTER = 2;
-    const static unsigned int PREDICT_INPUT = 3;
-    const static unsigned int ADJUST_CORRECTION = 3;
-    const static unsigned int ADJUST_PREDICTION = 4;
-    const static unsigned int ADJUST_DAMPING = 5;
+public:
+    const static unsigned int METHOD = 0;
+    const static unsigned int POINTER = 1;
+    const static unsigned int PREDICT_INPUT = 2;
+    const static unsigned int ADJUST_CORRECTION = 2;
+    const static unsigned int ADJUST_PREDICTION = 3;
+    const static unsigned int ADJUST_DAMPING = 4;
 };
 
 class InputSize
 {
-    public:
+public:
+    const static unsigned int DELETE = 2;
     const static unsigned int PREDICT = 3;
     const static unsigned int ADJUST = 5;
     const static unsigned int SERIALIZE = 2;
@@ -26,7 +27,7 @@ class InputSize
 
 class Method
 {
-    public:
+public:
     const static unsigned int DELETE = 0;
     const static unsigned int PREDICT = 100;
     const static unsigned int ADJUST = 101;
@@ -132,6 +133,14 @@ class MexFunction : public matlab::mex::Function {
 
                 #if Debug
                 std::cout<<"Cmac: Adjust method"<<std::endl;
+                #endif
+            }
+            else if(method == Method::DELETE 
+                    && inputs.size() == InputSize::DELETE)
+            {
+                delete cmac;
+                #if Debug
+                std::cout<<"Cmac: Delete method"<<std::endl;
                 #endif
             }
             else

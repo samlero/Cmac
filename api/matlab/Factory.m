@@ -29,12 +29,12 @@ classdef Factory < Entity
                 beta double
                 nu double
             end
-            cmacHandle = FactoryMex(Factory.CREATE_CMAC ...
+            cmacHandle = FactoryMex(Factory.METHOD_CREATE_CMAC ...
                 , obj.handle ...
                 , numQ, numLayers, maxMem, numOut ...
                 , upper, lower, beta, nu);
 
-            %cmac = Cmac(cmacHandle);
+            cmac = Cmac(cmacHandle);
         end
     end
 end
