@@ -14,6 +14,7 @@ public:
     const static unsigned int ADJUST_CORRECTION = 2;
     const static unsigned int ADJUST_PREDICTION = 3;
     const static unsigned int ADJUST_DAMPING = 4;
+    const static unsigned int DESERIALIZE_CONTENT = 2;
 };
 
 class InputSize
@@ -23,7 +24,7 @@ public:
     const static unsigned int PREDICT = 3;
     const static unsigned int ADJUST = 5;
     const static unsigned int SERIALIZE = 2;
-    const static unsigned int DESERIALIZE = 2;
+    const static unsigned int DESERIALIZE = 3;
 };
 
 class Method
@@ -143,6 +144,22 @@ class MexFunction : public matlab::mex::Function {
                 outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)serialization.release());
                 #if Debug
                 std::cout<<"Cmac: Serialize method"<<std::endl;
+                #endif
+            }
+            else if(method == Method::DESERIALIZE
+                    && inputs.size() == InputSize::DESERIALIZE)
+            {
+                if(inputs[InputIndex::DESERIALIZE_CONTENT].getType() != matlab::data::ArrayType::CHAR)
+                {
+                    matlabPtr->feval(u"error", 0,
+                                     std::vector<matlab::data::Array>({ factory.createScalar("Third input expected to be char.")}));
+                }
+                matlab::data::CharArray charArr(inputs[InputIndex::DESERIALIZE_CONTENT]);
+                std::string content(charArr.toAscii());
+                std::unique_ptr<IResult> result = cmac->Deserialize(std::move(content));
+                outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)result.release());
+                #if Debug
+                std::cout<<"Cmac: Deserialize method"<<std::endl;
                 #endif
             }
             else if(method == Method::DELETE 

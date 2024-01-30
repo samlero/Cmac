@@ -30,6 +30,7 @@ class InputSize
     const static unsigned int DELETE = 2;
     const static unsigned int CREATE_CMAC = 10;
     const static unsigned int CREATE_MARSHALLER = 2;
+    const static unsigned int CREATE_DEFAULT_CMAC = 2;
 };
 
 class Method
@@ -39,6 +40,7 @@ class Method
     const static unsigned int DELETE = 1;
     const static unsigned int CREATE_CMAC = 100;
     const static unsigned int CREATE_MARSHALLER = 101;
+    const static unsigned int CREATE_DEFAULT_CMAC = 102;
 };
 
 class MexFunction : public matlab::mex::Function {
@@ -164,6 +166,13 @@ class MexFunction : public matlab::mex::Function {
                     && inputs.size() == InputSize::CREATE_MARSHALLER)
             {
                 Factory* ptr = this->GetPointer(inputs, matlabPtr);
+            }
+            else if(method == Method::CREATE_DEFAULT_CMAC
+                    && inputs.size() == InputSize::CREATE_DEFAULT_CMAC)
+            {
+                Factory* ptr = this->GetPointer(inputs, matlabPtr);
+                std::unique_ptr<ICmac> cmac = ptr->CreateDefaultCmac();
+                outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)cmac.release());
             }
             else
             {

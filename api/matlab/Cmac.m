@@ -51,11 +51,13 @@ classdef Cmac < Entity
             serialization = Serialization(handle);
         end
 
-        function result = Deserialize(obj)
+        function result = Deserialize(obj, content)
             arguments
                 obj Cmac
+                content string
             end
-            handle = CmacMex(Cmac.METHOD_DESERIALIZE, obj.handle);
+            handle = CmacMex(Cmac.METHOD_DESERIALIZE ...
+                , obj.handle, convertStringsToChars(content));
             result = Result(handle);
         end
     end

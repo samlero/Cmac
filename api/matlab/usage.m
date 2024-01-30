@@ -29,7 +29,19 @@ cmac = factory.CreateCmac(10, 100, 1e5, 2, [10 10], -[10 10], dt*0.01, 1e-5);
 
 % serialize 
 ser = cmac.Serialize();
+if ~ser.IsSuccessful()
+    disp(ser.GetMessage());
+    error('Serialization failed.');
+end
 serializedString = ser.GetString();
+
+% create default CMAC instance and deserialize
+cmac = factory.CreateDefaultCmac();
+result = cmac.Deserialize(serializedString);
+if ~result.IsSuccessful()
+    disp(result.GetMessage());
+    error('Serialization failed.');
+end
 
 % cycles
 for cycle = 1 : num_cycles

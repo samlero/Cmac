@@ -7,6 +7,7 @@ classdef Factory < Entity
         METHOD_DELETE uint32 = 1;
         METHOD_CREATE_CMAC uint32 = 100;
         METHOD_CREATE_MARSHALLER uint32 = 101;
+        METHOD_CREATE_DEFAULT_CMAC uint32 = 102;
     end
 
     methods
@@ -34,6 +35,15 @@ classdef Factory < Entity
                 , numQ, numLayers, maxMem, numOut ...
                 , upper, lower, beta, nu);
 
+            cmac = Cmac(cmacHandle);
+        end
+
+        function cmac = CreateDefaultCmac(obj)
+            arguments
+                obj Factory
+            end
+            cmacHandle = FactoryMex(Factory.METHOD_CREATE_DEFAULT_CMAC ...
+                , obj.handle);
             cmac = Cmac(cmacHandle);
         end
     end
