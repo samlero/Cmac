@@ -24,6 +24,8 @@ if (NOT DEFINED cmaclib_src)
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include_internal
         )
+        set_property(TARGET cmaclib PROPERTY
+            MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
         # Testing.
         if (BUILD_TESTING AND NOT Python_FOUND)
