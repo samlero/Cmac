@@ -9,15 +9,26 @@ classdef Result < Entity
         METHOD_GET_MESSAGE uint32 = 101;
     end
 
+    properties(SetAccess=immutable, GetAccess=public)
+        isSuccessfulMethodId uint32
+        getMessageMethodId uint32
+    end
+
     methods
-        function obj = Result(handle, mexname, deleteId)
+        function obj = Result(handle ...
+                , mexname, deleteId, successId ...
+                , messageId)
             %RESULT Construct an instance of this class
             arguments
                 handle uint64
                 mexname string = "ResultMex";
                 deleteId uint32 = Result.METHOD_DELETE
+                successId uint32 = Result.METHOD_IS_SUCCESSFUL
+                messageId uint32 = Result.METHOD_GET_MESSAGE
             end
             obj@Entity(mexname, handle, deleteId);
+            obj.isSuccessfulMethodId = successId;
+            obj.getMessageMethodId = messageId;
         end
         
         function success = IsSuccessful(obj)
@@ -26,7 +37,7 @@ classdef Result < Entity
                 obj Result
             end
             success = feval(obj.mexName ...
-                , Result.METHOD_IS_SUCCESSFUL, obj.handle);
+                , obj.isSuccessfulMethodId, obj.handle);
         end
 
         function msg = GetMessage(obj)
@@ -36,7 +47,7 @@ classdef Result < Entity
                 obj Result
             end
             msg = feval(obj.mexName ...
-                , Result.METHOD_GET_MESSAGE, obj.handle);
+                , obj.getMessageMethodId, obj.handle);
         end
     end
 end

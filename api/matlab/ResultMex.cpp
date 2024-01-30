@@ -23,7 +23,6 @@ public:
 
 class MexFunction : public matlab::mex::Function {
     matlab::data::ArrayFactory factory;
-
     const static unsigned int INPUT_SIZE = 2;
 public:
     void operator()(matlab::mex::ArgumentList outputs, matlab::mex::ArgumentList inputs){
@@ -42,7 +41,7 @@ public:
             matlabPtr->feval(u"error", 0, 
                              std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint32.")}));
         }
-        // extract the method name
+        // extract the method type
         matlab::data::TypedArray<uint32_t> methodData = std::move(inputs[InputIndex::METHOD]);
         auto methodPtr = methodData.release();
         uint32_t* methodRaw = methodPtr.get();

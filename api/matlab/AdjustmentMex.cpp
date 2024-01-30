@@ -5,49 +5,60 @@
 
 using namespace CmacLib;
 
+class InputIndex
+{
+public:
+    const static unsigned int METHOD = 1;
+    const static unsigned int POINTER = 2;
+};
+
+class Method
+{
+public:
+    const static unsigned int DELETE = 0;
+    const static unsigned int GET_WEIGHT_CHANGES = 100;
+    const static unsigned int IS_SUCCESSFUL = 101;
+    const static unsigned int GET_MESSAGE = 102;
+};
+
 class MexFunction : public matlab::mex::Function {
     matlab::data::ArrayFactory factory;
+    const static unsigned int INPUT_SIZE = 2;
 public:
     void operator()(matlab::mex::ArgumentList outputs, matlab::mex::ArgumentList inputs){
         std::shared_ptr<matlab::engine::MATLABEngine> matlabPtr = getEngine();
 
-        if(inputs.size() != 2)
+        if(inputs.size() != INPUT_SIZE)
         {
             matlabPtr->feval(u"error", 0,
                              std::vector<matlab::data::Array>({ factory.createScalar("Input must contain only two arguments.")}));
-            return;
         }
 
         // first argument must be the name of the method in question
-        if(inputs[0].getType() != matlab::data::ArrayType::CHAR)
+        if(inputs[InputIndex::METHOD].getType() != matlab::data::ArrayType::UINT32)
         {
             matlabPtr->feval(u"error", 0,
-                             std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type string.")}));
-            return;
+                             std::vector<matlab::data::Array>({ factory.createScalar("First input must be of type uint32.")}));
         }
-        std::cout<<"Adjustment:Extract method name"<<std::endl;
-        // extract the method name
-        matlab::data::CharArray inChar(inputs[0]);
-        std::string method = inChar.toAscii();
+        // extract the method type
+        matlab::data::TypedArray<uint32_t> methodData = std::move(inputs[InputIndex::METHOD]);
+        auto methodPtr = methodData.release();
+        uint32_t* methodRaw = methodPtr.get();
+        uint32_t method = *methodRaw;
 
-
-        if(inputs[1].getType() != matlab::data::ArrayType::UINT64)
+        if(inputs[InputIndex::POINTER].getType() != matlab::data::ArrayType::UINT64)
         {
             matlabPtr->feval(u"error", 0,
                              std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type uint64.")}));
-            return;
         }
-
-        std::cout<<"Adjustment:Extract Adjustment pointer"<<std::endl;
         // extract the handle
         matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[1]);
         auto dataPtr = dataArray.release();
         uint64_t* dataRaw = dataPtr.get();
         IAdjustment* adjustment = (IAdjustment*)(*dataRaw);
 
-        if(method == "GetWeightChanges")
+        if(method == Method::GET_WEIGHT_CHANGES)
         {
-            std::cout<<"Adjustment:GetWeightChanges"<<std::endl;
             std::vector<std::vector<double>> matrix = adjustment->GetWeightChanges();
             std::vector<double> array;
             unsigned int ncols = 0;
@@ -68,20 +79,32 @@ public:
             // number of columns
             outputs[2] = factory
                 .createScalar<uint32_t>(ncols);
+            #if Debug
+            std::cout << "AdjustmentMex: GetWeightChanges method." << std::endl;
+            #endif
         }
-        else if(method == "Delete")
+        else if(method == Method::DELETE)
         {
-            std::cout<<"Adjustment:Delete"<<std::endl;
             delete adjustment;
+            #if Debug
+            std::cout << "AdjustmentMex: Delete method." << std::endl;
+            #endif
         }
-        else if(method == "IsSuccessful"){
+        else if(method == Method::IS_SUCCESSFUL)
+        {
             bool success = adjustment->IsSuccessful();
-            std::cout << "IsSuccessful: " << success << std::endl;
             outputs[0] = factory.createScalar<bool>(success);
+            #if Debug
+            std::cout << "AdjustmentMex: IsSuccessful method." << std::endl;
+            #endif
         }
-        else if(method == "GetMessage"){
+        else if(method == Method::GET_MESSAGE)
+        {
             std::string msg = adjustment->GetMessage();
             outputs[0] = factory.createCharArray(msg);
+            #if Debug
+            std::cout << "AdjustmentMex: GetMessage method." << std::endl;
+            #endif
         }
         else
         {

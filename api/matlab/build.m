@@ -17,7 +17,7 @@ fprintf("\n");
 
 %% Build AdjustmentMex.cpp
 fprintf("Build AdjustmentMex ...\n");
-mex AdjustmentMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+mex -DDebug=true AdjustmentMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
 fprintf("\n");
 
 %% Build CmacMex.cpp
