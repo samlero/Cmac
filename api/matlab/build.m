@@ -2,7 +2,7 @@ clear all; close all; clc;
 
 %% Build ResultMex.cpp
 fprintf("Build ResultMex ...\n");
-mex ResultMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+mex -DDebug=true ResultMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
 fprintf("\n");
 
 %% Build PredictionMex.cpp

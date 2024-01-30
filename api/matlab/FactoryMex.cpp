@@ -65,7 +65,8 @@ public:
                 matlabPtr->feval(u"error", 0,
                                  std::vector<matlab::data::Array>({ factory.createScalar("FactoryMex: Expected uint32 for the method type.")}));
             }
-            matlab::data::TypedArray<uint32_t> methodData = std::move(inputs[InputIndex::METHOD]);
+            matlab::data::TypedArray<uint32_t> methodData 
+                = std::move(inputs[InputIndex::METHOD]);
             auto methodPtr = methodData.release();
             uint32_t* methodRaw = methodPtr.get();
             uint32_t method = *methodRaw;
