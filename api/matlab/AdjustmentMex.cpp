@@ -52,10 +52,15 @@ public:
                              std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type uint64.")}));
         }
         // extract the handle
-        matlab::data::TypedArray<uint64_t> dataArray = std::move(inputs[1]);
+        matlab::data::TypedArray<uint64_t> dataArray 
+            = std::move(inputs[InputIndex::POINTER]);
         auto dataPtr = dataArray.release();
         uint64_t* dataRaw = dataPtr.get();
         IAdjustment* adjustment = (IAdjustment*)(*dataRaw);
+
+        #if Debug
+        std::cout<<"AdjustmentMex: Pointer: "<< *dataRaw <<std::endl;
+        #endif
 
         if(method == Method::GET_WEIGHT_CHANGES)
         {
