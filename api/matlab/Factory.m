@@ -48,6 +48,12 @@ classdef Factory < Entity
         end
 
         function marshaller = CreateMarshaller(obj)
+            arguments
+                obj Factory
+            end
+            marshallerHandle = FactoryMex(Factory.METHOD_CREATE_MARSHALLER ...
+                , obj.handle);
+            marshaller = Marshaller(marshallerHandle);
         end
     end
 end

@@ -21,6 +21,8 @@ namespace CmacLib
         /// @brief Extension of the serializable object
         /// @return 
         virtual std::string GetExtension() = 0;
+
+        virtual ~ISerializable(){}
     };
 }
 

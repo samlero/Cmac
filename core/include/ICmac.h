@@ -10,7 +10,7 @@
 namespace CmacLib
 {
 	/// @brief Cerebellar Model Articulation Controller (CMAC)
-	class ICmac : public virtual ISerializable{
+	class ICmac : public ISerializable{
 	public:
 
 		/// @brief Acquires active weights and associated basis values, then multiply and sum to produce an output.

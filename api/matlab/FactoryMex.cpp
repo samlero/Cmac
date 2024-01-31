@@ -160,12 +160,20 @@ class MexFunction : public matlab::mex::Function {
                                                               , pNu[0]);
 
                 outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)cmac.release());
-
+                #if Debug
+                std::cout << "FactoryMex: CreateCmac." << std::endl;
+                #endif
             }
             else if(method == Method::CREATE_MARSHALLER
                     && inputs.size() == InputSize::CREATE_MARSHALLER)
             {
                 Factory* ptr = this->GetPointer(inputs, matlabPtr);
+                std::unique_ptr<IMarshaller> marshaller
+                    = ptr->CreateMarshaller();
+                outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)marshaller.release());
+                #if Debug
+                std::cout << "FactoryMex: CreateMarshaller." << std::endl;
+                #endif
             }
             else if(method == Method::CREATE_DEFAULT_CMAC
                     && inputs.size() == InputSize::CREATE_DEFAULT_CMAC)
@@ -173,6 +181,9 @@ class MexFunction : public matlab::mex::Function {
                 Factory* ptr = this->GetPointer(inputs, matlabPtr);
                 std::unique_ptr<ICmac> cmac = ptr->CreateDefaultCmac();
                 outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)cmac.release());
+                #if Debug
+                std::cout << "FactoryMex: CreateDefaultCmac." << std::endl;
+                #endif
             }
             else
             {

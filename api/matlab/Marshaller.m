@@ -6,6 +6,8 @@ classdef Marshaller < Entity
         METHOD_DELETE uint32 = 0;
         METHOD_SAVE uint32 = 100;
         METHOD_LOAD uint32 = 101;
+
+        SERIALIZABLE_CMAC uint32 = 1000;
     end
 
     methods
@@ -27,7 +29,8 @@ classdef Marshaller < Entity
             handle = MarshallerMex(Marshaller.METHOD_SAVE ...
                 , obj.handle, serializable.handle ...
                 , convertStringsToChars(directory) ...
-                , convertStringsToChars(filename));
+                , convertStringsToChars(filename) ...
+                , Marshaller.SERIALIZABLE_CMAC);
             result = Result(handle);
         end
 
@@ -39,7 +42,8 @@ classdef Marshaller < Entity
             end
             handle = MarshallerMex(Marshaller.METHOD_LOAD ...
                 , obj.handle, serializable.handle ...
-                , convertStringsToChars(filepath));
+                , convertStringsToChars(filepath)...
+                , Marshaller.SERIALIZABLE_CMAC);
             result = Result(handle);
         end
     end

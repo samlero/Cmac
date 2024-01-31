@@ -43,8 +43,20 @@ if ~result.IsSuccessful()
     error('Serialization failed.');
 end
 
-% load and save using the marshaller
-marshaller = Factory.
+% save and load using the marshaller
+marshaller = factory.CreateMarshaller();
+result = marshaller.Save(cmac, cd, "test_save");
+if ~result.IsSuccessful()
+    disp(result.GetMessage());
+    error('Save failed.');
+end
+cmac = factory.CreateDefaultCmac();
+filepath = append(cd, "\test_save.cmac");
+result = marshaller.Load(cmac, filepath);
+if ~result.IsSuccessful()
+    disp(result.GetMessage());
+    error('Load failed.');
+end
 
 % cycles
 for cycle = 1 : num_cycles
