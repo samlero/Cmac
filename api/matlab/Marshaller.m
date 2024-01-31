@@ -19,8 +19,28 @@ classdef Marshaller < Entity
         function result = Save(obj, serializable, directory, filename)
             arguments
                 obj Marshaller
-                serializable uint64
+                serializable Serializable
+                directory string
+                filename string
             end
+
+            handle = MarshallerMex(Marshaller.METHOD_SAVE ...
+                , obj.handle, serializable.handle ...
+                , convertStringsToChars(directory) ...
+                , convertStringsToChars(filename));
+            result = Result(handle);
+        end
+
+        function result = Load(obj, serializable, filepath)
+            arguments
+                obj Marshaller
+                serializable Serializable
+                filepath string
+            end
+            handle = MarshallerMex(Marshaller.METHOD_LOAD ...
+                , obj.handle, serializable.handle ...
+                , convertStringsToChars(filepath));
+            result = Result(handle);
         end
     end
 end
