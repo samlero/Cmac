@@ -30,3 +30,7 @@ fprintf("Build SerializationMex ...\n");
 mex -DDebug=true SerializationMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
 fprintf("\n");
 
+%% Build MarshallerMex.cpp
+fprintf("Build MarshallerMex ...\n");
+mex -DDebug=true MarshallerMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+fprintf("\n");

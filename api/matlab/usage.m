@@ -43,6 +43,9 @@ if ~result.IsSuccessful()
     error('Serialization failed.');
 end
 
+% load and save using the marshaller
+marshaller = Factory.
+
 % cycles
 for cycle = 1 : num_cycles
 % loop

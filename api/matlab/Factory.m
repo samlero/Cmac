@@ -46,6 +46,9 @@ classdef Factory < Entity
                 , obj.handle);
             cmac = Cmac(cmacHandle);
         end
+
+        function marshaller = CreateMarshaller(obj)
+        end
     end
 end
 
