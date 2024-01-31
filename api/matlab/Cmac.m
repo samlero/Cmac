@@ -1,4 +1,4 @@
-classdef Cmac < Entity
+classdef Cmac < Serializable
     %CMAC Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -17,7 +17,9 @@ classdef Cmac < Entity
             arguments
                 handle uint64
             end
-            obj@Entity("CmacMex", handle, Cmac.METHOD_DELETE);
+            obj@Serializable("CmacMex", handle ...
+                , Cmac.METHOD_DELETE, Cmac.METHOD_SERIALIZE ...
+                , Cmac.METHOD_DESERIALIZE);
         end
         
         function prediction = Predict(obj, inputs)
@@ -41,24 +43,6 @@ classdef Cmac < Entity
             adjustmentHandle = CmacMex(Cmac.METHOD_ADJUST, obj.handle ...
                 , correction, prediction.handle, damping);
             adjustment = Adjustment(adjustmentHandle);
-        end
-
-        function serialization = Serialize(obj)
-            arguments
-                obj Cmac
-            end
-            handle = CmacMex(Cmac.METHOD_SERIALIZE, obj.handle);
-            serialization = Serialization(handle);
-        end
-
-        function result = Deserialize(obj, content)
-            arguments
-                obj Cmac
-                content string
-            end
-            handle = CmacMex(Cmac.METHOD_DESERIALIZE ...
-                , obj.handle, convertStringsToChars(content));
-            result = Result(handle);
         end
     end
 end
