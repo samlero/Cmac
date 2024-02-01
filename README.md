@@ -17,13 +17,16 @@ The CMAC implementation can do the following:
 
 The Predict and Adjust capabilities are available in the ICmac interface while the Save and Load capabilities in IMarshaller. 
 
+Predict and Adjust are used for near continuous calculation of CMAC outputs for feedforward control, and weight training for adaptive capabilities. The speed limitation will depend on the number of Predict inputs and number of layers (or active weights). The more of either the slower the calculation gets, so tune the CMAC parameters properly. 
+
+Save and Load are functions are typically used when the user wants to save a trained CMAC for later use. 
+
 # Usage
 The following example illustrates how the capabilities mentioned above could be used. 
 
 > TODO: PUT CODE HYPERLINK HERE
 
-# Stats
-> TODO: ADD BUILD AND TEST RESULTS HERE
+
 
 
 
