@@ -28,7 +28,7 @@ Save and Load are functions are typically used when the user wants to save a tra
 ## Linux
 > TODO: HOW TO INSTALL ON LINUX
 
-# Build
+# BUILD
 A couple of build scripts were generated to ease building the installers. Scripts with *_win_* are used under the Windows environment and the others under Linux. 
 
 # USAGE
