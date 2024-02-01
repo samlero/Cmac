@@ -33,8 +33,10 @@ A couple of build scripts were generated to ease building the installers. Script
 
 # Usage
 The following example illustrates how the capabilities mentioned above could be used. 
-
-> TODO: PUT CODE HYPERLINK HERE
+## C++
+> TODO: PUT C++ CODE USAGE HYPERLINK HERE
+## Matlab
+> TODO: PUT MATLAB CODE USAGE HYPERLINK HERE
 
 # Disclaimer
 The repository is primarily thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
