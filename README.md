@@ -8,7 +8,7 @@ The core implementation is written in C++ and packaged using CMake. Other API wr
 
 The APIs are a work in progress and more will come. If a specific language API is needed for an application, feel free to open an issue about it. We will get to it as soon as we can. 
 
-# Capabilities
+# CAPABILITIES
 The CMAC implementation can do the following:
 1. Predict: calculates the output of a CMAC by accumulating all active weights scaled by their corresponding basis function values.
 2. Adjust: trains the active weights based on a corrective term, while also providing a damping term to avoid overlearning (or bursting). 
@@ -21,7 +21,7 @@ Predict and Adjust are used for near continuous calculation of CMAC outputs for 
 
 Save and Load are functions are typically used when the user wants to save a trained CMAC for later use. 
 
-# Installation
+# INSTALLATION
 ## Windows
 > TODO: HOW TO INSTALL ON WINDOWS
 
@@ -31,14 +31,14 @@ Save and Load are functions are typically used when the user wants to save a tra
 # Build
 A couple of build scripts were generated to ease building the installers. Scripts with *_win_* are used under the Windows environment and the others under Linux. 
 
-# Usage
+# USAGE
 The following example illustrates how the capabilities mentioned above could be used. 
 ## C++
 > TODO: PUT C++ CODE USAGE HYPERLINK HERE
 ## Matlab
 > TODO: PUT MATLAB CODE USAGE HYPERLINK HERE
 
-# Disclaimer
+# DISCLAIMER
 The repository is primarily thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
 
 
