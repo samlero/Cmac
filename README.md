@@ -36,6 +36,8 @@ The following example illustrates how the capabilities mentioned above could be 
 
 > TODO: PUT CODE HYPERLINK HERE
 
+# Disclaimer
+The repository is primarily thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
 
 
 
