@@ -21,6 +21,16 @@ Predict and Adjust are used for near continuous calculation of CMAC outputs for 
 
 Save and Load are functions are typically used when the user wants to save a trained CMAC for later use. 
 
+# Installation
+## Windows
+> TODO: HOW TO INSTALL ON WINDOWS
+
+## Linux
+> TODO: HOW TO INSTALL ON LINUX
+
+# Build
+A couple of build scripts were generated to ease building the installers. Scripts with *_win_* are used under the Windows environment and the others under Linux. 
+
 # Usage
 The following example illustrates how the capabilities mentioned above could be used. 
 
