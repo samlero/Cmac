@@ -20,10 +20,10 @@ The Predict and Adjust capabilities are available in the ICmac interface while t
 # Usage
 The following example illustrates how the capabilities mentioned above could be used. 
 
-> #include "CmacLib.h"
-> using namespace CmacLib;
-> ...
-> std::unique_ptr<Factory> factory(std::make_unique<Factory>());
+> TODO: PUT CODE HYPERLINK HERE
+
+# Stats
+> TODO: ADD BUILD AND TEST RESULTS HERE
 
 
 
