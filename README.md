@@ -5,6 +5,7 @@ The core implementation is written in C++ and packaged using CMake. Other API wr
 1. MATLAB: must be manually rebuilt,
 2. Python: in-progress,
 3. Julia: in-progress.
+
 The APIs are a work in progress and more will come. If a specific language API is needed for an application, feel free to open an issue about it. We will get to it as soon as we can. 
 
 # Capabilities
