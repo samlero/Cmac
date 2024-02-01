@@ -17,6 +17,14 @@ The CMAC implementation can do the following:
 
 The Predict and Adjust capabilities are available in the ICmac interface while the Save and Load capabilities in IMarshaller. 
 
+# Usage
+The following example illustrates how the capabilities mentioned above could be used. 
+
+> #include "CmacLib.h"
+> using namespace CmacLib;
+> ...
+> std::unique_ptr<Factory> factory(std::make_unique<Factory>());
+
 
 
 
