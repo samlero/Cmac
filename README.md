@@ -34,9 +34,9 @@ A couple of build scripts were generated to ease building the installers. Script
 # USAGE
 The following example illustrates how the capabilities mentioned above could be used. 
 ## C++
-See the examples in the tests folder. 
+See the examples in [CmacTests.cpp](tests/CmacTests.cpp) and [MarshallerTests.cpp](tests/MarshallerTests.cpp). 
 ## Matlab
-See an example [api/matlab/usage.m](api/matlab/usage.m)
+See an example in [api/matlab/usage.m](api/matlab/usage.m)
 
 # DISCLAIMER
 The repository is primarily thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
