@@ -26,3 +26,7 @@ std::unique_ptr<IMarshaller> CmacLib::Factory::CreateMarshaller()
 {
     return std::make_unique<Marshaller>();
 }
+
+Factory::Factory(){}
+
+Factory::~Factory(){}

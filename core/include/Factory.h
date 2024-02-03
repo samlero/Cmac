@@ -37,6 +37,9 @@ namespace CmacLib
 		/// @brief Creates an instance of IMarshaller.
 		/// @return IMarshaller object
 		std::unique_ptr<IMarshaller> CreateMarshaller();
+
+		Factory();
+		~Factory();
 	};
 }
 

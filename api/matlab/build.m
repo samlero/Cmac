@@ -1,36 +1,51 @@
 clear all; close all; clc;
+% Set to true if debug statements is wanted
+isDebug = false;
+% Set the path of the include files relative to the location of this file.
+% This is where CmacLib.h is located.
+includeDirectory = "..\..\..\..\Program Files\CmacLib\include";
+% Set the path of the lib file relative to the location of this file.
+% This is where CmacLib.lib is located.
+libDirectory = "..\..\..\..\Program Files\CmacLib\lib";
+
+debugArg = "-DDebug=false";
+if isDebug
+    debugArg = "-DDebug=true";
+end
+includeDirArg = strcat("-I", '"', includeDirectory, '"');
+libDirArg = strcat("-L", '"', libDirectory, '"');
 
 %% Build ResultMex.cpp
 fprintf("Build ResultMex ...\n");
-mex -DDebug=true ResultMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+feval("mex", "ResultMex.cpp", "-lCmacLib", includeDirArg, libDirArg, debugArg);
 fprintf("\n");
 
 %% Build PredictionMex.cpp
 fprintf("Build PredictionMex ...\n");
-mex -DDebug=true PredictionMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
-fprintf("\n");
-
-%% Build FactoryMex.cpp
-fprintf("Build FactoryMex ...\n");
-mex -DDebug=true FactoryMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+feval("mex", "PredictionMex.cpp", "-lCmacLib", includeDirArg, libDirArg, debugArg);
 fprintf("\n");
 
 %% Build AdjustmentMex.cpp
 fprintf("Build AdjustmentMex ...\n");
-mex -DDebug=true AdjustmentMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+feval("mex", "AdjustmentMex.cpp", "-lCmacLib", includeDirArg, libDirArg, debugArg);
 fprintf("\n");
 
 %% Build CmacMex.cpp
 fprintf("Build CmacMex ...\n");
-mex -DDebug=true CmacMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+feval("mex", "CmacMex.cpp", "-lCmacLib", includeDirArg, libDirArg, debugArg);
 fprintf("\n");
 
 %% Build SerializationMex.cpp
 fprintf("Build SerializationMex ...\n");
-mex -DDebug=true SerializationMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+feval("mex", "SerializationMex.cpp", "-lCmacLib", includeDirArg, libDirArg, debugArg);
 fprintf("\n");
 
 %% Build MarshallerMex.cpp
 fprintf("Build MarshallerMex ...\n");
-mex -DDebug=true MarshallerMex.cpp -I"..\..\..\..\Program Files\CmacLib\include" -L"..\..\..\..\Program Files\CmacLib\lib" -lCmacLib
+feval("mex", "MarshallerMex.cpp", "-lCmacLib", includeDirArg, libDirArg, debugArg);
+fprintf("\n");
+
+%% Build FactoryMex.cpp
+fprintf("Build FactoryMex ...\n");
+feval("mex", "FactoryMex.cpp", "-lCmacLib", includeDirArg, libDirArg, debugArg);
 fprintf("\n");
