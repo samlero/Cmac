@@ -6,8 +6,10 @@ classdef Cmac < Serializable
         METHOD_DELETE uint32 = 0;
         METHOD_PREDICT uint32 = 100;
         METHOD_ADJUST uint32 = 101;
-        METHOD_SERIALIZE uint32 = 102;
-        METHOD_DESERIALIZE uint32 = 103;
+        METHOD_ZEROIZE uint32 = 102;
+
+        METHOD_SERIALIZE uint32 = 200;
+        METHOD_DESERIALIZE uint32 = 201;
     end
 
     methods
@@ -43,6 +45,14 @@ classdef Cmac < Serializable
             adjustmentHandle = CmacMex(Cmac.METHOD_ADJUST, obj.handle ...
                 , correction, prediction.handle, damping);
             adjustment = Adjustment(adjustmentHandle);
+        end
+
+        function result = Zeroize(obj)
+            arguments
+                obj Cmac
+            end
+            resultHandle = CmacMex(Cmac.METHOD_ZEROIZE, obj.handle);
+            result = Result(resultHandle);
         end
     end
 end

@@ -23,6 +23,7 @@ public:
     const static unsigned int DELETE = 2;
     const static unsigned int PREDICT = 3;
     const static unsigned int ADJUST = 5;
+    const static unsigned int ZEROIZE = 2;
     const static unsigned int SERIALIZE = 2;
     const static unsigned int DESERIALIZE = 3;
 };
@@ -33,8 +34,10 @@ public:
     const static unsigned int DELETE = 0;
     const static unsigned int PREDICT = 100;
     const static unsigned int ADJUST = 101;
-    const static unsigned int SERIALIZE = 102;
-    const static unsigned int DESERIALIZE = 103;
+    const static unsigned int ZEROIZE = 102;
+
+    const static unsigned int SERIALIZE = 200;
+    const static unsigned int DESERIALIZE = 201;
 };
 
 class MexFunction : public matlab::mex::Function {
@@ -135,6 +138,15 @@ class MexFunction : public matlab::mex::Function {
 
                 #if Debug
                 std::cout<<"Cmac: Adjust method"<<std::endl;
+                #endif
+            }
+            else if(method == Method::ZEROIZE
+                    && inputs.size() == InputSize::ZEROIZE)
+            {
+                std::unique_ptr<IResult> result = cmac->Zeroize();
+                outputs[0] = factory.createScalar<uint64_t>((uint64_t)(void*)result.release());
+                #if Debug
+                std::cout<<"Cmac: Zeroize method"<<std::endl;
                 #endif
             }
             else if(method == Method::SERIALIZE

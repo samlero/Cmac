@@ -58,6 +58,13 @@ if ~result.IsSuccessful()
     error('Load failed.');
 end
 
+% zeroize weights to return to an untrained state
+result = cmac.Zeroize();
+if ~result.IsSuccessful()
+    disp(result.GetMessage());
+    error('Zeroize failed.');
+end
+
 % cycles
 for cycle = 1 : num_cycles
 % loop
