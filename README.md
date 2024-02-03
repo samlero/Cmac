@@ -23,7 +23,7 @@ Save and Load are functions are typically used when the user wants to save a tra
 
 # INSTALLATION
 ## Windows
-> TODO: HOW TO INSTALL ON WINDOWS
+Download the latest CmacLib-x.x.x-win64.exe and follow the installation wizard.
 
 ## Linux
 > TODO: HOW TO INSTALL ON LINUX
@@ -36,10 +36,12 @@ The following example illustrates how the capabilities mentioned above could be 
 ## C++
 See the examples in [CmacTests.cpp](tests/CmacTests.cpp) and [MarshallerTests.cpp](tests/MarshallerTests.cpp). 
 ## Matlab
-See an example in [api/matlab/usage.m](api/matlab/usage.m)
+See an example in [api/matlab/usage.m](api/matlab/usage.m).
 
 # DISCLAIMER
-The repository is primarily thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
+The repository is thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
+This is also a good indication that the core C++ is functional under a Windows environment. 
+Linux works in theory, more testing to be done on it.  
 
 
 
