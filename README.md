@@ -27,7 +27,7 @@ Save and Load are functions are typically used when the user wants to save a tra
 Download the latest CmacLib-x.x.x-win64.exe and follow the installation wizard.
 
 ## Linux
-> TODO: HOW TO INSTALL ON LINUX
+Download the latest CmacLib-1.001.0-Linux.tar.gz, unzip and make install.
 
 # BUILD
 A couple of build scripts were generated to ease building the installers. Scripts with *_win_* are used under the Windows environment and the others under Linux. 
