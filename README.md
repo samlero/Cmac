@@ -34,9 +34,9 @@ A couple of build scripts were generated to ease building the installers. Script
 # USAGE
 The following example illustrates how the capabilities mentioned above could be used. 
 ## C++
-> TODO: PUT C++ CODE USAGE HYPERLINK HERE
+See the examples in the tests folder. 
 ## Matlab
-> TODO: PUT MATLAB CODE USAGE HYPERLINK HERE
+https://github.com/samlero/Cmac/blob/101a8f689da863520db0e15562ae4c3ef16631d0/api/matlab/usage.m
 
 # DISCLAIMER
 The repository is primarily thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
