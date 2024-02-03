@@ -247,6 +247,28 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPred
 	return adjustment;
 }
 
+std::unique_ptr<IResult> Cmac::Zeroize()
+{
+	std::unique_ptr<Result> result(std::make_unique<Result>());
+	try
+	{
+		for(size_t i = 0; i < this->memory.size(); i++)
+		{
+			for(size_t j = 0; j < this->memory[i].size(); j++)
+			{
+				this->memory[i][j] = 0.0;
+			}
+		}
+		result->SetIsSuccessful(true);
+	}	
+	catch(const std::exception& ex)
+	{
+		result->SetIsSuccessful(false);
+		result->SetMessage(ex.what());
+	}
+	return result;
+}
+
 std::unique_ptr<ISerialization> Cmac::Serialize()
 {
 	std::unique_ptr<Serialization> serialization(std::make_unique<Serialization>());

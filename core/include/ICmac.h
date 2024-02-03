@@ -10,7 +10,7 @@
 namespace CmacLib
 {
 	/// @brief Cerebellar Model Articulation Controller (CMAC)
-	class ICmac : public ISerializable{
+	class ICmac : public virtual ISerializable{
 	public:
 
 		/// @brief Acquires active weights and associated basis values, then multiply and sum to produce an output.
@@ -26,6 +26,10 @@ namespace CmacLib
 		virtual std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
 			, IPrediction* const prediction
 			, double damping) = 0;
+
+		/// @brief Sets all the weights in memory to zero, untraining the Cmac.
+		/// @return Result of the operation.
+		virtual std::unique_ptr<IResult> Zeroize() = 0;
 
 		/// @brief Destructor
 		virtual ~ICmac(){};

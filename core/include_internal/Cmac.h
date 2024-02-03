@@ -52,6 +52,7 @@ namespace CmacLib
 		std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
 			, IPrediction* const prediction
 			, double damping) override;
+		std::unique_ptr<IResult> Zeroize() override;
 
 	
 	public: // ISerializable overrides
