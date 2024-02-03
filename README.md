@@ -13,7 +13,8 @@ The CMAC implementation can do the following:
 1. Predict: calculates the output of a CMAC by accumulating all active weights scaled by their corresponding basis function values.
 2. Adjust: trains the active weights based on a corrective term, while also providing a damping term to avoid overlearning (or bursting). 
 3. Save: writes the contents of a CMAC to a file.
-4. Load: loads the contents of a CMAC-saved file. 
+4. Load: loads the contents of a CMAC-saved file.
+5. Zeroize: sets all the weights back to zero, untraining the CMAC.
 
 The Predict and Adjust capabilities are available in the ICmac interface while the Save and Load capabilities in IMarshaller. 
 
