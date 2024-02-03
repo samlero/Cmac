@@ -36,7 +36,7 @@ The following example illustrates how the capabilities mentioned above could be 
 ## C++
 See the examples in the tests folder. 
 ## Matlab
-api/matlab/usage.m
+[link]api/matlab/usage.m
 
 # DISCLAIMER
 The repository is primarily thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
