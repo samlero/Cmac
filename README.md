@@ -36,7 +36,7 @@ The following example illustrates how the capabilities mentioned above could be 
 ## C++
 See the examples in the tests folder. 
 ## Matlab
-https://github.com/samlero/Cmac/blob/101a8f689da863520db0e15562ae4c3ef16631d0/api/matlab/usage.m
+api/matlab/usage.m
 
 # DISCLAIMER
 The repository is primarily thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
