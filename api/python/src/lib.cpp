@@ -33,7 +33,8 @@ PYBIND11_MODULE(cmaclib, m) {
 
     pybind11::class_<ISerializable>(m, "ISerializable", pybind11::multiple_inheritance())
         .def("Serialize", &ISerializable::Serialize, pybind11::return_value_policy::take_ownership)
-        .def("Deserialize", &ISerializable::Deserialize, pybind11::return_value_policy::take_ownership);
+        .def("Deserialize", &ISerializable::Deserialize, pybind11::return_value_policy::take_ownership)
+        .def("GetExtension", &ISerializable::GetExtension, pybind11::return_value_policy::take_ownership);
 
     pybind11::class_<ICmac, ISerializable>(m, "ICmac", pybind11::multiple_inheritance())
         .def("Predict", &ICmac::Predict, pybind11::return_value_policy::take_ownership)
