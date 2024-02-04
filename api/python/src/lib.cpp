@@ -37,7 +37,8 @@ PYBIND11_MODULE(cmaclib, m) {
 
     pybind11::class_<ICmac, ISerializable>(m, "ICmac", pybind11::multiple_inheritance())
         .def("Predict", &ICmac::Predict, pybind11::return_value_policy::take_ownership)
-        .def("Adjust", &ICmac::Adjust, pybind11::return_value_policy::take_ownership);
+        .def("Adjust", &ICmac::Adjust, pybind11::return_value_policy::take_ownership)
+        .def("Zeroize", &ICmac::Zeroize, pybind11::return_value_policy::take_ownership);
 
     pybind11::class_<Factory>(m, "Factory")
         .def(pybind11::init<>())
