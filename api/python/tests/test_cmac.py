@@ -2,6 +2,60 @@
 
 import cmaclib
 
+def test_object_member_existence() -> None:
+    factory: cmaclib.Factory = cmaclib.Factory()
+
+    assert hasattr(factory.CreateCmac, "__call__")
+    assert hasattr(factory.CreateDefaultCmac, "__call__")
+    assert hasattr(factory.CreateMarshaller, "__call__")
+
+    # Create cmac to check its members.
+    upper: list[float] = [10.0, 10.0]
+    lower: list[float] = [-10.0, -10.0]
+    cmac: cmaclib.ICmac = factory.CreateCmac(10 \
+        , 100 \
+		, int(1e5) \
+		, 2 \
+		, upper \
+		, lower \
+		, 0.001 \
+		, 0.00001)
+
+    assert hasattr(cmac.Predict, "__call__")
+    assert hasattr(cmac.Adjust, "__call__")
+    assert hasattr(cmac.Zeroize, "__call__")
+    # Remember how ICmac also inherits from ISerializable.
+    assert hasattr(cmac.Serialize, "__call__")
+    assert hasattr(cmac.Deserialize, "__call__")
+    assert hasattr(cmac.GetExtension, "__call__")
+
+    # Create IResult object to check its members.
+    result = cmac.Zeroize()
+
+    assert hasattr(result.IsSuccessful, "__call__")
+    assert hasattr(result.GetMessage, "__call__")
+
+    # Create prediction to check its members.
+    input: list[float] = [0.0, 0.0]
+    prediction = cmac.Predict(input)
+
+    assert hasattr(prediction.GetValues, "__call__")
+    assert hasattr(prediction.GetActiveWeightIndices, "__call__")
+    assert hasattr(prediction.GetActiveWeights, "__call__")
+    assert hasattr(prediction.GetBasisValues, "__call__")
+    # Remember how IPrediction also inherits from IResult.
+    assert hasattr(prediction.IsSuccessful, "__call__")
+    assert hasattr(prediction.GetMessage, "__call__")
+
+    # Create adjustment to check its members.
+    correction: list[float] = [0.001, 0.001]
+    adjustment = cmac.Adjust(correction, prediction, 0.00001)
+
+    assert hasattr(adjustment.GetWeightChanges, "__call__")
+    # Remember how IAdjustment also inherits from IResult.
+    assert hasattr(adjustment.IsSuccessful, "__call__")
+    assert hasattr(adjustment.GetMessage, "__call__")
+
 def test_predict_success() -> None:
     factory: cmaclib.Factory = cmaclib.Factory()
 
