@@ -69,7 +69,10 @@ class MexFunction : public matlab::mex::Function {
                                  std::vector<matlab::data::Array>({ factory.createScalar("Second input must be of type uint64.")}));
                 return;
             }
+
+            #if Debug
             std::cout<<"Cmac:Extract Cmac pointer"<<std::endl;
+            #endif
             // get Cmac pointer
             matlab::data::TypedArray<uint64_t> dataArray
                 = std::move(inputs[InputIndex::POINTER]);

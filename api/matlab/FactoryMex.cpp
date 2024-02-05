@@ -113,7 +113,9 @@ class MexFunction : public matlab::mex::Function {
                     matlabPtr->feval(u"error", 0,
                                      std::vector<matlab::data::Array>({ factory.createScalar("Inputs three to six should be unsigned int (32bit).")}));
                 }
-                std::cout<<"Factory:CreateCmac: Extract first set of arguments"<<std::endl;
+                #if Debug
+                std::cout<<"FactoryMex: CreateCmac: Extract first set of arguments"<<std::endl;
+                #endif
                 matlab::data::TypedArray<uint32_t> pNumQ = std::move(inputs[InputIndex::CREATE_CMAC_NUM_Q]);
                 matlab::data::TypedArray<uint32_t> pNumLayers = std::move(inputs[InputIndex::CREATE_CMAC_NUM_LAYERS]);
                 matlab::data::TypedArray<uint32_t> pMaxMem = std::move(inputs[InputIndex::CREATE_CMAC_MAX_MEMORY]);
