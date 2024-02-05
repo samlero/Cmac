@@ -26,7 +26,7 @@ namespace CmacLib
         inline static const char* UPPER_LIMITS = "UpperLimits";
         inline static const char* LOWER_LIMITS = "LowerLimits";
         inline static const char* MEMORY = "Memory";
-        inline static const char* DELIMITER = ",";
+        inline static char DELIMITER = ',';
         inline static const char* HASHTABLE = "Hashtable";
         inline static const char* DENOMINATOR = "Denominator";
         inline static const char* OFFSETS = "Offsets";
@@ -135,7 +135,7 @@ namespace CmacLib
         {
             std::vector<unsigned int> result;
             std::string content = GetContent(entry, tag);
-            std::vector<std::string> strNums = StringSplit(content, CmacTagger::DELIMITER[0]);
+            std::vector<std::string> strNums = StringSplit(content, CmacTagger::DELIMITER);
             for(size_t i = 0; i < strNums.size(); i++)
             {
                 result.emplace_back(std::stoul(strNums[i]));
@@ -148,7 +148,7 @@ namespace CmacLib
         {
             std::vector<double> result;
             std::string content = GetContent(entry, tag);
-            std::vector<std::string> strNums = StringSplit(content, CmacTagger::DELIMITER[0]);
+            std::vector<std::string> strNums = StringSplit(content, CmacTagger::DELIMITER);
             for(size_t i = 0; i < strNums.size(); i++)
             {
                 std::stringstream ss(strNums[i]);
@@ -170,7 +170,7 @@ namespace CmacLib
             for(size_t i = 0; i < lines.size(); i++)
             {
                 std::vector<double> vals;
-                std::vector<std::string> strNums = StringSplit(lines[i], CmacTagger::DELIMITER[0]);
+                std::vector<std::string> strNums = StringSplit(lines[i], CmacTagger::DELIMITER);
                 for(size_t j = 0; j < strNums.size(); j++)
                 {
                     std::stringstream ss(strNums[j]);
