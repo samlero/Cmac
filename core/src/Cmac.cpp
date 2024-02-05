@@ -301,7 +301,7 @@ std::unique_ptr<ISerialization> Cmac::Serialize()
 		result = tagger->StartTag(CmacTagger::ROOT) 
 			+ "\n" + result + tagger->EndTag(CmacTagger::ROOT);
 
-		serialization->SetString(result);
+		serialization->SetString(std::move(result));
 		serialization->SetIsSuccessful(true);
 	}
 	catch(const std::exception& ex)
