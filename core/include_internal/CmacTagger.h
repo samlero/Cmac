@@ -14,47 +14,55 @@ namespace CmacLib
         ~CmacTagger(){};
 
     public: // tags
-        inline static const std::string ROOT = "Cmac";
-        inline static const std::string NUM_Q = "NumQ";
-        inline static const std::string NUM_LAYERS = "NumLayers";
-        inline static const std::string MAX_MEMORY = "MaxMemory";
-        inline static const std::string MAX_HASH_VALUE = "MaxHashValue";
-        inline static const std::string NUM_OUTPUTS = "NumOutputs";
-        inline static const std::string NUM_INPUTS = "NumInputs";
-        inline static const std::string BETA = "Beta";
-        inline static const std::string NU = "Nu";
-        inline static const std::string UPPER_LIMITS = "UpperLimits";
-        inline static const std::string LOWER_LIMITS = "LowerLimits";
-        inline static const std::string MEMORY = "Memory";
-        inline static const std::string DELIMITER = ",";
-        inline static const std::string HASHTABLE = "Hashtable";
-        inline static const std::string DENOMINATOR = "Denominator";
-        inline static const std::string OFFSETS = "Offsets";
+        inline static const char* ROOT = "Cmac";
+        inline static const char* NUM_Q = "NumQ";
+        inline static const char* NUM_LAYERS = "NumLayers";
+        inline static const char* MAX_MEMORY = "MaxMemory";
+        inline static const char* MAX_HASH_VALUE = "MaxHashValue";
+        inline static const char* NUM_OUTPUTS = "NumOutputs";
+        inline static const char* NUM_INPUTS = "NumInputs";
+        inline static const char* BETA = "Beta";
+        inline static const char* NU = "Nu";
+        inline static const char* UPPER_LIMITS = "UpperLimits";
+        inline static const char* LOWER_LIMITS = "LowerLimits";
+        inline static const char* MEMORY = "Memory";
+        inline static const char* DELIMITER = ",";
+        inline static const char* HASHTABLE = "Hashtable";
+        inline static const char* DENOMINATOR = "Denominator";
+        inline static const char* OFFSETS = "Offsets";
 
     public: // helper methods
-        std::string StartTag(std::string content)
+        inline std::string StartTag(const std::string& content)
         {
             return "<" + content + ">";
-        };
+        }
+        inline std::string StartTag(std::string&& content)
+        {
+            return "<" + content + ">";
+        }
 
-        std::string EndTag(std::string content)
+        inline std::string EndTag(const std::string& content)
+        {
+            return "</" + content + ">";
+        }
+        inline std::string EndTag(std::string&& content)
         {
             return "</" + content + ">";
         }
 
-        std::string Entry(std::string content, std::string tag)
+        inline std::string Entry(std::string&& content, const std::string& tag)
         {
-            return StartTag(tag) + content + EndTag(tag) + "\n";
+            return StartTag(tag) + std::move(content) + EndTag(tag) + "\n";
         }
 
-        std::string ToString(double value)
+        inline std::string ToString(double value)
         {
             std::stringstream ss;
             ss << std::hexfloat << value;
             return ss.str();
         }
 
-        std::string ToString(std::vector<unsigned int> vec)
+        inline std::string ToString(const std::vector<unsigned int>& vec)
         {
             std::string result;
             for(size_t i = 0; i < vec.size(); i++)
@@ -65,7 +73,7 @@ namespace CmacLib
             return result;
         }
 
-        std::string ToString(std::vector<double> vec)
+        inline std::string ToString(const std::vector<double>& vec)
         {
             std::string result;
             for(size_t i = 0; i < vec.size(); i++)
@@ -76,7 +84,7 @@ namespace CmacLib
             return result;
         }
 
-        std::string ToString(std::vector<std::vector<double>> mat)
+        inline std::string ToString(const std::vector<std::vector<double>>& mat)
         {
             std::string result = "\n";
             for(size_t i = 0; i < mat.size(); i++)
@@ -86,26 +94,30 @@ namespace CmacLib
             return result;
         }
 
-        std::string GetContent(std::string entry, std::string tag)
+        inline std::string GetContent(
+            const std::string& entry, const std::string& tag)
         {
             size_t start = entry.find(StartTag(tag)) + StartTag(tag).size();
             size_t end = entry.find(EndTag(tag));
             return entry.substr(start, end - start);
         }
 
-        unsigned int GetUnsignedInt(std::string entry, std::string tag)
+        inline unsigned int GetUnsignedInt(
+            const std::string& entry, const std::string& tag)
         {
             return std::stoul(GetContent(entry, tag));
         }
 
-        double GetDouble(std::string entry, std::string tag)
+        inline double GetDouble(
+            const std::string& entry, const std::string& tag)
         {
             std::string content = GetContent(entry, tag);
             std::stringstream ss(content);
             return std::strtod(ss.str().c_str(), NULL);
         }
 
-        std::vector<std::string> StringSplit(std::string str, char delimiter)
+        inline std::vector<std::string> StringSplit(
+            const std::string& str, char delimiter)
         {
             std::vector<std::string> strings;
             int startIndex = 0, endIndex = 0;
@@ -116,26 +128,28 @@ namespace CmacLib
                     endIndex = i;
                     std::string temp;
                     temp.append(str, startIndex, endIndex - startIndex);
-                    strings.push_back(temp);
+                    strings.emplace_back(temp);
                     startIndex = endIndex + 1;
                 }
             }
             return strings;
         }
 
-        std::vector<unsigned int> GetUnsignedInts(std::string entry, std::string tag)
+        inline std::vector<unsigned int> GetUnsignedInts(
+            const std::string& entry, const std::string& tag)
         {
             std::vector<unsigned int> result;
             std::string content = GetContent(entry, tag);
             std::vector<std::string> strNums = StringSplit(content, CmacTagger::DELIMITER[0]);
             for(size_t i = 0; i < strNums.size(); i++)
             {
-                result.push_back(std::stoul(strNums[i]));
+                result.emplace_back(std::stoul(strNums[i]));
             }
             return result;
         }
 
-        std::vector<double> GetDoubles(std::string entry, std::string tag)
+        inline std::vector<double> GetDoubles(
+            const std::string& entry, const std::string& tag)
         {
             std::vector<double> result;
             std::string content = GetContent(entry, tag);
@@ -144,12 +158,13 @@ namespace CmacLib
             {
                 std::stringstream ss(strNums[i]);
                 double val = std::strtod(ss.str().c_str(), NULL);
-                result.push_back(val);
+                result.emplace_back(val);
             }
             return result;
         }
 
-        std::vector<std::vector<double>> GetMatrixDoubles(std::string entry, std::string tag)
+        inline std::vector<std::vector<double>> GetMatrixDoubles(
+            const std::string& entry, const std::string& tag)
         {
             std::string content = GetContent(entry, tag);
             // remove new lines
@@ -165,12 +180,12 @@ namespace CmacLib
                 {
                     std::stringstream ss(strNums[j]);
                     double val = std::strtod(ss.str().c_str(), NULL);
-                    vals.push_back(val);
+                    vals.emplace_back(val);
                 }
 
                 if(vals.size() > 0) // avoid accidentally putting in empty vectors
                 {
-                    result.push_back(vals);
+                    result.emplace_back(vals);
                 }
             }
             return result;
