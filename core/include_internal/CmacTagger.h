@@ -120,18 +120,13 @@ namespace CmacLib
             const std::string& str, char delimiter)
         {
             std::vector<std::string> strings;
-            int startIndex = 0, endIndex = 0;
-            for (int i = 0; i <= str.size(); i++) {
-                
-                // If we reached the end of the word or the end of the input.
-                if (str[i] == delimiter || i == str.size()) {
-                    endIndex = i;
-                    std::string temp;
-                    temp.append(str, startIndex, endIndex - startIndex);
-                    strings.emplace_back(temp);
-                    startIndex = endIndex + 1;
-                }
+            std::istringstream stream(str);
+            std::string token;
+
+            while (std::getline(stream, token, delimiter)) {
+                strings.emplace_back(std::move(token));
             }
+
             return strings;
         }
 
