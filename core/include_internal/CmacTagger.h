@@ -38,7 +38,7 @@ namespace CmacLib
         }
         inline std::string StartTag(std::string&& content)
         {
-            return "<" + content + ">";
+            return "<" + std::move(content) + ">";
         }
 
         inline std::string EndTag(const std::string& content)
@@ -47,7 +47,7 @@ namespace CmacLib
         }
         inline std::string EndTag(std::string&& content)
         {
-            return "</" + content + ">";
+            return "</" + std::move(content) + ">";
         }
 
         inline std::string Entry(std::string&& content, const std::string& tag)
