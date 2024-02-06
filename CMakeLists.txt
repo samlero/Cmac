@@ -23,9 +23,6 @@ else()
 endif()
 ## Enforcing C and C++ standards. </region>
 
-#set_property(TARGET MyVtkAppOrLibName PROPERTY
-#  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-
 project ("CmacLibProject")
 
 include(CTest)
