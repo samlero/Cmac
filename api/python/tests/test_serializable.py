@@ -2,7 +2,7 @@
 
 import os
 import pytest
-import cmaclib
+import pycmaclib
 
 @pytest.fixture(scope="function")
 def setup_teardown() -> None:
@@ -23,11 +23,11 @@ def setup_teardown() -> None:
         os.remove(file)
 
 def test_object_member_existence(setup_teardown) -> None:
-    factory: cmaclib.Factory = cmaclib.Factory()
+    factory: pycmaclib.Factory = pycmaclib.Factory()
 
     upper: list[float] = [10.0, 10.0]
     lower: list[float] = [-10.0, -10.0]
-    cmac: cmaclib.ICmac = factory.CreateCmac(10 \
+    cmac: pycmaclib.ICmac = factory.CreateCmac(10 \
         , 100 \
 		, int(1e5) \
 		, 2 \
@@ -45,11 +45,11 @@ def test_object_member_existence(setup_teardown) -> None:
     assert hasattr(serialization.GetMessage, "__call__")
 
 def test_serialize_deserialize_cmac(setup_teardown) -> None:
-    factory: cmaclib.Factory = cmaclib.Factory()
+    factory: pycmaclib.Factory = pycmaclib.Factory()
 
     upper: list[float] = [10.0, 10.0]
     lower: list[float] = [-10.0, -10.0]
-    cmac: cmaclib.ICmac = factory.CreateCmac(10 \
+    cmac: pycmaclib.ICmac = factory.CreateCmac(10 \
         , 100 \
 		, int(1e5) \
 		, 2 \

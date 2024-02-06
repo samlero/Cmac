@@ -10,7 +10,7 @@
 
 using namespace CmacLib;
 
-PYBIND11_MODULE(cmaclib, m) {
+PYBIND11_MODULE(pycmaclib, m) {
     pybind11::class_<IResult>(m, "IResult",
         pybind11::multiple_inheritance())
         .def("IsSuccessful", &IResult::IsSuccessful,

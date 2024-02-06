@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-import cmaclib
+import pycmaclib
 
 def test_object_member_existence() -> None:
-    factory: cmaclib.Factory = cmaclib.Factory()
+    factory: pycmaclib.Factory = pycmaclib.Factory()
 
     assert hasattr(factory.CreateCmac, "__call__")
     assert hasattr(factory.CreateDefaultCmac, "__call__")
@@ -12,7 +12,7 @@ def test_object_member_existence() -> None:
     # Create cmac to check its members.
     upper: list[float] = [10.0, 10.0]
     lower: list[float] = [-10.0, -10.0]
-    cmac: cmaclib.ICmac = factory.CreateCmac(10 \
+    cmac: pycmaclib.ICmac = factory.CreateCmac(10 \
         , 100 \
 		, int(1e5) \
 		, 2 \
@@ -57,11 +57,11 @@ def test_object_member_existence() -> None:
     assert hasattr(adjustment.GetMessage, "__call__")
 
 def test_predict_success() -> None:
-    factory: cmaclib.Factory = cmaclib.Factory()
+    factory: pycmaclib.Factory = pycmaclib.Factory()
 
     upper: list[float] = [10.0, 10.0]
     lower: list[float] = [-10.0, -10.0]
-    cmac: cmaclib.ICmac = factory.CreateCmac(10 \
+    cmac: pycmaclib.ICmac = factory.CreateCmac(10 \
         , 100 \
 		, int(1e5) \
 		, 2 \
@@ -90,11 +90,11 @@ def test_predict_success() -> None:
     assert len(prediction.GetActiveWeightIndices()) == 100
 
 def test_predict_fail() -> None:
-    factory: cmaclib.Factory = cmaclib.Factory()
+    factory: pycmaclib.Factory = pycmaclib.Factory()
 
     upper: list[float] = [10.0, 10.0]
     lower: list[float] = [-10.0, -10.0]
-    cmac: cmaclib.ICmac = factory.CreateCmac(10 \
+    cmac: pycmaclib.ICmac = factory.CreateCmac(10 \
         , 100 \
 		, int(1e5) \
 		, 2 \
@@ -116,11 +116,11 @@ def test_predict_fail() -> None:
     assert len(prediction.GetActiveWeightIndices()) == 0
 
 def test_adjust_success() -> None:
-    factory: cmaclib.Factory = cmaclib.Factory()
+    factory: pycmaclib.Factory = pycmaclib.Factory()
 
     upper: list[float] = [10.0, 10.0]
     lower: list[float] = [-10.0, -10.0]
-    cmac: cmaclib.ICmac = factory.CreateCmac(10 \
+    cmac: pycmaclib.ICmac = factory.CreateCmac(10 \
         , 100 \
 		, int(1e5) \
 		, 2 \
@@ -145,11 +145,11 @@ def test_adjust_success() -> None:
         assert len(weight_change_col) == 100
 
 def test_adjust_fail() -> None:
-    factory: cmaclib.Factory = cmaclib.Factory()
+    factory: pycmaclib.Factory = pycmaclib.Factory()
 
     upper: list[float] = [10.0, 10.0]
     lower: list[float] = [-10.0, -10.0]
-    cmac: cmaclib.ICmac = factory.CreateCmac(10 \
+    cmac: pycmaclib.ICmac = factory.CreateCmac(10 \
         , 100 \
 		, int(1e5) \
 		, 2 \

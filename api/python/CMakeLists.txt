@@ -10,21 +10,21 @@ if (NOT DEFINED cmaclib_src)
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/src/*.cpp
         )
         # Add the Python module
-        pybind11_add_module(cmaclib ${cmaclib_src})
+        pybind11_add_module(pycmaclib ${cmaclib_src})
         target_link_libraries(
-            cmaclib PRIVATE pybind11::module
+            pycmaclib PRIVATE pybind11::module
         )
-        set_target_properties(cmaclib PROPERTIES
+        set_target_properties(pycmaclib PROPERTIES
             PREFIX "${PYTHON_MODULE_PREFIX}"
             SUFFIX "${PYTHON_MODULE_EXTENSION}"
         )
         # Access implementation classes.
         target_include_directories(
-            cmaclib PRIVATE
+            pycmaclib PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include
             ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include_internal
         )
-        set_property(TARGET cmaclib PROPERTY
+        set_property(TARGET pycmaclib PROPERTY
             MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
         # Testing.
@@ -51,7 +51,7 @@ if (NOT DEFINED cmaclib_src)
             )
         endif()
 
-        install(TARGETS cmaclib LIBRARY DESTINATION lib)
+        install(TARGETS pycmaclib LIBRARY DESTINATION lib)
     else()
         message("pybind11 is not installed in your system."
         " CmacLibPythonWrapper was not built")
