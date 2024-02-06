@@ -17,6 +17,6 @@ script_dir="$(dirname "$(readlink -f "$0")")"
 cd $script_dir/../
 mkdir build
 cd build
-cmake ../core/ -DCMAKE_BUILD_TYPE=Release
+cmake ../ -DCMAKE_BUILD_TYPE=Release
 make
 make package
