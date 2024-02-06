@@ -24,7 +24,7 @@ mkdir build
 cd build
 
 echo "Run CMake on core"
-%cmake_exe% ../ -DCMAKE_BUILD_TYPE=Release
+%cmake_exe% ../ -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
 
 echo "Run PACKAGE.vcxproj"
 %msbuild_exe% PACKAGE.vcxproj /property:Configuration=Release
