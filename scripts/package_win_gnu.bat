@@ -24,7 +24,7 @@ mkdir build
 cd build
 
 echo "Run CMake on core"
-%cmake_exe% ../core/ -G "Unix Makefiles"
+%cmake_exe% ../core/ -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
 
 echo "Run make"
 %make_exe%
