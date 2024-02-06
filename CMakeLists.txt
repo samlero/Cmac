@@ -23,7 +23,7 @@ else()
 endif()
 ## Enforcing C and C++ standards. </region>
 
-project ("CmacLibProject")
+project (CmacLib)
 
 include(CTest)
 
