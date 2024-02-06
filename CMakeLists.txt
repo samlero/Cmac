@@ -24,6 +24,8 @@ else()
 endif()
 ## Enforcing C and C++ standards. </region>
 
+project ("CmacLibProject")
+
 include(CTest)
 
 add_subdirectory(core)
