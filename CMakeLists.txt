@@ -2,6 +2,7 @@
 # and include sub-projects here.
 #
 cmake_minimum_required (VERSION 3.13)
+project(CmacLib)
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
