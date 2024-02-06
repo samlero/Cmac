@@ -15,20 +15,16 @@ using namespace CmacLib;
 
 std::vector<double> Cmac::Normalize(std::vector<double>& raw)
 {
-	std::vector<double> result(raw.size(), 0.0);
-	for (size_t i = 0; i < raw.size(); i++) 
-	{
-		result[i] = (raw[i] - this->lower[i]) / this->denominator[i];
-		if(result[i] > 1.0) 
-		{
-			result[i] = 1.0;
-		}
-		if(result[i] < 0.0)
-		{
-			result[i] = 0.0;
-		}
-	}
-	return result;
+	std::vector<double> result;
+    result.reserve(raw.size());
+
+    for (size_t i = 0; i < raw.size(); i++) {
+        double value = (raw[i] - lower[i]) / denominator[i];
+        value = std::max(0.0, std::min(value, 1.0));
+        result.emplace_back(value);
+    }
+
+    return result;
 }
 
 /// @brief Initialize the cmac instance.
