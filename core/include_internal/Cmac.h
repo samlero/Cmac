@@ -31,7 +31,7 @@ namespace CmacLib
 		/// </summary>
 		/// <param name="raw"></param>
 		/// <returns></returns>
-		std::vector<double> Normalize(std::vector<double>& raw);
+		std::vector<double> Normalize(const std::vector<double>& raw);
 		/// @brief Initialize the instance.
 		void Init();
 
@@ -48,8 +48,8 @@ namespace CmacLib
 		~Cmac();
 
 	public: // ICmac overrides
-		std::unique_ptr<IPrediction> Predict(std::vector<double>& input) override;
-		std::unique_ptr<IAdjustment> Adjust(std::vector<double>& correction
+		std::unique_ptr<IPrediction> Predict(const std::vector<double>& input) override;
+		std::unique_ptr<IAdjustment> Adjust(const std::vector<double>& correction
 			, IPrediction* const prediction
 			, double damping) override;
 		std::unique_ptr<IResult> Zeroize() override;

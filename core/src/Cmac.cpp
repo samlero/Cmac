@@ -13,7 +13,7 @@
 
 using namespace CmacLib;
 
-std::vector<double> Cmac::Normalize(std::vector<double>& raw)
+std::vector<double> Cmac::Normalize(const std::vector<double>& raw)
 {
 	std::vector<double> result;
     result.reserve(raw.size());
@@ -97,7 +97,7 @@ Cmac::Cmac(unsigned int numQ
 
 Cmac::~Cmac(){}
 
-std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
+std::unique_ptr<IPrediction> Cmac::Predict(const std::vector<double>& input)
 {
 	std::unique_ptr<Prediction> prediction = ::std::make_unique<Prediction>();
 
@@ -169,7 +169,7 @@ std::unique_ptr<IPrediction> Cmac::Predict(std::vector<double>& input)
 	return prediction;
 }
 
-std::unique_ptr<IAdjustment> Cmac::Adjust(std::vector<double>& correction, IPrediction* const prediction, double damping)
+std::unique_ptr<IAdjustment> Cmac::Adjust(const std::vector<double>& correction, IPrediction* const prediction, double damping)
 {
 	std::unique_ptr<Adjustment> adjustment = ::std::make_unique<Adjustment>();
 	try
