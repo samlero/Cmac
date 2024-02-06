@@ -1,14 +1,25 @@
-# Cerebellar Model Articulation Controller (CMAC)
+<h2 align="center">
+🧠
+Cerebellar Model Articulation Controller (CMAC)
+🎛️
+</h2>
+
+<a href="./LICENSE"
+    style="display: block; text-align: center;">
+    <img src="https://img.shields.io/badge/License-GPL--3.0-blue.svg" alt="License: GPL-3.0">
+</a>
+
+###
 An artificial neural network based on a human cerebellum. It is mostly used in control systems applications due to its fast calculation and training; it does so by only activating or operating on a subset of the weights at a time, thus minimizing the amount of multiplication and addition operations. 
 
 The core implementation is written in C++ and packaged using CMake. Other API wrappers include:
-1. MATLAB: must be manually rebuilt,
-2. Python: in-progress,
-3. Julia: in-progress.
+1. MATLAB (must be manually built)
+2. Python
+3. Julia (in-progress)
 
 The APIs are a work in progress and more will come. If a specific language API is needed for an application, feel free to open an issue about it. We will get to it as soon as we can. 
 
-# CAPABILITIES
+## 🌟 CAPABILITIES
 The CMAC implementation can do the following:
 1. Predict: calculates the output of a CMAC by accumulating all active weights scaled by their corresponding basis function values.
 2. Adjust: trains the active weights based on a corrective term, while also providing a damping term to avoid overlearning (or bursting). 
@@ -22,30 +33,26 @@ Predict and Adjust are used for near continuous calculation of CMAC outputs for 
 
 Save and Load are functions are typically used when the user wants to save a trained CMAC for later use. 
 
-# INSTALLATION
-## Windows
-Download the latest CmacLib-x.x.x-win64.exe and follow the installation wizard.
+## 📦 INSTALLATION
+### Windows
+Download the latest [CmacLib-x.x.x-win64.exe](https://github.com/samlero/Cmac/releases) and follow the installation wizard.
 
-## Linux
-Download the latest CmacLib-x.x.x-Linux.tar.gz, unzip and make install.
+### Linux
+Download the latest [CmacLib-x.x.x-Linux.tar.gz](https://github.com/samlero/Cmac/releases) and unzip.
 
-# BUILD
+## 🏗️ BUILD
 A couple of build scripts were generated to ease building the installers. Scripts with *_win_* are used under the Windows environment and the others under Linux. 
 
-# USAGE
+## 💻 USAGE
 The following example illustrates how the capabilities mentioned above could be used. 
-## C++
-See the examples in [CmacTests.cpp](tests/CmacTests.cpp) and [MarshallerTests.cpp](tests/MarshallerTests.cpp). 
-## Matlab
-See an example in [api/matlab/usage.m](api/matlab/usage.m).
+### C++
+See the unit tests in [tests/CmacTests.cpp](tests/CmacTests.cpp) and [tests/MarshallerTests.cpp](tests/MarshallerTests.cpp). 
+### Matlab
+See the unit tests in [api/matlab/usage.m](api/matlab/usage.m).
+### Python
+See the unit tests in [api/python/tests/test_cmac.py](api/python/tests/test_cmac.py) and [api/python/tests/test_serializable.py](api/python/tests/test_serializable.py).
 
-# DISCLAIMER
+## ⚠️ DISCLAIMER
 The repository is thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
 This is also a good indication that the core C++ is functional under a Windows environment. 
-Linux works in theory, more testing to be done on it.  
-
-
-
-
-
-
+Linux works in theory, more testing to be done on it.
