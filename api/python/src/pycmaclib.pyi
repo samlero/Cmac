@@ -55,7 +55,7 @@ class IPrediction (IResult):
         """
         ...
 
-    def GetActiveWeights() -> list[float]:
+    def GetActiveWeights() -> list[list[float]]:
         """Get the values of the active weights.
 
         Returns:
@@ -75,7 +75,7 @@ class IAdjustment (IResult):
     """The interface to the weight adjustment data.
     """
 
-    def GetWeightChanges() -> list[float]:
+    def GetWeightChanges() -> list[list[float]]:
         """Get the amount the each active weight changed.
 
         Returns:
