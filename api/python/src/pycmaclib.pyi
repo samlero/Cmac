@@ -6,7 +6,7 @@ class IResult:
     """The interface to the result.
     """
 
-    def IsSuccessful() -> bool:
+    def IsSuccessful(self) -> bool:
         """Indicates if an operation was successful.
 
         Returns:
@@ -14,7 +14,7 @@ class IResult:
         """
         ...
 
-    def GetMessage() -> str:
+    def GetMessage(self) -> str:
         """If not successful, a failure message is provided.
 
         Returns:
@@ -26,7 +26,7 @@ class ISerialization (IResult):
     """The interface to the serialization data.
     """
 
-    def GetString() -> str:
+    def GetString(self) -> str:
         """The string from the resulting serialization process.
 
         Returns:
@@ -38,7 +38,7 @@ class IPrediction (IResult):
     """The interface to the prediction output.
     """
 
-    def GetValues() -> list[float]:
+    def GetValues(self) -> list[float]:
         """Get the calculated multiplication and accumulation \
             of basis and active weights.
 
@@ -47,7 +47,7 @@ class IPrediction (IResult):
         """
         ...
 
-    def GetActiveWeightIndices() -> list[int]:
+    def GetActiveWeightIndices(self) -> list[int]:
         """Get the indices of the active weights.
 
         Returns:
@@ -55,7 +55,7 @@ class IPrediction (IResult):
         """
         ...
 
-    def GetActiveWeights() -> list[list[float]]:
+    def GetActiveWeights(self) -> list[list[float]]:
         """Get the values of the active weights.
 
         Returns:
@@ -63,7 +63,7 @@ class IPrediction (IResult):
         """
         ...
 
-    def GetBasisValues() -> list[float]:
+    def GetBasisValues(self) -> list[float]:
         """Get the basis function values.
 
         Returns:
@@ -75,7 +75,7 @@ class IAdjustment (IResult):
     """The interface to the weight adjustment data.
     """
 
-    def GetWeightChanges() -> list[list[float]]:
+    def GetWeightChanges(self) -> list[list[float]]:
         """Get the amount the each active weight changed.
 
         Returns:
@@ -87,7 +87,7 @@ class ISerializable:
     """An object that can be serialized and de-serialized.
     """
 
-    def Serialize() -> ISerialization:
+    def Serialize(self) -> ISerialization:
         """Serializes the object in its own unique format.
 
         Returns:
@@ -95,7 +95,7 @@ class ISerializable:
         """
         ...
 
-    def Deserialize(content: str) -> IResult:
+    def Deserialize(self, content: str) -> IResult:
         """Deserializes the content into its member variables.
 
         Args:
@@ -106,7 +106,7 @@ class ISerializable:
         """
         ...
 
-    def GetExtension() -> str:
+    def GetExtension(self) -> str:
         """Gets the extension of the serializable object
 
         Returns:
@@ -118,7 +118,7 @@ class IMarshaller:
     """Handles saving and loading of serializable objects
     """
 
-    def Save(serializable: ISerializable, directory: str, \
+    def Save(self, serializable: ISerializable, directory: str, \
         filename: str) -> IResult:
         """Save the serializable object.
 
@@ -132,7 +132,7 @@ class IMarshaller:
         """
         ...
 
-    def Load(serializable: ISerializable, filepath: str) -> IResult:
+    def Load(self, serializable: ISerializable, filepath: str) -> IResult:
         """Fills the contents of the serialzable object.
 
         Args:
@@ -149,7 +149,7 @@ class ICmac (ISerializable):
     """The interface to the Cerebellar Model Articulation Controller (CMAC)
     """
 
-    def Predict(input: list[float]) -> IPrediction:
+    def Predict(self, input: list[float]) -> IPrediction:
         """Acquires active weights and associated basis values, \
             then multiply and sum to produce an output.
 
@@ -161,7 +161,7 @@ class ICmac (ISerializable):
         """
         ...
 
-    def Adjust(correction: list[float], prediction: IPrediction, \
+    def Adjust(self, correction: list[float], prediction: IPrediction, \
         damping: float) -> IAdjustment:
         """Train the weights of the Cmac.
 
@@ -175,7 +175,7 @@ class ICmac (ISerializable):
         """
         ...
 
-    def Zeroize() -> IResult:
+    def Zeroize(self) -> IResult:
         """Sets all the weights in memory to zero, untraining the Cmac.
 
         Returns:
@@ -187,7 +187,7 @@ class Factory:
     """Creates Cmac objects.
     """
 
-    def CreateCmac(numQ: int, numLayers: int, maxmem: int, \
+    def CreateCmac(self, numQ: int, numLayers: int, maxmem: int, \
         numOut: int, upper: list[float], lower: list[float], \
         beta: float, nu: float) -> ICmac:
         """Create a raw and untrained Cmac.
@@ -208,7 +208,7 @@ class Factory:
         """
         ...
 
-    def CreateDefaultCmac() -> ICmac:
+    def CreateDefaultCmac(self) -> ICmac:
         """Creates a Cmac with default values.
 
         Returns:
@@ -216,7 +216,7 @@ class Factory:
         """
         ...
 
-    def CreateMarshaller() -> IMarshaller:
+    def CreateMarshaller(self) -> IMarshaller:
         """Creates an instance of IMarshaller.
 
         Returns:
