@@ -194,13 +194,14 @@ class Factory:
 
         Args:
             numQ (int): The number of quantizations.
-            numLayers (int): _description_
-            maxmem (int): _description_
-            numOut (int): _description_
-            upper (list[float]): _description_
-            lower (list[float]): _description_
-            beta (float): _description_
-            nu (float): _description_
+            numLayers (int): Number of layers (which would indicate \
+                number of active weights)
+            maxmem (int): Maximum potential memory index or memory size.
+            numOut (int): Number of outputs.
+            upper (list[float]): Upper limits of the Predict method inputs.
+            lower (list[float]): Lower limits of the Predict method inputs.
+            beta (float): Learning rate.
+            nu (float): Damping coefficient.
 
         Returns:
             ICmac: The cmac.
