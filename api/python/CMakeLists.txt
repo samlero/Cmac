@@ -34,6 +34,7 @@ if (NOT DEFINED cmaclib_src)
             # Collect all test files.
             file(GLOB_RECURSE python_test_files
                 ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.py
+                ${CMAKE_CURRENT_SOURCE_DIR}/src/*.pyi
             )
             # Copy all test files to binary directory.
             foreach(test_py_file ${python_test_files})
