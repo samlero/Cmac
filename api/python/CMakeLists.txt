@@ -53,6 +53,10 @@ if (NOT DEFINED cmaclib_src)
         endif()
 
         install(TARGETS pycmaclib LIBRARY DESTINATION lib)
+        install(FILES
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/pycmaclib.pyi
+            DESTINATION lib
+        )
     else()
         message("pybind11 is not installed in your system."
         " CmacLibPythonWrapper was not built")
