@@ -37,7 +37,7 @@ def test_object_member_existence(setup_teardown) -> None:
 		, 0.00001)
 
     # Create serialization to check its members.
-    serialization = cmac.Serialize()
+    serialization: pycmaclib.ISerialization = cmac.Serialize()
 
     assert hasattr(serialization.GetString, "__call__")
     # Remember how ISerialization also inherits from IResult.
@@ -58,22 +58,22 @@ def test_serialize_deserialize_cmac(setup_teardown) -> None:
 		, 0.001 \
 		, 0.00001)
 
-    serialization = cmac.Serialize()
+    serialization: pycmaclib.ISerialization = cmac.Serialize()
 
     assert serialization.IsSuccessful()
     assert len(serialization.GetString()) > 0
     assert len(serialization.GetMessage()) == 0
 
-    def_cmac = factory.CreateDefaultCmac()
-    deserialization = def_cmac.Deserialize(serialization.GetString())
+    def_cmac: pycmaclib.ICmac = factory.CreateDefaultCmac()
+    deserialization: pycmaclib.IResult = def_cmac.Deserialize(serialization.GetString())
 
     assert deserialization.IsSuccessful()
     assert len(deserialization.GetMessage()) == 0
 
-    marshaller = factory.CreateMarshaller()
+    marshaller: pycmaclib.IMarshaller = factory.CreateMarshaller()
     marshaller.Save(cmac, os.getcwd(), "expected")
 
-    another_serialization = def_cmac.Serialize()
+    another_serialization: pycmaclib.ISerialization = def_cmac.Serialize()
 
     assert another_serialization.IsSuccessful()
     assert len(another_serialization.GetString()) > 0

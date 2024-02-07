@@ -30,14 +30,14 @@ def test_object_member_existence() -> None:
     assert hasattr(cmac.GetExtension, "__call__")
 
     # Create IResult object to check its members.
-    result = cmac.Zeroize()
+    result: pycmaclib.IResult = cmac.Zeroize()
 
     assert hasattr(result.IsSuccessful, "__call__")
     assert hasattr(result.GetMessage, "__call__")
 
     # Create prediction to check its members.
     input: list[float] = [0.0, 0.0]
-    prediction = cmac.Predict(input)
+    prediction: pycmaclib.IPrediction = cmac.Predict(input)
 
     assert hasattr(prediction.GetValues, "__call__")
     assert hasattr(prediction.GetActiveWeightIndices, "__call__")
@@ -49,7 +49,7 @@ def test_object_member_existence() -> None:
 
     # Create adjustment to check its members.
     correction: list[float] = [0.001, 0.001]
-    adjustment = cmac.Adjust(correction, prediction, 0.00001)
+    adjustment: pycmaclib.IAdjustment = cmac.Adjust(correction, prediction, 0.00001)
 
     assert hasattr(adjustment.GetWeightChanges, "__call__")
     # Remember how IAdjustment also inherits from IResult.
@@ -71,7 +71,7 @@ def test_predict_success() -> None:
 		, 0.00001)
 
     input: list[float] = [0.0, 0.0]
-    prediction = cmac.Predict(input)
+    prediction: pycmaclib.IPrediction = cmac.Predict(input)
 
 	# verify prediction properties
     assert prediction is not None
@@ -104,7 +104,7 @@ def test_predict_fail() -> None:
 		, 0.00001)
 
     input: list[float] = [0.0]
-    prediction = cmac.Predict(input)
+    prediction: pycmaclib.IPrediction = cmac.Predict(input)
 
     assert prediction is not None
 
@@ -130,12 +130,12 @@ def test_adjust_success() -> None:
 		, 0.00001)
 
     input: list[float] = [0.0, 0.0]
-    prediction = cmac.Predict(input)
+    prediction: pycmaclib.IPrediction = cmac.Predict(input)
 
     assert prediction is not None
 
     correction: list[float] = [0.001, 0.001]
-    adjustment = cmac.Adjust(correction, prediction, 0.00001)
+    adjustment: pycmaclib.IAdjustment = cmac.Adjust(correction, prediction, 0.00001)
 
     assert adjustment is not None
     assert adjustment.IsSuccessful()
@@ -159,12 +159,12 @@ def test_adjust_fail() -> None:
 		, 0.00001)
 
     input: list[float] = [0.0, 0.0]
-    prediction = cmac.Predict(input)
+    prediction: pycmaclib.IPrediction = cmac.Predict(input)
 
     assert prediction is not None
 
     correction: list[float] = [0.001]
-    adjustment = cmac.Adjust(correction, prediction, 0.00001)
+    adjustment: pycmaclib.IAdjustment = cmac.Adjust(correction, prediction, 0.00001)
 
     assert adjustment is not None
     assert not adjustment.IsSuccessful()
