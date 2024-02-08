@@ -55,6 +55,13 @@ namespace CmacLib
             return StartTag(tag) + std::move(content) + EndTag(tag) + "\n";
         }
 
+        inline std::string ToString(double value)
+        {
+            std::stringstream ss;
+            ss << std::hexfloat << value;
+            return ss.str();
+        }
+
         inline std::string ToString(const std::vector<unsigned int>& vec)
         {
             std::string result;
@@ -71,7 +78,7 @@ namespace CmacLib
             std::string result;
             for(size_t i = 0; i < vec.size(); i++)
             {
-                result += std::to_string(vec[i]) + CmacTagger::DELIMITER;
+                result += ToString(vec[i]) + CmacTagger::DELIMITER;
             }
             result.pop_back();
             return result;

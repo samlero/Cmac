@@ -281,8 +281,8 @@ std::unique_ptr<ISerialization> Cmac::Serialize()
 		result += tagger->Entry(std::to_string(this->numOutput), CmacTagger::NUM_OUTPUTS);
 		result += tagger->Entry(std::to_string(this->numInput), CmacTagger::NUM_INPUTS);
 		// double types
-		result += tagger->Entry(std::to_string(this->beta), CmacTagger::BETA);
-		result += tagger->Entry(std::to_string(this->nu), CmacTagger::NU);
+		result += tagger->Entry(tagger->ToString(this->beta), CmacTagger::BETA);
+		result += tagger->Entry(tagger->ToString(this->nu), CmacTagger::NU);
 		// hashtable
 		result += tagger->Entry(tagger->ToString(this->hashtable), CmacTagger::HASHTABLE);
 		// vector doubles
