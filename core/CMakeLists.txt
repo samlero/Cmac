@@ -34,7 +34,19 @@ target_include_directories(${PROJECT_NAME}
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-install(TARGETS CmacLib LIBRARY DESTINATION bin)
+# Shared library version.
+add_library(
+  CmacLibD SHARED ${SOURCES}
+)
+target_include_directories(
+  CmacLibD PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/include_internal
+  PUBLIC
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+install(TARGETS CmacLib LIBRARY DESTINATION lib)
+install(TARGETS CmacLibD LIBRARY DESTINATION lib)
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/include/" DESTINATION "include")
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A Cerebellar Model Articulation Controller (CMAC) library in the context of control systems.")
