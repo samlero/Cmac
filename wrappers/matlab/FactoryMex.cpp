@@ -1,6 +1,6 @@
-#include "mex.hpp"
-#include "mexAdapter.hpp"
-#include "CmacLib.h"
+#include <mex.hpp>
+#include <mexAdapter.hpp>
+#include <CmacLib.h>
 #include <iostream>
 #include <utility>
 #include <iterator>

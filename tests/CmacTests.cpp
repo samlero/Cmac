@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../include/CmacLib.h"
+#include <CmacLib.h>
 #include <memory>
 #include <cmath>
 #include <utility>

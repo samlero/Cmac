@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
-#include "../include/CmacLib.h"
+#include <CmacLib.h>
 #include <memory>
 #include <cmath>
 #include <utility>
 #include <filesystem>
-#include "../include_internal/Serialization.h"
-#include "../include_internal/Result.h"
+#include <cmaclib/Serialization.h>
+#include <cmaclib/Result.h>
 
 using namespace CmacLib;
 using namespace std;

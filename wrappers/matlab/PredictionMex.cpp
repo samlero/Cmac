@@ -1,7 +1,7 @@
-#include "mex.hpp"
-#include "mexAdapter.hpp"
-#include "IPrediction.h"
-#include "IResult.h"
+#include <mex.hpp>
+#include <mexAdapter.hpp>
+#include <cmaclib/IPrediction.h>
+#include <cmaclib/IResult.h>
 #include <string>
 #include <iostream>
 

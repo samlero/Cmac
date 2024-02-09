@@ -1,6 +1,6 @@
-#include "mex.hpp"
-#include "mexAdapter.hpp"
-#include "IResult.h"
+#include <mex.hpp>
+#include <mexAdapter.hpp>
+#include <cmaclib/IResult.h>
 #include <string>
 
 using namespace CmacLib;

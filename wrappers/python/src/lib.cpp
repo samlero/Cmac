@@ -3,7 +3,7 @@
     something that the python interpreter can read.
 */
 
-#include "CmacLib.h"
+#include <CmacLib.h>
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>

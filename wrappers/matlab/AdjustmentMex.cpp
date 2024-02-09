@@ -1,7 +1,7 @@
-#include "mex.hpp"
-#include "mexAdapter.hpp"
-#include "IAdjustment.h"
-#include "IResult.h"
+#include <mex.hpp>
+#include <mexAdapter.hpp>
+#include <cmaclib/IAdjustment.h>
+#include <cmaclib/IResult.h>
 
 using namespace CmacLib;
 

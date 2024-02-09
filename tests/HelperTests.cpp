@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "../include/CmacLib.h"
-#include "../include_internal/CmacTagger.h"
+#include <CmacLib.h>
+#include <cmaclib/CmacTagger.h>
 #include <memory>
 #include <cmath>
 #include <utility>
