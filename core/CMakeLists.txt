@@ -20,8 +20,7 @@ file(GLOB INTERNAL_INCLUDE "include_internal/*.h")
 
 target_sources(${PROJECT_NAME}
     PRIVATE
-        ${SOURCES} 
-        ${INTERNAL_INCLUDE})
+        ${SOURCES})
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
