@@ -2,7 +2,7 @@
 #define IPREDICTION_H
 
 #include <vector>
-#include "IResult.h"
+#include <cmaclib/IResult.h>
 
 namespace CmacLib
 {

@@ -1,15 +1,16 @@
-#include "Cmac.h"
+#include "cmaclib/Cmac.h"
+
 #include <stdexcept>
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
 #include <utility>
 #include <ios>
-#include "Result.h"
-#include "Prediction.h"
-#include "Adjustment.h"
-#include "CmacTagger.h"
-#include "Serialization.h"
+#include "cmaclib/Result.h"
+#include "cmaclib/Prediction.h"
+#include "cmaclib/Adjustment.h"
+#include "cmaclib/CmacTagger.h"
+#include "cmaclib/Serialization.h"
 
 using namespace CmacLib;
 

@@ -2,7 +2,7 @@
 #define RESULT_H
 
 #include <string>
-#include "IResult.h"
+#include <cmaclib/IResult.h>
 
 namespace CmacLib
 {

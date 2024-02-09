@@ -1,15 +1,15 @@
 #ifndef CMACLIB_H
 #define CMACLIB_H
 
-#include "Factory.h"
-#include "ICmac.h"
-#include "IMarshaller.h"
-#include "ISerializable.h"
+#include <cmaclib/Factory.h>
+#include <cmaclib/ICmac.h>
+#include <cmaclib/IMarshaller.h>
+#include <cmaclib/ISerializable.h>
 
 // Result types
-#include "IResult.h"
-#include "IAdjustment.h"
-#include "IPrediction.h"
-#include "ISerialization.h"
+#include <cmaclib/IResult.h>
+#include <cmaclib/IAdjustment.h>
+#include <cmaclib/IPrediction.h>
+#include <cmaclib/ISerialization.h>
 
 #endif

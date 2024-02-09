@@ -5,9 +5,9 @@
 
 #include <vector>
 #include <memory>
-#include "IResult.h"
-#include "IAdjustment.h"
-#include "Result.h"
+#include <cmaclib/IResult.h>
+#include <cmaclib/IAdjustment.h>
+#include <cmaclib/Result.h>
 
 namespace CmacLib
 {

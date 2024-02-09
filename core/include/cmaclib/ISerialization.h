@@ -1,7 +1,7 @@
 #ifndef ISERIALIZATION_H
 #define ISERIALIZATION_H
 
-#include "IResult.h"
+#include <cmaclib/IResult.h>
 
 namespace CmacLib
 {

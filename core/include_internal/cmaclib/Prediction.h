@@ -5,8 +5,8 @@
 
 #include <memory>
 #include <vector>
-#include "IPrediction.h"
-#include "Result.h"
+#include <cmaclib/IPrediction.h>
+#include <cmaclib/Result.h>
 
 namespace CmacLib
 {

@@ -1,5 +1,6 @@
-#include "Prediction.h"
-#include "Result.h"
+#include "cmaclib/Prediction.h"
+
+#include <cmaclib/Result.h>
 #include <utility>
 
 using namespace CmacLib;

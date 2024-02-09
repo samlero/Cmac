@@ -1,8 +1,8 @@
 #ifndef IMARSHALLER_H
 #define IMARSHALLER_H
 
-#include "ISerializable.h"
-#include "IResult.h"
+#include <cmaclib/ISerializable.h>
+#include <cmaclib/IResult.h>
 #include <memory>
 
 namespace CmacLib

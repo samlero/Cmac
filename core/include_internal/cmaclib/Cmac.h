@@ -3,9 +3,9 @@
 
 #include <memory>
 #include <vector>
-#include "IPrediction.h"
-#include "IAdjustment.h"
-#include "ICmac.h"
+#include <cmaclib/IPrediction.h>
+#include <cmaclib/IAdjustment.h>
+#include <cmaclib/ICmac.h>
 
 namespace CmacLib
 {

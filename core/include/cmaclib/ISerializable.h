@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <string>
-#include "ISerialization.h"
+#include <cmaclib/ISerialization.h>
 
 namespace CmacLib
 {

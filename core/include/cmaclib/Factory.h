@@ -3,8 +3,8 @@
 
 #include <memory>
 #include <string>
-#include "ICmac.h"
-#include "IMarshaller.h"
+#include <cmaclib/ICmac.h>
+#include <cmaclib/IMarshaller.h>
 
 namespace CmacLib
 {

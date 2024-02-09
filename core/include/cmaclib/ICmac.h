@@ -2,10 +2,10 @@
 #define ICMAC_H
 
 #include <memory>
-#include "IPrediction.h"
-#include "IAdjustment.h"
-#include "IResult.h"
-#include "ISerializable.h"
+#include <cmaclib/IPrediction.h>
+#include <cmaclib/IAdjustment.h>
+#include <cmaclib/IResult.h>
+#include <cmaclib/ISerializable.h>
 
 namespace CmacLib
 {

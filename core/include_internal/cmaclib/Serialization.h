@@ -4,7 +4,7 @@
 #pragma warning( disable : 4250) // disable dominance warning
 
 #include <string>
-#include "ISerialization.h"
+#include <cmaclib/ISerialization.h>
 #include "Result.h"
 
 namespace CmacLib

@@ -1,7 +1,7 @@
 #ifndef MARSHALLER_H
 #define MARSHALLER_H
 
-#include "IMarshaller.h"
+#include <cmaclib/IMarshaller.h>
 
 namespace CmacLib
 {

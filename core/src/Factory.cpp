@@ -1,7 +1,7 @@
-#include "Factory.h"
-#include "Cmac.h"
-#include "Marshaller.h"
+#include "cmaclib/Factory.h"
 
+#include <cmaclib/Cmac.h>
+#include <cmaclib/Marshaller.h>
 #include <stdexcept>
 #include <utility>
 
