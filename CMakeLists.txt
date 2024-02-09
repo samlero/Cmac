@@ -37,4 +37,4 @@ if (NOT GTest_FOUND)
 endif()
 
 add_subdirectory(tests)
-add_subdirectory(api/python)
+add_subdirectory(wrappers/python)
