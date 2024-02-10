@@ -43,6 +43,12 @@ target_include_directories(
   PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+target_compile_definitions(
+  CmacLibD PRIVATE
+  CMACLIB_BUILD_SHARED_LIB
+  PUBLIC
+  CMACLIB_SHARED_LIBRARY
+)
 
 install(TARGETS CmacLib LIBRARY DESTINATION lib)
 install(TARGETS CmacLibD LIBRARY DESTINATION lib)
