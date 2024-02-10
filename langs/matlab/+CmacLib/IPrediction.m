@@ -1,4 +1,4 @@
-classdef IPrediction < IResult
+classdef (Abstract) IPrediction < CmacLib.IResult
     %IPREDICTION Summary of this class goes here
     %   Detailed explanation goes here 
     properties(SetAccess=protected, GetAccess=public)
