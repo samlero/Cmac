@@ -1,6 +1,7 @@
 #ifndef IMARSHALLER_H
 #define IMARSHALLER_H
 
+#include <cmaclib/defines.h>
 #include <cmaclib/ISerializable.h>
 #include <cmaclib/IResult.h>
 #include <memory>
@@ -8,7 +9,7 @@
 namespace CmacLib
 {
     /// @brief Save and load serializable objects
-    class IMarshaller
+    class CMACLIB_SHARED_SYMBOL IMarshaller
     {
     public:
         virtual ~IMarshaller(){}

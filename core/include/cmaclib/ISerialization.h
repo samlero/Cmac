@@ -1,11 +1,12 @@
 #ifndef ISERIALIZATION_H
 #define ISERIALIZATION_H
 
+#include <cmaclib/defines.h>
 #include <cmaclib/IResult.h>
 
 namespace CmacLib
 {
-    class ISerialization : public virtual IResult
+    class CMACLIB_SHARED_SYMBOL ISerialization : public virtual IResult
     {
     public:
         virtual ~ISerialization(){};

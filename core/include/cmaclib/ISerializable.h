@@ -3,12 +3,13 @@
 
 #include <memory>
 #include <string>
+#include <cmaclib/defines.h>
 #include <cmaclib/ISerialization.h>
 
 namespace CmacLib
 {
     /// @brief Serializes and deserializes
-    class ISerializable{
+    class CMACLIB_SHARED_SYMBOL ISerializable{
     public:
         /// @brief Serializes the object in its own unique format.
         /// @return Serialized string.

@@ -2,11 +2,12 @@
 #define IRESULT_H
 
 #include <string>
+#include <cmaclib/defines.h>
 
 namespace CmacLib
 {
 	/// @brief Result.
-	class IResult {
+	class CMACLIB_SHARED_SYMBOL IResult {
 	public:
 
 		/// @brief Indicates if an operation was successful.

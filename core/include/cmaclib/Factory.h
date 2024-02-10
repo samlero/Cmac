@@ -3,13 +3,14 @@
 
 #include <memory>
 #include <string>
+#include <cmaclib/defines.h>
 #include <cmaclib/ICmac.h>
 #include <cmaclib/IMarshaller.h>
 
 namespace CmacLib
 {
 	/// @brief Creates Cmac objects.
-	class Factory {
+	class CMACLIB_SHARED_SYMBOL Factory {
 	public:
 		/// @brief Create a raw and untrained Cmac.
 		/// @param numQ Number of quantizations.

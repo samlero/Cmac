@@ -2,12 +2,13 @@
 #define IADJUSTMENT_H
 
 #include <vector>
+#include <cmaclib/defines.h>
 #include <cmaclib/IResult.h>
 
 namespace CmacLib
 {
 	/// @brief Contains weight adjustment data.
-	class IAdjustment : public virtual IResult {
+	class CMACLIB_SHARED_SYMBOL IAdjustment : public virtual IResult {
 	public:
 
 		/// @brief Get the amount the each active weight changed.

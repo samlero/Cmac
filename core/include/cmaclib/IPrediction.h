@@ -2,12 +2,13 @@
 #define IPREDICTION_H
 
 #include <vector>
+#include <cmaclib/defines.h>
 #include <cmaclib/IResult.h>
 
 namespace CmacLib
 {
 	/// @brief Prediction output.
-	class IPrediction : public virtual IResult {
+	class CMACLIB_SHARED_SYMBOL IPrediction : public virtual IResult {
 	public:
 		/// @brief Get the calculated multiplication and accumulation of basis and active weights.
 		/// @return Cmac output.

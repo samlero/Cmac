@@ -2,6 +2,7 @@
 #define ICMAC_H
 
 #include <memory>
+#include <cmaclib/defines.h>
 #include <cmaclib/IPrediction.h>
 #include <cmaclib/IAdjustment.h>
 #include <cmaclib/IResult.h>
@@ -10,7 +11,7 @@
 namespace CmacLib
 {
 	/// @brief Cerebellar Model Articulation Controller (CMAC)
-	class ICmac : public virtual ISerializable{
+	class CMACLIB_SHARED_SYMBOL ICmac : public virtual ISerializable{
 	public:
 
 		/// @brief Acquires active weights and associated basis values, then multiply and sum to produce an output.
