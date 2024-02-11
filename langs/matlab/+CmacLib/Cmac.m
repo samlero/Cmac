@@ -134,6 +134,13 @@ classdef Cmac < handle
             adjust = CmacLib.Adjustment();
             adjust.SetWeightChanges(dw);
         end
+
+        function Zeroize(obj)
+            arguments
+                obj CmacLib.Cmac
+            end
+            obj.Memory(:,:) = 0.0;
+        end
     end
 end
 

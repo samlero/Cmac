@@ -10,7 +10,7 @@ classdef (Hidden,Sealed) Prediction < handle
     end
 
     %% Constructor
-    methods
+    methods(Access={?CmacLib.Cmac})
         function obj = Prediction()
         end
     end

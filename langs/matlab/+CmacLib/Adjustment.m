@@ -7,7 +7,7 @@ classdef (Hidden, Sealed) Adjustment < handle
     end
 
     %% Constructor
-    methods
+    methods(Access={?CmacLib.Cmac})
         function obj = Adjustment()
         end
     end
