@@ -1,4 +1,4 @@
-classdef (Hidden,Sealed) Prediction < CmacLib.Result
+classdef (Hidden,Sealed) Prediction < handle
     %PREDICTION Summary of this class goes here
     %   Detailed explanation goes here
 

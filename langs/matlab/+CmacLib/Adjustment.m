@@ -1,4 +1,4 @@
-classdef (Hidden, Sealed) Adjustment < CmacLib.Result
+classdef (Hidden, Sealed) Adjustment < handle
     %ADJUSTMENT Summary of this class goes here
     %   Detailed explanation goes here
 
@@ -9,7 +9,6 @@ classdef (Hidden, Sealed) Adjustment < CmacLib.Result
     %% Constructor
     methods
         function obj = Adjustment()
-            obj@CmacLib.Result();
         end
     end
 

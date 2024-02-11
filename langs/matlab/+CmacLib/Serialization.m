@@ -1,4 +1,4 @@
-classdef (Hidden, Sealed) Serialization < CmacLib.Result
+classdef (Hidden, Sealed) Serialization < handle
     %SERIALIZATION Summary of this class goes here
     %   Detailed explanation goes here
 
@@ -9,7 +9,6 @@ classdef (Hidden, Sealed) Serialization < CmacLib.Result
     %% Constructor
     methods
         function obj = Serialization()
-            obj@CmacLib.Result()
         end
     end
 
