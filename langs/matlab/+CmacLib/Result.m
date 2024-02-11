@@ -1,21 +1,25 @@
-classdef (Hidden) Result < CmacLib.Interfaces.IResult
+classdef (Hidden) Result < handle
     %RESULT Summary of this class goes here
     %   Detailed explanation goes here
    
-    % Constructor
-    methods(Access=protected)
+    properties(GetAccess=public, SetAccess=protected)
+        IsSuccessful logical = false
+        Message string = ""
+    end
+
+    %% Constructor
+    methods
         function obj = Result()
             %RESULT Construct an instance of this class
             %   Detailed explanation goes here
-            obj@CmacLib.Interfaces.IResult();
         end
     end
 
-    % Setters
-    methods
+    %% Setters
+    methods(Access={?CmacLib.Cmac})
         function SetIsSuccessful(obj, value)
             arguments
-                obj Result
+                obj CmacLib.Result
                 value logical
             end
             obj.IsSuccessful = value;
@@ -23,19 +27,10 @@ classdef (Hidden) Result < CmacLib.Interfaces.IResult
 
         function SetMessage(obj, value)
             arguments
-                obj Result
+                obj CmacLib.Result
                 value string
             end
             obj.Message = value;
-        end
-    end
-
-    % Converters
-    methods
-        function objIResult = IResult(obj)
-            objIResult = CmacLib.Interfaces.IResult();
-            objIResult.IsSuccessful = obj.IsSuccessful;
-            objIResult.Message = obj.Message;
         end
     end
 end
