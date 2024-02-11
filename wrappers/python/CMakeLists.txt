@@ -7,22 +7,15 @@ if (NOT DEFINED cmaclib_src)
     if (pybind11_FOUND)
         file(GLOB cmaclib_src
             ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/../../core/src/*.cpp
         )
         # Add the Python module
         pybind11_add_module(pycmaclib ${cmaclib_src})
         target_link_libraries(
-            pycmaclib PRIVATE pybind11::module
+            pycmaclib PRIVATE CmacLibD pybind11::module
         )
         set_target_properties(pycmaclib PROPERTIES
             PREFIX "${PYTHON_MODULE_PREFIX}"
             SUFFIX "${PYTHON_MODULE_EXTENSION}"
-        )
-        # Access implementation classes.
-        target_include_directories(
-            pycmaclib PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include
-            ${CMAKE_CURRENT_SOURCE_DIR}/../../core/include_internal
         )
         set_property(TARGET pycmaclib PROPERTY
             MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
