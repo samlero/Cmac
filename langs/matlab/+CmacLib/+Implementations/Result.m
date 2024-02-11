@@ -1,13 +1,13 @@
-classdef Result < CmacLib.IResult
+classdef (Hidden) Result < CmacLib.Interfaces.IResult
     %RESULT Summary of this class goes here
     %   Detailed explanation goes here
    
     % Constructor
-    methods
+    methods(Access=protected)
         function obj = Result()
             %RESULT Construct an instance of this class
             %   Detailed explanation goes here
-            obj@CmacLib.IResult();
+            obj@CmacLib.Interfaces.IResult();
         end
     end
 
@@ -32,10 +32,10 @@ classdef Result < CmacLib.IResult
 
     % Converters
     methods
-        function interfaceResult = CmacLib.IResult(obj)
-            interfaceResult = CmacLib.IResult();
-            interfaceResult.IsSuccessful = obj.IsSuccessful;
-            interfaceResult.Message = obj.Message;
+        function objIResult = IResult(obj)
+            objIResult = CmacLib.Interfaces.IResult();
+            objIResult.IsSuccessful = obj.IsSuccessful;
+            objIResult.Message = obj.Message;
         end
     end
 end

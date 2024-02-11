@@ -6,7 +6,7 @@ classdef IResult < handle
         Message string
     end
     
-    methods(Access={?CmacLib.Implementations.Result})
+    methods(Access=protected)
         function obj = IResult()
         end
     end

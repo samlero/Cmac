@@ -1,4 +1,4 @@
-classdef ICmac < CmacLib.ISerializable
+classdef ICmac < CmacLib.Interfaces.ISerializable
     %ICMAC Summary of this class goes here
     %   Detailed explanation goes here
     

@@ -19,3 +19,5 @@ out/*
 **.eggs/
 **.egg-info
 wrappers/matlab/test_save.cmac
+langs/matlab/+CmacLib/Create.m
+langs/matlab/codegensample.m

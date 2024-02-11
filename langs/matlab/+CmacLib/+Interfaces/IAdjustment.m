@@ -1,4 +1,4 @@
-classdef (Abstract) IAdjustment < CmacLib.IResult
+classdef IAdjustment < CmacLib.Interfaces.IResult
     %IADJUSTMENT Summary of this class goes here
     %   Detailed explanation goes here
     
