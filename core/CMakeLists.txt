@@ -49,6 +49,8 @@ target_compile_definitions(
   PUBLIC
   CMACLIB_SHARED_LIBRARY
 )
+set_property(TARGET CmacLibD PROPERTY
+  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
 # Copy shared library to dependency directory for testing.
 add_custom_command(TARGET CmacLibD POST_BUILD
