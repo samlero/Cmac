@@ -50,6 +50,12 @@ target_compile_definitions(
   CMACLIB_SHARED_LIBRARY
 )
 
+# Copy shared library to dependency directory for testing.
+add_custom_command(TARGET CmacLibD POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:CmacLibD>
+    ${CMAKE_CURRENT_BINARY_DIR}/../wrappers/python
+)
+
 install(TARGETS CmacLib LIBRARY DESTINATION lib)
 install(TARGETS CmacLibD LIBRARY DESTINATION lib)
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/include/" DESTINATION "include")
