@@ -1,7 +1,8 @@
-classdef Cmac < handle
+classdef (Sealed) Cmac < CmacLib.Serializable
     %CMAC Summary of this class goes here
     %   Detailed explanation goes here
     
+    %% Properties
     properties(Hidden, SetAccess=private)
         NumQ int32 % number of quantizations/cells per layer
         NumLayers int32 % number of layers
@@ -21,7 +22,8 @@ classdef Cmac < handle
     properties(Access=private)
         InputNormalizingDenominator (:,1) double
     end
-
+    
+    %% Cmac Methods
     methods
         function obj = Cmac(nout,nq,nlayers,maxq,minq,beta,nu,maxmemsize)
             %CMAC Construct an instance of this class
@@ -35,6 +37,8 @@ classdef Cmac < handle
                 nu double = 1
                 maxmemsize (1,1) {mustBeNumeric} = 1e5
             end
+
+            obj@CmacLib.Serializable("cmac");
 
             obj.NumQ = nq;
             obj.NumLayers = nlayers;
@@ -140,6 +144,24 @@ classdef Cmac < handle
                 obj CmacLib.Cmac
             end
             obj.Memory(:,:) = 0.0;
+        end
+    end
+
+    %% Serializable Implementation
+    methods
+        function serialization = Serialize(obj)
+            arguments
+                obj CmacLib.Cmac
+            end
+            serialization = CmacLib.Serialization();
+            serialization.SetString("TO BE IMPLEMENTED");
+        end
+
+        function Deserialize(obj, content)
+            arguments
+                obj CmacLib.Cmac
+                content string
+            end
         end
     end
 end

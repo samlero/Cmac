@@ -18,10 +18,6 @@ classdef Marshaller < handle
             % serialize
             serialization = serializable.Serialize();
             
-            if ~serialization.IsSuccessful
-                result.Message("Serialization failed.");
-                return
-            end
             
             % concatenate filepath
 

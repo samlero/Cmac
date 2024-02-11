@@ -1,4 +1,4 @@
-classdef (Abstract,Hidden) Serializable < handle
+classdef (Abstract, Hidden) Serializable < handle
     %SERIALIZABLE Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -8,6 +8,9 @@ classdef (Abstract,Hidden) Serializable < handle
 
     methods
         function obj = Serializable(ext)
+            arguments
+                ext string
+            end
             obj.Extension = ext;
         end
     end
