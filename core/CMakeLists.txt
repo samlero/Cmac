@@ -52,10 +52,14 @@ target_compile_definitions(
 set_property(TARGET CmacLibD PROPERTY
   MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
-# Copy shared library to dependency directory for testing.
+# Copy shared library to dependencies's directories for testing.
 add_custom_command(TARGET CmacLibD POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:CmacLibD>
     ${CMAKE_CURRENT_BINARY_DIR}/../wrappers/python
+)
+add_custom_command(TARGET CmacLibD POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:CmacLibD>
+    ${CMAKE_CURRENT_BINARY_DIR}/../wrappers/julia
 )
 
 install(TARGETS CmacLib LIBRARY DESTINATION lib)
