@@ -59,7 +59,7 @@ class IPrediction (IResult):
         """Get the values of the active weights.
 
         Returns:
-            list[float]: The active weight values.
+            list[list[float]]: The active weight values.
         """
         ...
 
