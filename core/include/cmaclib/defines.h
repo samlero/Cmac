@@ -42,6 +42,14 @@
 #endif
 // CMACLIB_SHARED_SYMBOL Definition END.
 
+// Boolean type definition.
+#if defined(__cplusplus)
+typedef bool cmaclib_bool_t;
+#else
+typedef char cmaclib_bool_t;
+#endif
+// END Boolean type definition.
+
 #endif
 // End of file.
 // DO NOT WRITE BEYOND HERE.
