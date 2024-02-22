@@ -1,5 +1,3 @@
-project(CmacLibJuliaWrapper)
-
 if (BUILD_TESTING)
     # Collect all files necessary for testing.
     file(GLOB_RECURSE julia_test_files
