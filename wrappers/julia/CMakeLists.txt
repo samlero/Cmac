@@ -12,4 +12,11 @@ if (BUILD_TESTING)
             COPYONLY
         )
     endforeach()
+
+    find_program(JULIA_EXE julia)
+    add_test(
+        NAME JuliaWrapperTests
+        COMMAND ${JULIA_EXE} runtests.jl
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
 endif()
