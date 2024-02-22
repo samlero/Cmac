@@ -50,6 +50,26 @@ typedef char cmaclib_bool_t;
 #endif
 // END Boolean type definition.
 
+// Boolean True Definition.
+#if !defined(CMACLIB_BOOLEAN_TRUE)
+#if defined(__cplusplus)
+#define CMACLIB_BOOLEAN_TRUE true
+#else
+#define CMACLIB_BOOLEAN_TRUE 0x01
+#endif
+#endif
+// END Boolean True Definition.
+
+// Boolean False Definition.
+#if !defined(CMACLIB_BOOLEAN_FALSE)
+#if defined(__cplusplus)
+#define CMACLIB_BOOLEAN_FALSE false
+#else
+#define CMACLIB_BOOLEAN_FALSE 0x00
+#endif
+#endif
+// END Boolean False Definition.
+
 #endif
 // End of file.
 // DO NOT WRITE BEYOND HERE.
