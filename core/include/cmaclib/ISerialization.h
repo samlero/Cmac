@@ -21,6 +21,50 @@ namespace CmacLib
 #endif
 // End C++ Only Region.
 
+// CCmacLibISerialization Definition.
+#if defined(__cplusplus)
+typedef CmacLib::ISerialization CCmacLibISerialization;
+#else
+typedef struct CCmacLibISerialization CCmacLibISerialization;
+#endif
+// END CCmacLibISerialization Definition.
+
+// C Wrappers.
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+/// @brief The string from the resulting serialization process.
+/// @param pSerialization The pointer to the serialization instance.
+/// @return serialized string
+const char* CMACLIB_SHARED_SYMBOL CCmacLibISerializationGetString(
+    CCmacLibISerialization* pSerialization
+);
+
+/// @brief Indicates if an operation was successful.
+/// @param pSerialization The pointer to the serialization instance.
+/// @return Success.
+cmaclib_bool_t CMACLIB_SHARED_SYMBOL CCmacLibISerializationIsSuccessful(
+    CCmacLibISerialization* pSerialization
+);
+
+/// @brief If not successful, a failure message is provided.
+/// @param pSerialization The pointer to the serialization instance.
+const char* CMACLIB_SHARED_SYMBOL CCmacLibISerializationGetMessage(
+    CCmacLibISerialization* pSerialization
+);
+
+/// @brief Destructor.
+/// @param ppSerialization The pointer to the pointer to the serialization instance.
+void CMACLIB_SHARED_SYMBOL CCmacLibISerializationDestroy(
+    CCmacLibISerialization** ppSerialization
+);
+
+#if defined(__cplusplus)
+}
+#endif
+// END C Wrappers.
+
 #endif
 // End of file.
 // DO NOT WRITE BEYOND HERE.

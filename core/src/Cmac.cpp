@@ -352,3 +352,80 @@ std::string Cmac::GetExtension()
 {
     return "cmac";
 }
+
+/// @brief Acquires active weights and associated basis values,
+/// then multiply and sum to produce an output.
+/// @param pCmac The pointer to the cmac instance.
+/// @param inputData States. (array pointer)
+/// @param inputSize States. (array size)
+/// @return Prediction result.
+CCmacLibIPrediction* CCmacLibICmacPredict(
+	CCmacLibICmac* pCmac, double* inputData, unsigned long inputSize
+) {
+	return pCmac->Predict(
+		::std::vector<double>(inputData, inputData + inputSize)
+	).release();
+}
+
+/// @brief Train the weights of the Cmac.
+/// @param pCmac The pointer to the cmac instance.
+/// @param correctionData Error of the prediction. (array pointer)
+/// @param correctionSize Error of the prediction. (array size)
+/// @param pPrediction Contains indices of weights and basis values.
+/// @param damping Additional damping to further reduce chances of overfitting.
+/// @return Adjustment result.
+CCmacLibIAdjustment* CCmacLibICmacAdjust(
+	CCmacLibICmac* pCmac, double* correctionData, unsigned long correctionSize,
+	CCmacLibIPrediction* pPrediction, double damping
+) {
+	return pCmac->Adjust(
+		::std::vector<double>(correctionData, correctionData + correctionSize),
+		pPrediction, damping
+	).release();
+}
+
+/// @brief Sets all the weights in memory to zero, untraining the Cmac.
+/// @param pCmac The pointer to the cmac instance.
+/// @return Result of the operation.
+CCmacLibIResult* CCmacLibICmacZeroize(
+	CCmacLibICmac* pCmac
+) {
+	return pCmac->Zeroize().release();
+}
+
+/// @brief Serializes the object in its own unique format.
+/// @param pCmac The pointer to the cmac instance.
+/// @return Serialized string.
+CCmacLibISerialization* CCmacLibICmacSerialize(
+	CCmacLibICmac* pCmac
+) {
+	return pCmac->Serialize().release();
+}
+
+/// @brief Deserializes the content into its member variables.
+/// @param pCmac The pointer to the cmac instance.
+/// @param content Valid deserializable content.
+CCmacLibIResult* CCmacLibICmacDeserialize(
+	CCmacLibICmac* pCmac, const char* content
+) {
+	return pCmac->Deserialize(content).release();
+}
+
+/// @param pCmac The pointer to the cmac instance.
+/// @return The extension of the serializable object
+const char* CCmacLibICmacGetExtension(
+	CCmacLibICmac* pCmac
+) {
+	return pCmac->GetExtension().c_str();
+}
+
+/// @brief Destructor.
+/// @param ppCmac The pointer to the pointer to the cmac instance.
+void CCmacLibICmacDestroy(
+	CCmacLibICmac** ppCmac
+) {
+	if (*ppCmac) {
+		delete *ppCmac;
+		*ppCmac = nullptr;
+	}
+}

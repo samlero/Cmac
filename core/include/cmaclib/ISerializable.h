@@ -32,6 +32,50 @@ namespace CmacLib
 #endif
 // End C++ Only Region.
 
+// CCmacLibISerializable Definition.
+#if defined(__cplusplus)
+typedef CmacLib::ISerializable CCmacLibISerializable;
+#else
+typedef struct CCmacLibISerializable CCmacLibISerializable;
+#endif
+// END CCmacLibISerializable Definition.
+
+// C Wrappers.
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+/// @brief Serializes the object in its own unique format.
+/// @param pSerializable The pointer to the serializable instance.
+/// @return Serialized string.
+CCmacLibISerialization* CMACLIB_SHARED_SYMBOL CCmacLibISerializableSerialize(
+    CCmacLibISerializable* pSerializable
+);
+
+/// @brief Deserializes the content into its member variables.
+/// @param pSerializable The pointer to the serializable instance.
+/// @param content Valid deserializable content.
+CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibISerializableDeserialize(
+    CCmacLibISerializable* pSerializable, const char* content
+);
+
+/// @return The extension of the serializable object
+/// @param pSerializable The pointer to the serializable instance.
+const char* CMACLIB_SHARED_SYMBOL CCmacLibISerializableGetExtension(
+    CCmacLibISerializable* pSerializable
+);
+
+/// @brief Destructor.
+/// @param ppSerializable The pointer to the pointer to the serializable instance.
+void CMACLIB_SHARED_SYMBOL CCmacLibISerializableDestroy(
+    CCmacLibISerializable** ppSerializable
+);
+
+#if defined(__cplusplus)
+}
+#endif
+// END C Wrappers.
+
 #endif
 // End of file.
 // DO NOT WRITE BEYOND HERE.

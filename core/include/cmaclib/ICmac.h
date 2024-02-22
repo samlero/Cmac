@@ -42,6 +42,79 @@ namespace CmacLib
 #endif
 // End C++ Only Region.
 
+// CCmacLibICmac definition.
+#if defined(__cplusplus)
+typedef CmacLib::ICmac CCmacLibICmac;
+#else
+typedef struct CCmacLibICmac CCmacLibICmac;
+#endif
+// END CCmacLibICmac definition.
+
+// C Wrappers.
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+/// @brief Acquires active weights and associated basis values,
+/// then multiply and sum to produce an output.
+/// @param pCmac The pointer to the cmac instance.
+/// @param inputData States. (array pointer)
+/// @param inputSize States. (array size)
+/// @return Prediction result.
+CCmacLibIPrediction* CMACLIB_SHARED_SYMBOL CCmacLibICmacPredict(
+	CCmacLibICmac* pCmac, double* inputData, unsigned long inputSize
+);
+
+/// @brief Train the weights of the Cmac.
+/// @param pCmac The pointer to the cmac instance.
+/// @param correctionData Error of the prediction. (array pointer)
+/// @param correctionSize Error of the prediction. (array size)
+/// @param pPrediction Contains indices of weights and basis values.
+/// @param damping Additional damping to further reduce chances of overfitting.
+/// @return Adjustment result.
+CCmacLibIAdjustment* CMACLIB_SHARED_SYMBOL CCmacLibICmacAdjust(
+	CCmacLibICmac* pCmac, double* correctionData, unsigned long correctionSize,
+	CCmacLibIPrediction* pPrediction, double damping
+);
+
+/// @brief Sets all the weights in memory to zero, untraining the Cmac.
+/// @param pCmac The pointer to the cmac instance.
+/// @return Result of the operation.
+CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibICmacZeroize(
+	CCmacLibICmac* pCmac
+);
+
+/// @brief Serializes the object in its own unique format.
+/// @param pCmac The pointer to the cmac instance.
+/// @return Serialized string.
+CCmacLibISerialization* CMACLIB_SHARED_SYMBOL CCmacLibICmacSerialize(
+	CCmacLibICmac* pCmac
+);
+
+/// @brief Deserializes the content into its member variables.
+/// @param pCmac The pointer to the cmac instance.
+/// @param content Valid deserializable content.
+CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibICmacDeserialize(
+	CCmacLibICmac* pCmac, const char* content
+);
+
+/// @param pCmac The pointer to the cmac instance.
+/// @return The extension of the serializable object
+const char* CMACLIB_SHARED_SYMBOL CCmacLibICmacGetExtension(
+	CCmacLibICmac* pCmac
+);
+
+/// @brief Destructor.
+/// @param ppCmac The pointer to the pointer to the cmac instance.
+void CMACLIB_SHARED_SYMBOL CCmacLibICmacDestroy(
+	CCmacLibICmac** ppCmac
+);
+
+#if defined(__cplusplus)
+}
+#endif
+// END C Wrappers.
+
 #endif
 // End of file.
 // DO NOT WRITE BEYOND HERE.

@@ -49,6 +49,49 @@ namespace CmacLib
 #endif
 // End C++ Only Region.
 
+// C Wrappers.
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+/// @brief Create a raw and untrained Cmac.
+/// @param numQ Number of quantizations.
+/// @param numLayers Number of layers (which would indicate number of active weights)
+/// @param maxmem Maximum potential memory index or memory size.
+/// @param numOut Number of outputs.
+/// @param upperData Upper limits of the Predict method inputs. (array pointer)
+/// @param upperSize Upper limits of the Predict method inputs. (array size)
+/// @param lowerData Lower limits of the Predict method inputs. (array pointer)
+/// @param lowerSize Lower limits of the Predict method inputs. (array size)
+/// @param beta Learning rate.
+/// @param nu Damping coefficient.
+/// @return The pointer to the cmac instance.
+CCmacLibICmac* CMACLIB_SHARED_SYMBOL CCmacLibCreateCmac(
+	unsigned int numQ,
+	unsigned int numLayers,
+	unsigned int maxmem,
+	unsigned int numOut,
+	double* upperData,
+	unsigned long upperSize,
+	double* lowerData,
+	unsigned long lowerSize,
+	double beta,
+	double nu
+);
+
+/// @brief Create a Cmac with default values.
+/// @return The pointer to the cmac instance.
+CCmacLibICmac* CMACLIB_SHARED_SYMBOL CCmacLibCreateDefaultCmac();
+
+/// @brief Creates an instance of IMarshaller.
+/// @return The pointer to the newly created marshaller instance.
+CCmacLibIMarshaller* CMACLIB_SHARED_SYMBOL CCmacLibCreateMarshaller();
+
+#if defined(__cplusplus)
+}
+#endif
+// END C Wrappers.
+
 #endif
 // End of file.
 // DO NOT WRITE BEYOND HERE.

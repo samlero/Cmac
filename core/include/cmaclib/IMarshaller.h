@@ -35,6 +35,50 @@ namespace CmacLib
 #endif
 // End C++ Only Region.
 
+// CCmacLibIMarshaller Definition.
+#if defined(__cplusplus)
+typedef CmacLib::IMarshaller CCmacLibIMarshaller;
+#else
+typedef struct CCmacLibIMarshaller CCmacLibIMarshaller;
+#endif
+// END CCmacLibIMarshaller Definition.
+
+// C Wrappers.
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+/// @brief Save the serializable object.
+/// @param pMarshaller The pointer to the marshaller instance.
+/// @param serializable Object to save.
+/// @param directory Folder to save the serializable object in.
+/// @param filename Name of the object to save.
+/// @return Indicates if the save operation was successful or not.
+CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibIMarshallerSave(
+    CCmacLibIMarshaller* pMarshaller, CCmacLibISerializable* pSerializable,
+    const char* directory, const char* filename
+);
+
+/// @brief Fills the contents of the serialzable object.
+/// @param pMarshaller The pointer to the marshaller instance.
+/// @param serializable Object to fill.
+/// @param filepath Location of the file that contains the serializable object's contents.
+CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibIMarshallerLoad(
+    CCmacLibIMarshaller* pMarshaller, CCmacLibISerializable* pSerializable,
+    const char* filepath
+);
+
+/// @brief Destructor.
+/// @param ppMarshaller The pointer to the pointer to the marshaller instance.
+void CMACLIB_SHARED_SYMBOL CCmacLibIMarshallerDestroy(
+    CCmacLibIMarshaller** ppMarshaller
+);
+
+#if defined(__cplusplus)
+}
+#endif
+// END C Wrappers.
+
 #endif
 // End of file.
 // DO NOT WRITE BEYOND HERE.

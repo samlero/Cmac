@@ -36,6 +36,72 @@ namespace CmacLib
 #endif
 // End C++ Only Region.
 
+// CCmacLibIPrediction Definition.
+#if defined(__cplusplus)
+typedef CmacLib::IPrediction CCmacLibIPrediction;
+#else
+typedef struct CCmacLibIPrediction CCmacLibIPrediction;
+#endif
+// END CCmacLibIPrediction Definition.
+
+// C Wrappers.
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+/// @brief Get the calculated multiplication and accumulation
+/// of basis and active weights.
+/// @param pPrediction The pointer to the prediction instance.
+/// @return Cmac output.
+const double* CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetValues(
+	CCmacLibIPrediction* pPrediction
+);
+
+/// @brief Get the indices of the active weights.
+/// @param pPrediction The pointer to the prediction instance.
+/// @return Active weight indices.
+const unsigned int* CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetActiveWeightIndices(
+	CCmacLibIPrediction* pPrediction
+);
+
+/// @brief Get the values of the active weights.
+/// @param pPrediction The pointer to the prediction instance.
+/// @return Active weight values.
+double** CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetActiveWeights(
+	CCmacLibIPrediction* pPrediction
+);
+
+/// @brief Get the basis function values.
+/// @param pPrediction The pointer to the prediction instance.
+/// @return Basis function values.
+const double* CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetBasisValues(
+	CCmacLibIPrediction* pPrediction
+);
+
+/// @brief Indicates if an operation was successful.
+/// @param pPrediction The pointer to the prediction instance.
+/// @return Success.
+cmaclib_bool_t CMACLIB_SHARED_SYMBOL CCmacLibIPredictionIsSuccessful(
+	CCmacLibIPrediction* pPrediction
+);
+
+/// @brief If not successful, a failure message is provided.
+/// @param pPrediction The pointer to the prediction instance.
+const char* CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetMessage(
+	CCmacLibIPrediction* pPrediction
+);
+
+/// @brief Destructor.
+/// @param ppPrediction The pointer to the pointer to the prediction instance.
+void CMACLIB_SHARED_SYMBOL CCmacLibIPredictionDestroy(
+	CCmacLibIPrediction** ppPrediction
+);
+
+#if defined(__cplusplus)
+}
+#endif
+// END C Wrappers.
+
 #endif
 // End of file.
 // DO NOT WRITE BEYOND HERE.

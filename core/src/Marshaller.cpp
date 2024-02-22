@@ -86,3 +86,38 @@ std::unique_ptr<IResult> Marshaller::Load(ISerializable *serializable, const std
     }
     return result;
 }
+
+/// @brief Save the serializable object.
+/// @param pMarshaller The pointer to the marshaller instance.
+/// @param serializable Object to save.
+/// @param directory Folder to save the serializable object in.
+/// @param filename Name of the object to save.
+/// @return Indicates if the save operation was successful or not.
+CCmacLibIResult* CCmacLibIMarshallerSave(
+    CCmacLibIMarshaller* pMarshaller, CCmacLibISerializable* pSerializable,
+    const char* directory, const char* filename
+) {
+    return pMarshaller->Save(pSerializable, directory, filename).release();
+}
+
+/// @brief Fills the contents of the serialzable object.
+/// @param pMarshaller The pointer to the marshaller instance.
+/// @param serializable Object to fill.
+/// @param filepath Location of the file that contains the serializable object's contents.
+CCmacLibIResult* CCmacLibIMarshallerLoad(
+    CCmacLibIMarshaller* pMarshaller, CCmacLibISerializable* pSerializable,
+    const char* filepath
+) {
+    return pMarshaller->Load(pSerializable, filepath).release();
+}
+
+/// @brief Destructor.
+/// @param ppMarshaller The pointer to the pointer to the marshaller instance.
+void CCmacLibIMarshallerDestroy(
+    CCmacLibIMarshaller** ppMarshaller
+) {
+    if (*ppMarshaller) {
+        delete *ppMarshaller;
+        *ppMarshaller = nullptr;
+    }
+}

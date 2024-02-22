@@ -28,6 +28,43 @@ namespace CmacLib
 #endif
 // End C++ Only Region.
 
+// CCmacLibIResult Definition.
+#if defined(__cplusplus)
+typedef CmacLib::IResult CCmacLibIResult;
+#else
+typedef struct CCmacLibIResult CCmacLibIResult;
+#endif
+// END CCmacLibIResult Definition.
+
+// C Wrappers.
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+/// @brief Indicates if an operation was successful.
+/// @param pResult The pointer to the result instance.
+/// @return Success.
+cmaclib_bool_t CMACLIB_SHARED_SYMBOL CCmacLibIResultIsSuccessful(
+	CCmacLibIResult* pResult
+);
+
+/// @brief If not successful, a failure message is provided.
+/// @param pResult The pointer to the result instance.
+const char* CMACLIB_SHARED_SYMBOL CCmacLibIResultGetMessage(
+	CCmacLibIResult* pResult
+);
+
+/// @brief Destructor.
+/// @param ppResult The pointer to the pointer to the result instance.
+void CMACLIB_SHARED_SYMBOL CCmacLibIResultDestory(
+	CCmacLibIResult** ppResult
+);
+
+#if defined(__cplusplus)
+}
+#endif
+// END C Wrappers.
+
 #endif
 // End of file.
 // DO NOT WRITE BEYOND HERE.
