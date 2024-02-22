@@ -1,11 +1,14 @@
 #ifndef FACTORY_H
 #define FACTORY_H
 
-#include <memory>
-#include <string>
 #include <cmaclib/defines.h>
 #include <cmaclib/ICmac.h>
 #include <cmaclib/IMarshaller.h>
+
+// Begin C++ Only Region.
+#if defined(__cplusplus)
+#include <memory>
+#include <string>
 
 namespace CmacLib
 {
@@ -43,5 +46,9 @@ namespace CmacLib
 		~Factory();
 	};
 }
+#endif
+// End C++ Only Region.
 
 #endif
+// End of file.
+// DO NOT WRITE BEYOND HERE.

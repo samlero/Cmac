@@ -4,6 +4,9 @@
 #include <cmaclib/defines.h>
 #include <cmaclib/ISerializable.h>
 #include <cmaclib/IResult.h>
+
+// Begin C++ Only Region.
+#if defined(__cplusplus)
 #include <memory>
 
 namespace CmacLib
@@ -29,5 +32,9 @@ namespace CmacLib
         virtual std::unique_ptr<IResult> Load(ISerializable* serializable, const std::string& filepath) = 0;
     };
 }
+#endif
+// End C++ Only Region.
 
 #endif
+// End of file.
+// DO NOT WRITE BEYOND HERE.

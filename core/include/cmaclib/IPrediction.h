@@ -1,9 +1,12 @@
 #ifndef IPREDICTION_H
 #define IPREDICTION_H
 
-#include <vector>
 #include <cmaclib/defines.h>
 #include <cmaclib/IResult.h>
+
+// Begin C++ Only Region.
+#if defined(__cplusplus)
+#include <vector>
 
 namespace CmacLib
 {
@@ -30,5 +33,9 @@ namespace CmacLib
 		virtual ~IPrediction(){};
 	};
 }
+#endif
+// End C++ Only Region.
 
 #endif
+// End of file.
+// DO NOT WRITE BEYOND HERE.

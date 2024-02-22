@@ -1,10 +1,13 @@
 #ifndef ISERIALIZABLE_H
 #define ISERIALIZABLE_H
 
-#include <memory>
-#include <string>
 #include <cmaclib/defines.h>
 #include <cmaclib/ISerialization.h>
+
+// Begin C++ Only Region.
+#if defined(__cplusplus)
+#include <memory>
+#include <string>
 
 namespace CmacLib
 {
@@ -26,5 +29,9 @@ namespace CmacLib
         virtual ~ISerializable(){}
     };
 }
+#endif
+// End C++ Only Region.
 
 #endif
+// End of file.
+// DO NOT WRITE BEYOND HERE.

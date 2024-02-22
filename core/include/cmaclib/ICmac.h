@@ -1,12 +1,15 @@
 #ifndef ICMAC_H
 #define ICMAC_H
 
-#include <memory>
 #include <cmaclib/defines.h>
 #include <cmaclib/IPrediction.h>
 #include <cmaclib/IAdjustment.h>
 #include <cmaclib/IResult.h>
 #include <cmaclib/ISerializable.h>
+
+// Begin C++ Only Region.
+#if defined(__cplusplus)
+#include <memory>
 
 namespace CmacLib
 {
@@ -36,5 +39,9 @@ namespace CmacLib
 		virtual ~ICmac(){};
 	};
 }
+#endif
+// End C++ Only Region.
 
 #endif
+// End of file.
+// DO NOT WRITE BEYOND HERE.

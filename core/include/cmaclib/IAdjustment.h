@@ -1,9 +1,12 @@
 #ifndef IADJUSTMENT_H
 #define IADJUSTMENT_H
 
-#include <vector>
 #include <cmaclib/defines.h>
 #include <cmaclib/IResult.h>
+
+// Begin C++ Only Region.
+#if defined(__cplusplus)
+#include <vector>
 
 namespace CmacLib
 {
@@ -19,5 +22,9 @@ namespace CmacLib
 		virtual ~IAdjustment(){};
 	};
 }
+#endif
+// End C++ Only Region.
 
 #endif
+// End of file.
+// DO NOT WRITE BEYOND HERE.

@@ -4,6 +4,8 @@
 #include <cmaclib/defines.h>
 #include <cmaclib/IResult.h>
 
+// Begin C++ Only Region.
+#if defined(__cplusplus)
 namespace CmacLib
 {
     class CMACLIB_SHARED_SYMBOL ISerialization : public virtual IResult
@@ -16,5 +18,9 @@ namespace CmacLib
         virtual std::string GetString() = 0;
     };
 }
+#endif
+// End C++ Only Region.
 
 #endif
+// End of file.
+// DO NOT WRITE BEYOND HERE.

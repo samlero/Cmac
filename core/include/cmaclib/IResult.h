@@ -1,8 +1,11 @@
 #ifndef IRESULT_H
 #define IRESULT_H
 
-#include <string>
 #include <cmaclib/defines.h>
+
+// Begin C++ Only Region.
+#if defined(__cplusplus)
+#include <string>
 
 namespace CmacLib
 {
@@ -22,5 +25,9 @@ namespace CmacLib
 		virtual ~IResult(){};
 	};
 }
+#endif
+// End C++ Only Region.
 
 #endif
+// End of file.
+// DO NOT WRITE BEYOND HERE.
