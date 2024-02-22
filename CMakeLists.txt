@@ -38,3 +38,4 @@ endif()
 
 add_subdirectory(tests)
 add_subdirectory(wrappers/python)
+add_subdirectory(wrappers/julia)

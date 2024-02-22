@@ -1,0 +1,5 @@
+name = "jlcmaclib"
+version = "1.005"
+
+[compat]
+julia = "1.6"
