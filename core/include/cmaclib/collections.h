@@ -21,6 +21,10 @@ typedef struct CDoubleArrayArray {
     unsigned long size;
 } CDoubleArrayArray;
 
+/// @brief Properly destroy the CDoubleArrayArray instance.
+/// @param arr The instance to be destroyed.
+void CDoubleArrayArrayDestroy(CDoubleArrayArray arr);
+
 /// @brief An array of unsigned ints with fixed array size.
 typedef struct CUintArray {
     /// @brief The pointer to the first element in the array.
