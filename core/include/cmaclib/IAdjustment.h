@@ -3,6 +3,7 @@
 
 #include <cmaclib/defines.h>
 #include <cmaclib/IResult.h>
+#include <cmaclib/collections.h>
 
 // Begin C++ Only Region.
 #if defined(__cplusplus)
@@ -41,7 +42,8 @@ extern "C" {
 /// @brief Get the amount the each active weight changed.
 /// @param pAdjustment The pointer to the adjustment instance.
 /// @return Weight change dW.
-double** CMACLIB_SHARED_SYMBOL CCmacLibIAdjustmentGetWeightChanges(
+/// (Remember to delete the CDoubleArray data pointer.)
+CDoubleArrayArray CMACLIB_SHARED_SYMBOL CCmacLibIAdjustmentGetWeightChanges(
 	CCmacLibIAdjustment* pAdjustment
 );
 

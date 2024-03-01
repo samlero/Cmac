@@ -3,6 +3,7 @@
 
 #include <cmaclib/defines.h>
 #include <cmaclib/IResult.h>
+#include <cmaclib/collections.h>
 
 // Begin C++ Only Region.
 #if defined(__cplusplus)
@@ -53,28 +54,29 @@ extern "C" {
 /// of basis and active weights.
 /// @param pPrediction The pointer to the prediction instance.
 /// @return Cmac output.
-const double* CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetValues(
+CDoubleArray CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetValues(
 	CCmacLibIPrediction* pPrediction
 );
 
 /// @brief Get the indices of the active weights.
 /// @param pPrediction The pointer to the prediction instance.
 /// @return Active weight indices.
-const unsigned int* CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetActiveWeightIndices(
+CUintArray CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetActiveWeightIndices(
 	CCmacLibIPrediction* pPrediction
 );
 
 /// @brief Get the values of the active weights.
 /// @param pPrediction The pointer to the prediction instance.
 /// @return Active weight values.
-double** CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetActiveWeights(
+/// (Remember to delete the CDoubleArray data pointer.)
+CDoubleArrayArray CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetActiveWeights(
 	CCmacLibIPrediction* pPrediction
 );
 
 /// @brief Get the basis function values.
 /// @param pPrediction The pointer to the prediction instance.
 /// @return Basis function values.
-const double* CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetBasisValues(
+CDoubleArray CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetBasisValues(
 	CCmacLibIPrediction* pPrediction
 );
 

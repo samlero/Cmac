@@ -21,17 +21,19 @@ const std::vector<std::vector<double>>& Adjustment::GetWeightChanges()
 }
 
 /// @brief Get the amount the each active weight changed.
-/// (DO NOT FORGET TO DELETE THE RETURNED POINTER AFTER USAGE.)
 /// @param pAdjustment The pointer to the adjustment instance.
 /// @return Weight change dW.
-double** CCmacLibIAdjustmentGetWeightChanges(
+/// (Remember to delete the CDoubleArray data pointer.)
+CDoubleArrayArray CCmacLibIAdjustmentGetWeightChanges(
 	CCmacLibIAdjustment* pAdjustment
 ) {
 	/// @brief The container for the active weights 2-D array.
-	double** matrix = new double*[pAdjustment->GetWeightChanges().size()];
+	CDoubleArrayArray matrix;
+	matrix.size = pAdjustment->GetWeightChanges().size();
+	matrix.data = new CDoubleArray[matrix.size];
 
-	for (unsigned int i = 0; i < pAdjustment->GetWeightChanges().size(); i++) {
-		matrix[i] = (double*) pAdjustment->GetWeightChanges().data()->data();
+	for (unsigned long i = 0; i < matrix.size; i++) {
+		matrix.data[i].data = (double*) pAdjustment->GetWeightChanges().data()->data();
 	}
 
 	return matrix;
