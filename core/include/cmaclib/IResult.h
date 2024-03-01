@@ -55,9 +55,9 @@ const char* CMACLIB_SHARED_SYMBOL CCmacLibIResultGetMessage(
 );
 
 /// @brief Destructor.
-/// @param ppResult The pointer to the pointer to the result instance.
+/// @param pResult The pointer to the result instance.
 void CMACLIB_SHARED_SYMBOL CCmacLibIResultDestory(
-	CCmacLibIResult** ppResult
+	CCmacLibIResult* pResult
 );
 
 #if defined(__cplusplus)

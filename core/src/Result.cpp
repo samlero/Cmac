@@ -42,10 +42,7 @@ const char* CCmacLibIResultGetMessage(CCmacLibIResult* pResult) {
 }
 
 /// @brief Destructor.
-/// @param ppResult The pointer to the pointer to the result instance.
-void CCmacLibIResultDestory(CCmacLibIResult** ppResult) {
-	if (*ppResult) {
-		delete *ppResult;
-		*ppResult = nullptr;
-	}
+/// @param pResult The pointer to the result instance.
+void CCmacLibIResultDestory(CCmacLibIResult* pResult) {
+	if (pResult) delete pResult;
 }

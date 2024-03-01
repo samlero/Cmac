@@ -420,12 +420,9 @@ const char* CCmacLibICmacGetExtension(
 }
 
 /// @brief Destructor.
-/// @param ppCmac The pointer to the pointer to the cmac instance.
+/// @param pCmac The pointer to the cmac instance.
 void CCmacLibICmacDestroy(
-	CCmacLibICmac** ppCmac
+	CCmacLibICmac* pCmac
 ) {
-	if (*ppCmac) {
-		delete *ppCmac;
-		*ppCmac = nullptr;
-	}
+	if (pCmac) delete pCmac;
 }

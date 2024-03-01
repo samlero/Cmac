@@ -128,12 +128,9 @@ const char* CCmacLibIPredictionGetMessage(
 }
 
 /// @brief Destructor.
-/// @param ppPrediction The pointer to the pointer to the prediction instance.
+/// @param pPrediction The pointer to the prediction instance.
 void CCmacLibIPredictionDestroy(
-	CCmacLibIPrediction** ppPrediction
+	CCmacLibIPrediction* pPrediction
 ) {
-	if (*ppPrediction) {
-		delete *ppPrediction;
-		*ppPrediction = nullptr;
-	}
+	if (pPrediction) delete pPrediction;
 }

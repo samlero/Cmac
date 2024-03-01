@@ -94,9 +94,9 @@ const char* CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetMessage(
 );
 
 /// @brief Destructor.
-/// @param ppPrediction The pointer to the pointer to the prediction instance.
+/// @param pPrediction The pointer to the prediction instance.
 void CMACLIB_SHARED_SYMBOL CCmacLibIPredictionDestroy(
-	CCmacLibIPrediction** ppPrediction
+	CCmacLibIPrediction* pPrediction
 );
 
 #if defined(__cplusplus)

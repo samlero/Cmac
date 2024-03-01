@@ -66,9 +66,9 @@ const char* CMACLIB_SHARED_SYMBOL CCmacLibISerializableGetExtension(
 );
 
 /// @brief Destructor.
-/// @param ppSerializable The pointer to the pointer to the serializable instance.
+/// @param pSerializable The pointer to the serializable instance.
 void CMACLIB_SHARED_SYMBOL CCmacLibISerializableDestroy(
-    CCmacLibISerializable** ppSerializable
+    CCmacLibISerializable* pSerializable
 );
 
 #if defined(__cplusplus)

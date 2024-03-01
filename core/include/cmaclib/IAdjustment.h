@@ -61,9 +61,9 @@ const char* CMACLIB_SHARED_SYMBOL CCmacLibIAdjustmentGetMessage(
 );
 
 /// @brief Destructor.
-/// @param ppAdjustment The pointer to the pointer to the adjustment instance.
+/// @param pAdjustment The pointer to the adjustment instance.
 void CMACLIB_SHARED_SYMBOL CCmacLibIAdjustmentDestroy(
-	CCmacLibIAdjustment** ppAdjustment
+	CCmacLibIAdjustment* pAdjustment
 );
 
 #if defined(__cplusplus)

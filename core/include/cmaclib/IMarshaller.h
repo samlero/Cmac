@@ -69,9 +69,9 @@ CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibIMarshallerLoad(
 );
 
 /// @brief Destructor.
-/// @param ppMarshaller The pointer to the pointer to the marshaller instance.
+/// @param pMarshaller The pointer to the marshaller instance.
 void CMACLIB_SHARED_SYMBOL CCmacLibIMarshallerDestroy(
-    CCmacLibIMarshaller** ppMarshaller
+    CCmacLibIMarshaller* pMarshaller
 );
 
 #if defined(__cplusplus)

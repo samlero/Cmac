@@ -112,12 +112,9 @@ CCmacLibIResult* CCmacLibIMarshallerLoad(
 }
 
 /// @brief Destructor.
-/// @param ppMarshaller The pointer to the pointer to the marshaller instance.
+/// @param pMarshaller The pointer to the marshaller instance.
 void CCmacLibIMarshallerDestroy(
-    CCmacLibIMarshaller** ppMarshaller
+    CCmacLibIMarshaller* pMarshaller
 ) {
-    if (*ppMarshaller) {
-        delete *ppMarshaller;
-        *ppMarshaller = nullptr;
-    }
+    if (pMarshaller) delete pMarshaller;
 }

@@ -27,12 +27,9 @@ const char* CCmacLibISerializableGetExtension(
 }
 
 /// @brief Destructor.
-/// @param ppSerializable The pointer to the pointer to the serializable instance.
+/// @param pSerializable The pointer to the serializable instance.
 void CCmacLibISerializableDestroy(
-    CCmacLibISerializable** ppSerializable
+    CCmacLibISerializable* pSerializable
 ) {
-    if (*ppSerializable) {
-        delete *ppSerializable;
-        *ppSerializable = nullptr;
-    }
+    if (pSerializable) delete pSerializable;
 }

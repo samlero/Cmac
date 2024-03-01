@@ -105,9 +105,9 @@ const char* CMACLIB_SHARED_SYMBOL CCmacLibICmacGetExtension(
 );
 
 /// @brief Destructor.
-/// @param ppCmac The pointer to the pointer to the cmac instance.
+/// @param pCmac The pointer to the cmac instance.
 void CMACLIB_SHARED_SYMBOL CCmacLibICmacDestroy(
-	CCmacLibICmac** ppCmac
+	CCmacLibICmac* pCmac
 );
 
 #if defined(__cplusplus)

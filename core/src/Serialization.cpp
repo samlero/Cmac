@@ -44,9 +44,6 @@ const char* CCmacLibISerializationGetMessage(
 }
 
 /// @brief Destructor.
-void CCmacLibISerializationDestroy(CCmacLibISerialization** ppSerialization) {
-    if (*ppSerialization) {
-        delete *ppSerialization;
-        *ppSerialization = nullptr;
-    }
+void CCmacLibISerializationDestroy(CCmacLibISerialization* pSerialization) {
+    if (pSerialization) delete pSerialization;
 }

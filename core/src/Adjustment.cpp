@@ -57,12 +57,9 @@ const char* CCmacLibIAdjustmentGetMessage(
 }
 
 /// @brief Destructor.
-/// @param ppAdjustment The pointer to the pointer to the adjustment instance.
+/// @param pAdjustment The pointer to the adjustment instance.
 void CCmacLibIAdjustmentDestroy(
-	CCmacLibIAdjustment** ppAdjustment
+	CCmacLibIAdjustment* pAdjustment
 ) {
-	if (*ppAdjustment) {
-		delete *ppAdjustment;
-		*ppAdjustment = nullptr;
-	}
+	if (pAdjustment) delete pAdjustment;
 }

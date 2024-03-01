@@ -55,9 +55,9 @@ const char* CMACLIB_SHARED_SYMBOL CCmacLibISerializationGetMessage(
 );
 
 /// @brief Destructor.
-/// @param ppSerialization The pointer to the pointer to the serialization instance.
+/// @param pSerialization The pointer to the serialization instance.
 void CMACLIB_SHARED_SYMBOL CCmacLibISerializationDestroy(
-    CCmacLibISerialization** ppSerialization
+    CCmacLibISerialization* pSerialization
 );
 
 #if defined(__cplusplus)
