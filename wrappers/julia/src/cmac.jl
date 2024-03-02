@@ -76,13 +76,13 @@ Deserializes the content into its member variables.
 
 ## Arguments
 - `pInst::Ptr{ICmac}`: The pointer to the cmac instance.
-- `content::String`: Valid deserializable content.
+- `content::Cstring`: Valid deserializable content.
 ## Returns
 The result of the operation.
 """
-function ICmacDeserialize(pInst::Ptr{ICmac}, content::String)::Ptr{IResult}
+function ICmacDeserialize(pInst::Ptr{ICmac}, content::Cstring)::Ptr{IResult}
     return ccall((:CCmacLibICmacDeserialize, cmaclib_core),
-        Ptr{IResult}, (Ptr{ICmac}, Cstring), pInst, Cstring(content))
+        Ptr{IResult}, (Ptr{ICmac}, Cstring), pInst, content)
 end
 
 export ICmacGetExtension
