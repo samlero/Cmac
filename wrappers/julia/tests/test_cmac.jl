@@ -1,10 +1,5 @@
 #!/usr/bin/julia
 
-using Test
-
-include("jlcmaclib.jl")
-using .jlcmaclib
-
 @testset "test_predict_success" begin
     upper::Vector{Float64} = [10.0, 10.0]
     lower::Vector{Float64} = [-10.0, -10.0]
