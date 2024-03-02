@@ -37,26 +37,26 @@ extern "C" {
 /// @brief The string from the resulting serialization process.
 /// @param pSerialization The pointer to the serialization instance.
 /// @return serialized string
-const char* CCmacLibISerializationGetString(
+CMACLIB_SHARED_SYMBOL const char* CCmacLibISerializationGetString(
     CCmacLibISerialization* pSerialization
 );
 
 /// @brief Indicates if an operation was successful.
 /// @param pSerialization The pointer to the serialization instance.
 /// @return Success.
-cmaclib_bool_t CCmacLibISerializationIsSuccessful(
+CMACLIB_SHARED_SYMBOL cmaclib_bool_t CCmacLibISerializationIsSuccessful(
     CCmacLibISerialization* pSerialization
 );
 
 /// @brief If not successful, a failure message is provided.
 /// @param pSerialization The pointer to the serialization instance.
-const char* CCmacLibISerializationGetMessage(
+CMACLIB_SHARED_SYMBOL const char* CCmacLibISerializationGetMessage(
     CCmacLibISerialization* pSerialization
 );
 
 /// @brief Destructor.
 /// @param pSerialization The pointer to the serialization instance.
-void CCmacLibISerializationDestroy(
+CMACLIB_SHARED_SYMBOL void CCmacLibISerializationDestroy(
     CCmacLibISerialization* pSerialization
 );
 

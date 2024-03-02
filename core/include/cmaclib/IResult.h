@@ -44,19 +44,19 @@ extern "C" {
 /// @brief Indicates if an operation was successful.
 /// @param pResult The pointer to the result instance.
 /// @return Success.
-cmaclib_bool_t CCmacLibIResultIsSuccessful(
+CMACLIB_SHARED_SYMBOL cmaclib_bool_t CCmacLibIResultIsSuccessful(
 	CCmacLibIResult* pResult
 );
 
 /// @brief If not successful, a failure message is provided.
 /// @param pResult The pointer to the result instance.
-const char* CCmacLibIResultGetMessage(
+CMACLIB_SHARED_SYMBOL const char* CCmacLibIResultGetMessage(
 	CCmacLibIResult* pResult
 );
 
 /// @brief Destructor.
 /// @param pResult The pointer to the result instance.
-void CCmacLibIResultDestory(
+CMACLIB_SHARED_SYMBOL void CCmacLibIResultDestory(
 	CCmacLibIResult* pResult
 );
 

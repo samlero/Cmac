@@ -43,26 +43,26 @@ extern "C" {
 /// @param pAdjustment The pointer to the adjustment instance.
 /// @return Weight change dW.
 /// (Remember to delete the CDoubleArray data pointer.)
-CDoubleArrayArray CCmacLibIAdjustmentGetWeightChanges(
+CMACLIB_SHARED_SYMBOL CDoubleArrayArray CCmacLibIAdjustmentGetWeightChanges(
 	CCmacLibIAdjustment* pAdjustment
 );
 
 /// @brief Indicates if an operation was successful.
 /// @param pAdjustment The pointer to the adjustment instance.
 /// @return Success.
-cmaclib_bool_t CCmacLibIAdjustmentIsSuccessful(
+CMACLIB_SHARED_SYMBOL cmaclib_bool_t CCmacLibIAdjustmentIsSuccessful(
 	CCmacLibIAdjustment* pAdjustment
 );
 
 /// @brief If not successful, a failure message is provided.
 /// @param pAdjustment The pointer to the adjustment instance.
-const char* CCmacLibIAdjustmentGetMessage(
+CMACLIB_SHARED_SYMBOL const char* CCmacLibIAdjustmentGetMessage(
 	CCmacLibIAdjustment* pAdjustment
 );
 
 /// @brief Destructor.
 /// @param pAdjustment The pointer to the adjustment instance.
-void CCmacLibIAdjustmentDestroy(
+CMACLIB_SHARED_SYMBOL void CCmacLibIAdjustmentDestroy(
 	CCmacLibIAdjustment* pAdjustment
 );
 
