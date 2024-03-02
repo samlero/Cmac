@@ -40,9 +40,14 @@ end
     @assert IResultIsSuccessful(pDeserialization)
 
     pMarshaller::Ptr{IMarshaller} = CreateMarshaller()
+    IMarshallerSave(pMarshaller, Ptr{ISerializable}(pCmac), pwd(), "expected")
+
+    pAnotherSerialization::Ptr{ISerialization} = ICmacSerialize(pDefaultCmac)
+    @assert ISerializationIsSuccessful(pAnotherSerialization)
 
     # Manually destroy pointers.
     IMarshallerDestroy(pMarshaller)
+    ISerializationDestroy(pAnotherSerialization)
     IResultDestory(pDeserialization)
     ISerializationDestroy(pSerialization)
     ICmacDestroy(pCmac)
