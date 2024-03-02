@@ -48,26 +48,26 @@ extern "C" {
 /// @brief Serializes the object in its own unique format.
 /// @param pSerializable The pointer to the serializable instance.
 /// @return Serialized string.
-CCmacLibISerialization* CMACLIB_SHARED_SYMBOL CCmacLibISerializableSerialize(
+CCmacLibISerialization* CCmacLibISerializableSerialize(
     CCmacLibISerializable* pSerializable
 );
 
 /// @brief Deserializes the content into its member variables.
 /// @param pSerializable The pointer to the serializable instance.
 /// @param content Valid deserializable content.
-CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibISerializableDeserialize(
+CCmacLibIResult* CCmacLibISerializableDeserialize(
     CCmacLibISerializable* pSerializable, const char* content
 );
 
 /// @return The extension of the serializable object
 /// @param pSerializable The pointer to the serializable instance.
-const char* CMACLIB_SHARED_SYMBOL CCmacLibISerializableGetExtension(
+const char* CCmacLibISerializableGetExtension(
     CCmacLibISerializable* pSerializable
 );
 
 /// @brief Destructor.
 /// @param pSerializable The pointer to the serializable instance.
-void CMACLIB_SHARED_SYMBOL CCmacLibISerializableDestroy(
+void CCmacLibISerializableDestroy(
     CCmacLibISerializable* pSerializable
 );
 

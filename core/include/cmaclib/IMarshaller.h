@@ -54,7 +54,7 @@ extern "C" {
 /// @param directory Folder to save the serializable object in.
 /// @param filename Name of the object to save.
 /// @return Indicates if the save operation was successful or not.
-CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibIMarshallerSave(
+CCmacLibIResult* CCmacLibIMarshallerSave(
     CCmacLibIMarshaller* pMarshaller, CCmacLibISerializable* pSerializable,
     const char* directory, const char* filename
 );
@@ -63,14 +63,14 @@ CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibIMarshallerSave(
 /// @param pMarshaller The pointer to the marshaller instance.
 /// @param serializable Object to fill.
 /// @param filepath Location of the file that contains the serializable object's contents.
-CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibIMarshallerLoad(
+CCmacLibIResult* CCmacLibIMarshallerLoad(
     CCmacLibIMarshaller* pMarshaller, CCmacLibISerializable* pSerializable,
     const char* filepath
 );
 
 /// @brief Destructor.
 /// @param pMarshaller The pointer to the marshaller instance.
-void CMACLIB_SHARED_SYMBOL CCmacLibIMarshallerDestroy(
+void CCmacLibIMarshallerDestroy(
     CCmacLibIMarshaller* pMarshaller
 );
 

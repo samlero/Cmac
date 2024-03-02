@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 /// @brief An array of doubles with fixed array size.
-typedef struct CMACLIB_SHARED_SYMBOL CDoubleArray {
+typedef struct CDoubleArray {
     /// @brief The pointer to the first element in the array.
     double* data;
     /// @brief The size of the array.
@@ -16,7 +16,7 @@ typedef struct CMACLIB_SHARED_SYMBOL CDoubleArray {
 } CDoubleArray;
 
 /// @brief An array of CDoubleArray with fixed array size.
-typedef struct CMACLIB_SHARED_SYMBOL CDoubleArrayArray {
+typedef struct CDoubleArrayArray {
     /// @brief The pointer to the first element in the array.
     CDoubleArray* data;
     /// @brief The size of the array.
@@ -25,10 +25,10 @@ typedef struct CMACLIB_SHARED_SYMBOL CDoubleArrayArray {
 
 /// @brief Properly destroy the CDoubleArrayArray instance.
 /// @param arr The instance to be destroyed.
-void CMACLIB_SHARED_SYMBOL CDoubleArrayArrayDestroy(CDoubleArrayArray arr);
+void CDoubleArrayArrayDestroy(CDoubleArrayArray arr);
 
 /// @brief An array of unsigned ints with fixed array size.
-typedef struct CMACLIB_SHARED_SYMBOL CUintArray {
+typedef struct CUintArray {
     /// @brief The pointer to the first element in the array.
     unsigned int* data;
     /// @brief The size of the array.

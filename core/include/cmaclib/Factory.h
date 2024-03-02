@@ -66,7 +66,7 @@ extern "C" {
 /// @param beta Learning rate.
 /// @param nu Damping coefficient.
 /// @return The pointer to the cmac instance.
-CCmacLibICmac* CMACLIB_SHARED_SYMBOL CCmacLibCreateCmac(
+CCmacLibICmac* CCmacLibCreateCmac(
 	unsigned int numQ,
 	unsigned int numLayers,
 	unsigned int maxmem,
@@ -81,11 +81,11 @@ CCmacLibICmac* CMACLIB_SHARED_SYMBOL CCmacLibCreateCmac(
 
 /// @brief Create a Cmac with default values.
 /// @return The pointer to the cmac instance.
-CCmacLibICmac* CMACLIB_SHARED_SYMBOL CCmacLibCreateDefaultCmac();
+CCmacLibICmac* CCmacLibCreateDefaultCmac();
 
 /// @brief Creates an instance of IMarshaller.
 /// @return The pointer to the newly created marshaller instance.
-CCmacLibIMarshaller* CMACLIB_SHARED_SYMBOL CCmacLibCreateMarshaller();
+CCmacLibIMarshaller* CCmacLibCreateMarshaller();
 
 #if defined(__cplusplus)
 }

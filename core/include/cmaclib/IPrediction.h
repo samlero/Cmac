@@ -54,14 +54,14 @@ extern "C" {
 /// of basis and active weights.
 /// @param pPrediction The pointer to the prediction instance.
 /// @return Cmac output.
-CDoubleArray CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetValues(
+CDoubleArray CCmacLibIPredictionGetValues(
 	CCmacLibIPrediction* pPrediction
 );
 
 /// @brief Get the indices of the active weights.
 /// @param pPrediction The pointer to the prediction instance.
 /// @return Active weight indices.
-CUintArray CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetActiveWeightIndices(
+CUintArray CCmacLibIPredictionGetActiveWeightIndices(
 	CCmacLibIPrediction* pPrediction
 );
 
@@ -69,33 +69,33 @@ CUintArray CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetActiveWeightIndices(
 /// @param pPrediction The pointer to the prediction instance.
 /// @return Active weight values.
 /// (Remember to delete the CDoubleArray data pointer.)
-CDoubleArrayArray CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetActiveWeights(
+CDoubleArrayArray CCmacLibIPredictionGetActiveWeights(
 	CCmacLibIPrediction* pPrediction
 );
 
 /// @brief Get the basis function values.
 /// @param pPrediction The pointer to the prediction instance.
 /// @return Basis function values.
-CDoubleArray CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetBasisValues(
+CDoubleArray CCmacLibIPredictionGetBasisValues(
 	CCmacLibIPrediction* pPrediction
 );
 
 /// @brief Indicates if an operation was successful.
 /// @param pPrediction The pointer to the prediction instance.
 /// @return Success.
-cmaclib_bool_t CMACLIB_SHARED_SYMBOL CCmacLibIPredictionIsSuccessful(
+cmaclib_bool_t CCmacLibIPredictionIsSuccessful(
 	CCmacLibIPrediction* pPrediction
 );
 
 /// @brief If not successful, a failure message is provided.
 /// @param pPrediction The pointer to the prediction instance.
-const char* CMACLIB_SHARED_SYMBOL CCmacLibIPredictionGetMessage(
+const char* CCmacLibIPredictionGetMessage(
 	CCmacLibIPrediction* pPrediction
 );
 
 /// @brief Destructor.
 /// @param pPrediction The pointer to the prediction instance.
-void CMACLIB_SHARED_SYMBOL CCmacLibIPredictionDestroy(
+void CCmacLibIPredictionDestroy(
 	CCmacLibIPrediction* pPrediction
 );
 

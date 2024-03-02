@@ -61,7 +61,7 @@ extern "C" {
 /// @param inputData States. (array pointer)
 /// @param inputSize States. (array size)
 /// @return Prediction result.
-CCmacLibIPrediction* CMACLIB_SHARED_SYMBOL CCmacLibICmacPredict(
+CCmacLibIPrediction* CCmacLibICmacPredict(
 	CCmacLibICmac* pCmac, double* inputData, unsigned long inputSize
 );
 
@@ -72,7 +72,7 @@ CCmacLibIPrediction* CMACLIB_SHARED_SYMBOL CCmacLibICmacPredict(
 /// @param pPrediction Contains indices of weights and basis values.
 /// @param damping Additional damping to further reduce chances of overfitting.
 /// @return Adjustment result.
-CCmacLibIAdjustment* CMACLIB_SHARED_SYMBOL CCmacLibICmacAdjust(
+CCmacLibIAdjustment* CCmacLibICmacAdjust(
 	CCmacLibICmac* pCmac, double* correctionData, unsigned long correctionSize,
 	CCmacLibIPrediction* pPrediction, double damping
 );
@@ -80,33 +80,33 @@ CCmacLibIAdjustment* CMACLIB_SHARED_SYMBOL CCmacLibICmacAdjust(
 /// @brief Sets all the weights in memory to zero, untraining the Cmac.
 /// @param pCmac The pointer to the cmac instance.
 /// @return Result of the operation.
-CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibICmacZeroize(
+CCmacLibIResult* CCmacLibICmacZeroize(
 	CCmacLibICmac* pCmac
 );
 
 /// @brief Serializes the object in its own unique format.
 /// @param pCmac The pointer to the cmac instance.
 /// @return Serialized string.
-CCmacLibISerialization* CMACLIB_SHARED_SYMBOL CCmacLibICmacSerialize(
+CCmacLibISerialization* CCmacLibICmacSerialize(
 	CCmacLibICmac* pCmac
 );
 
 /// @brief Deserializes the content into its member variables.
 /// @param pCmac The pointer to the cmac instance.
 /// @param content Valid deserializable content.
-CCmacLibIResult* CMACLIB_SHARED_SYMBOL CCmacLibICmacDeserialize(
+CCmacLibIResult* CCmacLibICmacDeserialize(
 	CCmacLibICmac* pCmac, const char* content
 );
 
 /// @param pCmac The pointer to the cmac instance.
 /// @return The extension of the serializable object
-const char* CMACLIB_SHARED_SYMBOL CCmacLibICmacGetExtension(
+const char* CCmacLibICmacGetExtension(
 	CCmacLibICmac* pCmac
 );
 
 /// @brief Destructor.
 /// @param pCmac The pointer to the cmac instance.
-void CMACLIB_SHARED_SYMBOL CCmacLibICmacDestroy(
+void CCmacLibICmacDestroy(
 	CCmacLibICmac* pCmac
 );
 
