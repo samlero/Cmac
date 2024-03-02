@@ -5,7 +5,7 @@ Cerebellar Model Articulation Controller (CMAC)
 </h2>
 
 <a href="./LICENSE"
-    style="display: block; text-align: center;">
+    style="display: flex; justify-content: center; align-items: center;">
     <img src="https://img.shields.io/badge/License-GPL--3.0-blue.svg" alt="License: GPL-3.0">
 </a>
 
@@ -15,7 +15,7 @@ An artificial neural network based on a human cerebellum. It is mostly used in c
 The core implementation is written in C++ and packaged using CMake. Other API wrappers include:
 1. MATLAB (must be manually built)
 2. Python
-3. Julia (in-progress)
+3. Julia
 
 The APIs are a work in progress and more will come. If a specific language API is needed for an application, feel free to open an issue about it. We will get to it as soon as we can. 
 
@@ -46,11 +46,13 @@ A couple of build scripts were generated to ease building the installers. Script
 ## 💻 USAGE
 The following example illustrates how the capabilities mentioned above could be used. 
 ### C++
-See the unit tests in [tests/CmacTests.cpp](tests/CmacTests.cpp) and [tests/MarshallerTests.cpp](tests/MarshallerTests.cpp). 
+See the unit tests in [CmacTests.cpp](tests/CmacTests.cpp) and [MarshallerTests.cpp](tests/MarshallerTests.cpp). 
 ### Matlab
-See the unit tests in [api/matlab/usage.m](api/matlab/usage.m).
+See the unit tests in [usage.m](wrappers/matlab/usage.m).
 ### Python
-See the unit tests in [api/python/tests/test_cmac.py](api/python/tests/test_cmac.py) and [api/python/tests/test_serializable.py](api/python/tests/test_serializable.py).
+See the unit tests in [test_cmac.py](wrappers/python/tests/test_cmac.py) and [test_serializable.py](wrappers/python/tests/test_serializable.py).
+### Julia
+See the unit tests in [test_cmac.jl](wrappers/julia/tests/test_cmac.jl) and [test_serialization.jl](wrappers/julia/tests/test_serialization.jl)
 
 ## ⚠️ DISCLAIMER
 The repository is thoroughly tested and utilized by the authors in a Windows environment using the MATLAB API for control systems research.
