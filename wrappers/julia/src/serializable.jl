@@ -62,5 +62,5 @@ Destructor.
 """
 function ISerializableDestroy(pInst::Ptr{ISerializable})::Nothing
     ccall((:CCmacLibISerializableDestroy, cmaclib_core),
-        Cvoid, (Ptr{ISerializable}, ) pInst)    
+        Cvoid, (Ptr{ISerializable}, ), pInst)
 end
