@@ -1,3 +1,5 @@
+#!/usr/bin/julia
+
 using Test
 
 include("jlcmaclib.jl")
