@@ -10,10 +10,6 @@ else()
 endif()
 ## Enforcing C and C++ standards. </region>
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL GNU)
-  add_compile_options(-Wno-attributes)
-endif()
-
 project ("CmacLib")
 
 add_library (CmacLib STATIC)
