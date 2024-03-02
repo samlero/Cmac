@@ -20,8 +20,8 @@ Save the serializable object.
 Indicates if the save operation was successful or not.
 """
 function IMarshallerSave(pInst::Ptr{IMarshaller},
-        pSerializable::Ptr{ISerializable}, directory::Cstring,
-        filename::Cstring)::Ptr{IResult}
+        pSerializable::Ptr{ISerializable}, directory::String,
+        filename::String)::Ptr{IResult}
     return ccall((:CCmacLibIMarshallerSave, cmaclib_core),
         Ptr{IResult}, (Ptr{IMarshaller}, Ptr{ISerializable}, Cstring, Cstring),
         pInst, pSerializable, directory, filename)
@@ -41,7 +41,7 @@ object's contents.
 Indicates if the save operation was successful or not.
 """
 function IMarshallerLoad(pInst::Ptr{IMarshaller},
-        pSerializable::Ptr{ISerializable}, filepath::Cstring)::Ptr{IResult}
+        pSerializable::Ptr{ISerializable}, filepath::String)::Ptr{IResult}
     return ccall((:CCmacLibIMarshallerLoad, cmaclib_core),
         Ptr{IResult}, (Ptr{IMarshaller}, Ptr{ISerializable}, Cstring),
         pInst, pSerializable, filepath)
