@@ -20,3 +20,12 @@ if (BUILD_TESTING)
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
 endif()
+
+# Collect all source files.
+file(GLOB_RECURSE julia_src_files
+${CMAKE_CURRENT_SOURCE_DIR}/src/*.jl
+)
+# Install all source files.
+foreach(src ${julia_src_files})
+install(FILES ${src} DESTINATION lib)
+endforeach()
