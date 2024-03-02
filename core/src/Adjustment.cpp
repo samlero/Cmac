@@ -33,7 +33,8 @@ CDoubleArrayArray CCmacLibIAdjustmentGetWeightChanges(
 	matrix.data = new CDoubleArray[matrix.size];
 
 	for (unsigned long i = 0; i < matrix.size; i++) {
-		matrix.data[i].data = (double*) pAdjustment->GetWeightChanges().data()->data();
+		matrix.data[i].data = (double*) pAdjustment->GetWeightChanges()[i].data();
+		matrix.data[i].size = pAdjustment->GetWeightChanges()[i].size();
 	}
 
 	return matrix;

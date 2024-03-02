@@ -90,8 +90,9 @@ CDoubleArrayArray CCmacLibIPredictionGetActiveWeights(
 	matrix.size = pPrediction->GetActiveWeights().size();
 	matrix.data = new CDoubleArray[matrix.size];
 
-	for (unsigned int i = 0; i < pPrediction->GetActiveWeights().size(); i++) {
-		matrix.data[i].data = (double*) pPrediction->GetActiveWeights().data()->data();
+	for (unsigned int i = 0; i < matrix.size; i++) {
+		matrix.data[i].data = (double*) pPrediction->GetActiveWeights()[i].data();
+		matrix.data[i].size = pPrediction->GetActiveWeights()[i].size();
 	}
 
 	return matrix;
