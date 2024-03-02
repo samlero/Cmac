@@ -11,7 +11,7 @@ export IResultIsSuccessful
 Indicates if an operation was successful.
 
 ## Arguments
-- `pInst`: The pointer to the result instance.
+- `pInst::Ptr{IResult}`: The pointer to the result instance.
 
 ## Returns
 Success.
@@ -26,7 +26,7 @@ export IResultGetMessage
 If not successful, a failure message is provided.
 
 ## Arguments
-- `pInst`: The pointer to the result instance.
+- `pInst::Ptr{IResult}`: The pointer to the result instance.
 """
 function IResultGetMessage(pInst::Ptr{IResult})::Cstring
     return ccall((:CCmacLibIResultGetMessage, cmaclib_core),
@@ -38,7 +38,7 @@ export IResultDestory
 Destructor.
 
 ## Arguments
-- `pInst`: The pointer to the result instance.
+- `pInst::Ptr{IResult}`: The pointer to the result instance.
 """
 function IResultDestory(pInst::Ptr{IResult})::Cvoid
     return ccall((:CCmacLibIResultDestory, cmaclib_core),
