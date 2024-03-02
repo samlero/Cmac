@@ -2,6 +2,7 @@
 #define CMACLIB_COLLECTIONS_HEADER_FILE
 
 #include <cmaclib/defines.h>
+#include <stddef.h>
 
 #if defined(__cplusplus)
 extern "C" {
@@ -12,7 +13,7 @@ typedef struct CDoubleArray {
     /// @brief The pointer to the first element in the array.
     double* data;
     /// @brief The size of the array.
-    unsigned long size;
+    size_t size;
 } CDoubleArray;
 
 /// @brief An array of CDoubleArray with fixed array size.
@@ -20,7 +21,7 @@ typedef struct CDoubleArrayArray {
     /// @brief The pointer to the first element in the array.
     CDoubleArray* data;
     /// @brief The size of the array.
-    unsigned long size;
+    size_t size;
 } CDoubleArrayArray;
 
 /// @brief Properly destroy the CDoubleArrayArray instance.
@@ -32,7 +33,7 @@ typedef struct CUintArray {
     /// @brief The pointer to the first element in the array.
     unsigned int* data;
     /// @brief The size of the array.
-    unsigned long size;
+    size_t size;
 } CUintArray;
 
 #if defined(__cplusplus)
