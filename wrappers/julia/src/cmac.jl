@@ -92,9 +92,9 @@ export ICmacGetExtension
 ## Returns
 The extension of the serializable object
 """
-function ICmacGetExtension(pInst::Ptr{ICmac})::Ptr{ISerialization}
+function ICmacGetExtension(pInst::Ptr{ICmac})::Cstring
     return ccall((:CCmacLibICmacGetExtension, cmaclib_core),
-        Ptr{ISerialization}, (Ptr{ICmac}, ), pInst)
+        Cstring, (Ptr{ICmac}, ), pInst)
 end
 
 export ICmacDestroy

@@ -6,11 +6,11 @@ An array of doubles with fixed array size.
 
 ## Fields
 - `data::Ptr{Cdouble}`: The pointer to the first element in the array.
-- `size::Culong`: The size of the array.
+- `size::Csize_t`: The size of the array.
 """
 struct CDoubleArray
     data::Ptr{Cdouble}
-    size::Culong
+    size::Csize_t
 end
 
 export CDoubleArrayArray
@@ -19,11 +19,11 @@ An array of CDoubleArray with fixed array size.
 
 ## Fields
 - `data::Ptr{CDoubleArray}`: The pointer to the first element in the array.
-- `size::Culong`: The size of the array.
+- `size::Csize_t`: The size of the array.
 """
 struct CDoubleArrayArray
     data::Ptr{CDoubleArray}
-    size::Culong
+    size::Csize_t
 end
 
 export CDoubleArrayArrayDestroy
@@ -44,9 +44,9 @@ An array of unsigned ints with fixed array size.
 
 ## Fields
 - `data::Ptr{Cuint}`: The pointer to the first element in the array.
-- `size::Culong`: The size of the array.
+- `size::Csize_t`: The size of the array.
 """
 struct CUintArray
     data::Ptr{Cuint}
-    size::Culong
+    size::Csize_t
 end
