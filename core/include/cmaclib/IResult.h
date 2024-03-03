@@ -30,8 +30,10 @@ namespace CmacLib
 
 // CCmacLibIResult Definition.
 #if defined(__cplusplus)
+/// @brief Result.
 typedef CmacLib::IResult CCmacLibIResult;
 #else
+/// @brief Result.
 typedef struct CCmacLibIResult CCmacLibIResult;
 #endif
 // END CCmacLibIResult Definition.

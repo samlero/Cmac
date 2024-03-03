@@ -44,8 +44,10 @@ namespace CmacLib
 
 // CCmacLibICmac definition.
 #if defined(__cplusplus)
+/// @brief Cerebellar Model Articulation Controller (CMAC)
 typedef CmacLib::ICmac CCmacLibICmac;
 #else
+/// @brief Cerebellar Model Articulation Controller (CMAC)
 typedef struct CCmacLibICmac CCmacLibICmac;
 #endif
 // END CCmacLibICmac definition.

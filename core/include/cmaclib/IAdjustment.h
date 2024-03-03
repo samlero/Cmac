@@ -28,8 +28,10 @@ namespace CmacLib
 
 // CCmacLibIAdjustment Definition.
 #if defined(__cplusplus)
+/// @brief Contains weight adjustment data.
 typedef CmacLib::IAdjustment CCmacLibIAdjustment;
 #else
+/// @brief Contains weight adjustment data.
 typedef struct CCmacLibIAdjustment CCmacLibIAdjustment;
 #endif
 // END CCmacLibIAdjustment Definition.

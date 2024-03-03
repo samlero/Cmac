@@ -37,8 +37,10 @@ namespace CmacLib
 
 // CCmacLibIMarshaller Definition.
 #if defined(__cplusplus)
+/// @brief Save and load serializable objects.
 typedef CmacLib::IMarshaller CCmacLibIMarshaller;
 #else
+/// @brief Save and load serializable objects.
 typedef struct CCmacLibIMarshaller CCmacLibIMarshaller;
 #endif
 // END CCmacLibIMarshaller Definition.

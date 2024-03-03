@@ -39,8 +39,10 @@ namespace CmacLib
 
 // CCmacLibIPrediction Definition.
 #if defined(__cplusplus)
+/// @brief Prediction output.
 typedef CmacLib::IPrediction CCmacLibIPrediction;
 #else
+/// @brief Prediction output.
 typedef struct CCmacLibIPrediction CCmacLibIPrediction;
 #endif
 // END CCmacLibIPrediction Definition.

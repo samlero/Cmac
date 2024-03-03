@@ -34,8 +34,10 @@ namespace CmacLib
 
 // CCmacLibISerializable Definition.
 #if defined(__cplusplus)
+/// @brief Serializes and deserializes.
 typedef CmacLib::ISerializable CCmacLibISerializable;
 #else
+/// @brief Serializes and deserializes.
 typedef struct CCmacLibISerializable CCmacLibISerializable;
 #endif
 // END CCmacLibISerializable Definition.

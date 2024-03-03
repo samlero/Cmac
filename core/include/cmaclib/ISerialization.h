@@ -8,6 +8,7 @@
 #if defined(__cplusplus)
 namespace CmacLib
 {
+    /// @brief The serialization output.
     class CMACLIB_SHARED_SYMBOL ISerialization : public virtual IResult
     {
     public:
@@ -23,8 +24,10 @@ namespace CmacLib
 
 // CCmacLibISerialization Definition.
 #if defined(__cplusplus)
+/// @brief The serialization output.
 typedef CmacLib::ISerialization CCmacLibISerialization;
 #else
+/// @brief The serialization output.
 typedef struct CCmacLibISerialization CCmacLibISerialization;
 #endif
 // END CCmacLibISerialization Definition.
