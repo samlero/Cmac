@@ -6,6 +6,6 @@ authors:
 - family-names: "Espinas"
   given-names: "Aldhinn"
 title: "Cmac"
-version: 1.004
+version: 1.005
 date-released: 2024-02-10
 url: "https://github.com/samlero/Cmac"
