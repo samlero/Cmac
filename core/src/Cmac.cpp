@@ -6,6 +6,7 @@
 #include <iostream>
 #include <utility>
 #include <ios>
+#include <mutex>
 #include "cmaclib/Result.h"
 #include "cmaclib/Prediction.h"
 #include "cmaclib/Adjustment.h"
@@ -35,6 +36,8 @@ void Cmac::Init() {
 	{
 		throw std::invalid_argument("Upper and lower limits must be of the same size.");
 	}
+
+	::std::unique_lock<::std::shared_mutex> writeLock(sharedMutex);
 
 	// check each element of the limits to see if the upper is higher than the lower
 	// And might as well initialize the denominator
@@ -103,7 +106,9 @@ std::unique_ptr<IPrediction> Cmac::Predict(const std::vector<double>& input)
 	std::unique_ptr<Prediction> prediction = ::std::make_unique<Prediction>();
 
 	try
-	{	
+	{
+		::std::shared_lock<::std::shared_mutex> readLock(sharedMutex);
+
 		if (input.size() != this->upper.size())
 		{
 			prediction->SetIsSuccessful(false);
@@ -175,6 +180,8 @@ std::unique_ptr<IAdjustment> Cmac::Adjust(const std::vector<double>& correction,
 	std::unique_ptr<Adjustment> adjustment = ::std::make_unique<Adjustment>();
 	try
 	{
+		::std::shared_lock<::std::shared_mutex> readLock(sharedMutex);
+
 		// check output and correction are the same size
 		if (correction.size() != this->numOutput)
 		{
@@ -249,6 +256,8 @@ std::unique_ptr<IResult> Cmac::Zeroize()
 	std::unique_ptr<Result> result(std::make_unique<Result>());
 	try
 	{
+		::std::unique_lock<::std::shared_mutex> writeLock(sharedMutex);
+
 		for(size_t i = 0; i < this->memory.size(); i++)
 		{
 			for(size_t j = 0; j < this->memory[i].size(); j++)
@@ -270,7 +279,9 @@ std::unique_ptr<ISerialization> Cmac::Serialize()
 {
 	std::unique_ptr<Serialization> serialization(std::make_unique<Serialization>());
 	try
-	{		
+	{
+		::std::shared_lock<::std::shared_mutex> readLock(sharedMutex);
+
 		// create tagger
 		std::unique_ptr<CmacTagger> tagger(std::make_unique<CmacTagger>());
 		std::string result;
@@ -315,6 +326,8 @@ std::unique_ptr<IResult> Cmac::Deserialize(std::string&& content)
 	try
 	{
 		result->SetIsSuccessful(false);
+
+		::std::unique_lock<::std::shared_mutex> writeLock(sharedMutex);
 
 		// create helper
 		std::unique_ptr<CmacTagger> tagger(std::make_unique<CmacTagger>());

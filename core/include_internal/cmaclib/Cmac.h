@@ -6,6 +6,7 @@
 #include <cmaclib/IPrediction.h>
 #include <cmaclib/IAdjustment.h>
 #include <cmaclib/ICmac.h>
+#include <shared_mutex>
 
 namespace CmacLib
 {
@@ -24,6 +25,9 @@ namespace CmacLib
 		std::vector<double> denominator;
 		// offset in each layer
 		std::vector<std::vector<double>> offsets;
+
+		// Sharable mutex object.
+		::std::shared_mutex sharedMutex;
 
 	private: // methods
 		/// <summary>
