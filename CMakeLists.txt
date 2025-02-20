@@ -2,6 +2,7 @@
 # and include sub-projects here.
 #
 cmake_minimum_required (VERSION 3.13)
+include(FetchContent)
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -29,12 +30,13 @@ include(CTest)
 
 add_subdirectory(core)
 
-find_package(GTest)
-# Prioritize using installed library.
-if (NOT GTest_FOUND)
-  # Only include this directory if gtest lib not installed in the system.
-  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest)
-endif()
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY      https://github.com/google/googletest.git
+  GIT_TAG             v1.16.0
+)
+FetchContent_MakeAvailable(googletest)
+include(GoogleTest)
 
 add_subdirectory(tests)
 add_subdirectory(wrappers/python)
